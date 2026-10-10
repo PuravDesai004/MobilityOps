@@ -1,0 +1,53 @@
+version: 2
+models:
+  - name: stg_trips
+    description: One accepted physical source row, with provenance and signed USD charge.
+    columns:
+      - name: trip_record_id
+        data_tests: [unique, not_null]
+      - name: artifact_id
+        data_tests: [not_null]
+      - name: recorded_charge
+        data_tests: [not_null]
+  - name: dim_zone
+    description: Official lookup members plus unresolved key zero. Official Unknown stays valid.
+    columns:
+      - name: zone_key
+        data_tests: [unique, not_null]
+  - name: dim_date
+    description: Actual accepted pickup dates, not a fixed month calendar.
+    columns:
+      - name: pickup_date
+        data_tests: [unique, not_null]
+  - name: fct_trip
+    description: One stable accepted source-row key; incremental unseen-key loading.
+    columns:
+      - name: trip_record_id
+        data_tests: [unique, not_null]
+      - name: pickup_zone_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: "ref('dim_zone')", field: zone_key}
+      - name: dropoff_zone_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: "ref('dim_zone')", field: zone_key}
+      - name: pickup_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: "ref('dim_date')", field: pickup_date}
+      - name: recorded_charge
+        data_tests: [not_null]
+  - name: mart_zone_hour
+    description: Artifact/date/hour/zone additive totals; averages need summed denominators.
+    columns:
+      - name: trip_count
+        data_tests: [not_null]
+  - name: mart_daily_reconciliation
+    description: Artifact/date bucket source dispositions, including missing or invalid pickup.
+    columns:
+      - name: source_count
+        data_tests: [not_null]

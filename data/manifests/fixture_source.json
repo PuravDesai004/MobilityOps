@@ -1,0 +1,97 @@
+{
+  "artifact_sha256": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+  "contract_version": "v1",
+  "created_at": "2026-10-06T17:27:33Z",
+  "dataset_id": "fixture",
+  "expected_row_count": 12,
+  "known_optional_fields": [
+    "VendorID",
+    "PULocationID",
+    "DOLocationID",
+    "passenger_count",
+    "payment_type",
+    "fare_amount",
+    "tip_amount",
+    "cbd_congestion_fee"
+  ],
+  "local_path": "tests/fixtures/yellow_taxi_fixture.parquet",
+  "manifest_version": 1,
+  "observed_schema_hash": "d7a3b932f111e1e18cff391643cb67136f3e51f19438a35a1dfe9ed4b8be3e2e",
+  "original_bytes": 8836,
+  "profile": {
+    "fields": [
+      {
+        "name": "VendorID",
+        "nullable": true,
+        "type": "int64"
+      },
+      {
+        "name": "tpep_pickup_datetime",
+        "nullable": true,
+        "type": "timestamp[us]"
+      },
+      {
+        "name": "tpep_dropoff_datetime",
+        "nullable": true,
+        "type": "timestamp[us]"
+      },
+      {
+        "name": "passenger_count",
+        "nullable": true,
+        "type": "int64"
+      },
+      {
+        "name": "trip_distance",
+        "nullable": true,
+        "type": "double"
+      },
+      {
+        "name": "PULocationID",
+        "nullable": true,
+        "type": "int64"
+      },
+      {
+        "name": "DOLocationID",
+        "nullable": true,
+        "type": "int64"
+      },
+      {
+        "name": "payment_type",
+        "nullable": true,
+        "type": "int64"
+      },
+      {
+        "name": "fare_amount",
+        "nullable": true,
+        "type": "double"
+      },
+      {
+        "name": "tip_amount",
+        "nullable": true,
+        "type": "double"
+      },
+      {
+        "name": "total_amount",
+        "nullable": true,
+        "type": "double"
+      },
+      {
+        "name": "cbd_congestion_fee",
+        "nullable": true,
+        "type": "double"
+      }
+    ],
+    "file_size_bytes": 8836,
+    "row_count": 12,
+    "row_group_count": 3
+  },
+  "profiled_at": "2026-10-10T14:18:18Z",
+  "source_artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+  "source_downloaded_at": null,
+  "source_name": "yellow_taxi_fixture.parquet",
+  "source_partition": "2026-01",
+  "source_url": null,
+  "status": "PROFILED",
+  "zone_artifact_sha256": "7d2f34d513df6285a2d2e1c861fe3012ae2ef9ccd6bbfc74fa5c4dcabb5e6db8",
+  "zone_artifact_version": "sha256:7d2f34d513df6285a2d2e1c861fe3012ae2ef9ccd6bbfc74fa5c4dcabb5e6db8"
+}

@@ -1,0 +1,21 @@
+# Copy privately, replace placeholders, and execute the Snowflake target yourself only.
+mobilityops:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('MOBILITYOPS_DB_PATH') }}"
+      schema: analytics
+      threads: 2
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('MOBILITYOPS_SF_ACCOUNT') }}"
+      user: "{{ env_var('MOBILITYOPS_SF_USER') }}"
+      authenticator: externalbrowser
+      role: MOBILITYOPS_ENGINEER
+      database: MOBILITYOPS_FIXTURE
+      warehouse: MOBILITYOPS_WH
+      schema: ANALYTICS
+      threads: 2
+      client_session_keep_alive: false
+      query_tag: mobilityops_manual

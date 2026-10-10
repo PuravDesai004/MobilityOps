@@ -1,0 +1,35 @@
+[project]
+name = "mobilityops"
+version = "0.1.0"
+description = "Replay-safe local taxi data pipeline with dbt and validated snapshots."
+requires-python = ">=3.12"
+dependencies = ["requests>=2.34", "pyarrow>=25", "duckdb>=1.5", "PyYAML>=6",
+                "pydantic>=2.13", "pandas>=3"]
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.65", "plotly>=7"]
+dev = ["pytest>=9", "ruff>=0.16"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -p no:cacheprovider --basetemp=.pytest-tmp"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["UP012"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["mobilityops"]

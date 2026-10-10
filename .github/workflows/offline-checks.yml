@@ -1,0 +1,42 @@
+name: Local fixture checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install application and local dbt in separate environments
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements/local.lock.txt
+          python -m venv .venv-dbt-local
+          .venv-dbt-local/bin/python -m pip install -r requirements/dbt-local.lock.txt
+      - name: Fixture end to end and replay
+        env:
+          PYTHONPATH: src
+        run: |
+          .venv/bin/python -m mobilityops.cli run-local --scope fixture --offline
+          .venv/bin/python -m mobilityops.cli run-local --scope fixture --offline
+          .venv/bin/python -m mobilityops.cli validate-snapshot --path demo/fixture
+      - name: Offline tests, lint, dependency checks
+        run: |
+          .venv/bin/python -m pytest -q
+          .venv/bin/python -m ruff check src tests app scripts airflow/dags
+          .venv/bin/python -m pip check
+          .venv-dbt-local/bin/python -m pip check
+      - name: Isolated local rollback and backfill
+        env:
+          PYTHONPATH: src
+        run: .venv/bin/python scripts/verify_local_scenarios.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: local-fixture-evidence
+          path: |
+            reports/evidence/
+            reports/local/fixture/fixture/verification.json
+            reports/local/fixture/fixture/dbt_execution.json

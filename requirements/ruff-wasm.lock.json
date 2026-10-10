@@ -1,0 +1,7 @@
+{
+  "package": "@astral-sh/ruff-wasm-nodejs",
+  "version": "0.16.10",
+  "tarball": "https://registry.npmjs.org/@astral-sh/ruff-wasm-nodejs/-/ruff-wasm-nodejs-0.16.10.tgz",
+  "integrity": "sha512-8s22TI+ba5G4DOmtYgwsGXaUYCYjm3HhO/suu5x2rxsebf6jqKBK7+sx/L25drJfO8uR7PKmvuZB92PyaVNtew==",
+  "purpose": "Official Ruff library via existing Node runtime"
+}

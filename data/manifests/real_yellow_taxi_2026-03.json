@@ -1,0 +1,246 @@
+{
+  "additional_source_fields_preserved": [
+    "RatecodeID",
+    "store_and_fwd_flag",
+    "extra",
+    "mta_tax",
+    "tolls_amount",
+    "improvement_surcharge",
+    "congestion_surcharge",
+    "Airport_fee"
+  ],
+  "artifact_sha256": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+  "artifacts": {
+    "yellow_taxi_parquet": {
+      "artifact_sha256": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+      "downloaded_at": "2026-10-10T13:48:49Z",
+      "etag": "\"7c9bd1bcac249e15858f8b1731c2039c-4\"",
+      "last_modified": "Tue, 28 Apr 2026 18:56:26 GMT",
+      "outcome": "DOWNLOADED",
+      "source_artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9"
+    },
+    "zone_lookup_csv": {
+      "artifact_sha256": "1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed",
+      "downloaded_at": "2026-10-10T13:48:50Z",
+      "etag": "\"c6064b7c144c716450641f769659d178\"",
+      "last_modified": "Thu, 22 Feb 2024 21:33:00 GMT",
+      "outcome": "REUSED_VERIFIED_UNCHANGED",
+      "source_artifact_id": "1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed"
+    }
+  },
+  "classification_run": false,
+  "contract_version": "v1",
+  "created_at": "2026-10-10T13:48:50Z",
+  "dataset_id": "real-yellow-taxi-2026-03",
+  "expected_row_count": null,
+  "identity": {
+    "source_artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+    "source_row_number": "one-based physical source row number",
+    "trip_record_id_input": "source_artifact_id:source_row_number"
+  },
+  "known_optional_fields": [
+    "VendorID",
+    "passenger_count",
+    "PULocationID",
+    "DOLocationID",
+    "payment_type",
+    "fare_amount",
+    "tip_amount",
+    "cbd_congestion_fee"
+  ],
+  "local_path": "data/raw/real/2026-03/yellow_tripdata_2026-03.parquet",
+  "manifest_version": 1,
+  "observed_row_count": 3952451,
+  "observed_schema_hash": "ec2b70e23697bdfb4ccde8cb171491044ea39acb6be49f97673331f45fd92d7d",
+  "original_bytes": 67891249,
+  "profile": {
+    "fields": [
+      {
+        "arrow_type": "int32",
+        "name": "VendorID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "timestamp[us]",
+        "name": "tpep_pickup_datetime",
+        "nullable": true,
+        "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "timestamp[us]",
+        "name": "tpep_dropoff_datetime",
+        "nullable": true,
+        "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "passenger_count",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "double",
+        "name": "trip_distance",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "RatecodeID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "large_string",
+        "name": "store_and_fwd_flag",
+        "nullable": true,
+        "parquet_logical_type": "String",
+        "parquet_physical_type": "BYTE_ARRAY"
+      },
+      {
+        "arrow_type": "int32",
+        "name": "PULocationID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "int32",
+        "name": "DOLocationID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "payment_type",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "double",
+        "name": "fare_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "extra",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "mta_tax",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "tip_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "tolls_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "improvement_surcharge",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "total_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "congestion_surcharge",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "Airport_fee",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "cbd_congestion_fee",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      }
+    ],
+    "file_name": "yellow_tripdata_2026-03.parquet",
+    "file_size_bytes": 67891249,
+    "null_counts": {
+      "Airport_fee": 945748,
+      "DOLocationID": 0,
+      "PULocationID": 0,
+      "RatecodeID": 945748,
+      "VendorID": 0,
+      "cbd_congestion_fee": 0,
+      "congestion_surcharge": 945748,
+      "extra": 0,
+      "fare_amount": 0,
+      "improvement_surcharge": 0,
+      "mta_tax": 0,
+      "passenger_count": 945748,
+      "payment_type": 0,
+      "store_and_fwd_flag": 945748,
+      "tip_amount": 0,
+      "tolls_amount": 0,
+      "total_amount": 0,
+      "tpep_dropoff_datetime": 0,
+      "tpep_pickup_datetime": 0,
+      "trip_distance": 0
+    },
+    "row_count": 3952451,
+    "row_group_count": 4,
+    "schema_sha256": "ec2b70e23697bdfb4ccde8cb171491044ea39acb6be49f97673331f45fd92d7d",
+    "source_artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9"
+  },
+  "profiled_at": "2026-10-10T13:48:50Z",
+  "source_artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+  "source_catalog_url": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+  "source_downloaded_at": "2026-10-10T13:48:49Z",
+  "source_name": "yellow_tripdata_2026-03.parquet",
+  "source_page_verified_on": "2026-10-10",
+  "source_partition": "2026-03",
+  "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2026-03.parquet",
+  "status": "PROFILED",
+  "zone_artifact_sha256": "1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed",
+  "zone_artifact_version": "sha256:1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed",
+  "zone_lookup": {
+    "file_size_bytes": 12331,
+    "local_path": "data/reference/real/taxi_zone_lookup.csv",
+    "row_count": 265,
+    "sha256": "1a99e105092230f8620f301edcca7f80d3080642ff404d28ed957d3fa222c8ed",
+    "source_url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv"
+  }
+}

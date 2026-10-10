@@ -1,0 +1,5 @@
+{
+  "runtime": "official Ruff WASM",
+  "version": "0.16.10",
+  "diagnostics": []
+}

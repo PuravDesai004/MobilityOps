@@ -1,0 +1,22 @@
+services:
+  airflow:
+    build:
+      context: ..
+      dockerfile: airflow/Dockerfile
+    image: mobilityops-airflow:3.3.2-python3.12
+    command: standalone
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__PARALLELISM: "2"
+      AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY:?Set a private local API secret}
+    volumes:
+      - ../:/workspace
+      - ./dags:/opt/airflow/dags:ro
+      - airflow-home:/opt/airflow
+    mem_limit: 4g
+    restart: "no"
+volumes:
+  airflow-home:

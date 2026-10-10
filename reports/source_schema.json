@@ -1,0 +1,202 @@
+{
+  "additional_source_fields_preserved": [
+    "RatecodeID",
+    "store_and_fwd_flag",
+    "extra",
+    "mta_tax",
+    "tolls_amount",
+    "improvement_surcharge",
+    "congestion_surcharge",
+    "Airport_fee"
+  ],
+  "contract_present_optional_columns": [
+    "VendorID",
+    "passenger_count",
+    "PULocationID",
+    "DOLocationID",
+    "payment_type",
+    "fare_amount",
+    "tip_amount",
+    "cbd_congestion_fee"
+  ],
+  "contract_required_columns": [
+    "tpep_pickup_datetime",
+    "tpep_dropoff_datetime",
+    "trip_distance",
+    "total_amount"
+  ],
+  "contract_version": "v1",
+  "dataset_id": "real-yellow-taxi-2026-01",
+  "fields": [
+    {
+      "arrow_type": "int32",
+      "name": "VendorID",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT32"
+    },
+    {
+      "arrow_type": "timestamp[us]",
+      "name": "tpep_pickup_datetime",
+      "nullable": true,
+      "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+      "parquet_physical_type": "INT64"
+    },
+    {
+      "arrow_type": "timestamp[us]",
+      "name": "tpep_dropoff_datetime",
+      "nullable": true,
+      "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+      "parquet_physical_type": "INT64"
+    },
+    {
+      "arrow_type": "int64",
+      "name": "passenger_count",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT64"
+    },
+    {
+      "arrow_type": "double",
+      "name": "trip_distance",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "int64",
+      "name": "RatecodeID",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT64"
+    },
+    {
+      "arrow_type": "large_string",
+      "name": "store_and_fwd_flag",
+      "nullable": true,
+      "parquet_logical_type": "String",
+      "parquet_physical_type": "BYTE_ARRAY"
+    },
+    {
+      "arrow_type": "int32",
+      "name": "PULocationID",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT32"
+    },
+    {
+      "arrow_type": "int32",
+      "name": "DOLocationID",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT32"
+    },
+    {
+      "arrow_type": "int64",
+      "name": "payment_type",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "INT64"
+    },
+    {
+      "arrow_type": "double",
+      "name": "fare_amount",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "extra",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "mta_tax",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "tip_amount",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "tolls_amount",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "improvement_surcharge",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "total_amount",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "congestion_surcharge",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "Airport_fee",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    },
+    {
+      "arrow_type": "double",
+      "name": "cbd_congestion_fee",
+      "nullable": true,
+      "parquet_logical_type": "None",
+      "parquet_physical_type": "DOUBLE"
+    }
+  ],
+  "file_name": "yellow_tripdata_2026-01.parquet",
+  "file_size_bytes": 64165080,
+  "null_counts": {
+    "Airport_fee": 1088058,
+    "DOLocationID": 0,
+    "PULocationID": 0,
+    "RatecodeID": 1088058,
+    "VendorID": 0,
+    "cbd_congestion_fee": 0,
+    "congestion_surcharge": 1088058,
+    "extra": 0,
+    "fare_amount": 0,
+    "improvement_surcharge": 0,
+    "mta_tax": 0,
+    "passenger_count": 1088058,
+    "payment_type": 0,
+    "store_and_fwd_flag": 1088058,
+    "tip_amount": 0,
+    "tolls_amount": 0,
+    "total_amount": 0,
+    "tpep_dropoff_datetime": 0,
+    "tpep_pickup_datetime": 0,
+    "trip_distance": 0
+  },
+  "row_count": 3724889,
+  "row_group_count": 4,
+  "schema_sha256": "ec2b70e23697bdfb4ccde8cb171491044ea39acb6be49f97673331f45fd92d7d",
+  "source_artifact_id": "8b3933fe6f0d7b6d8826613c0dd724edc680ff7c49e2bd4c7635c05102728637",
+  "source_partition": "2026-01",
+  "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2026-01.parquet"
+}

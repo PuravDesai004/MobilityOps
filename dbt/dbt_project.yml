@@ -1,0 +1,13 @@
+name: mobilityops
+version: '1.0.0'
+config-version: 2
+profile: mobilityops
+model-paths: [models]
+test-paths: [tests]
+macro-paths: [macros]
+clean-targets: [target, dbt_packages]
+models:
+  mobilityops:
+    +materialized: table
+    staging:
+      +materialized: view

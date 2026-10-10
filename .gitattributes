@@ -1,0 +1,7 @@
+# Preserve reviewed bytes across Windows/Linux clones. Snapshot checksums, source
+# identities, dependency-lock receipts and the shared-policy ZIP depend on them.
+* -text
+*.parquet binary
+*.zip binary
+*.jpg binary
+*.png binary

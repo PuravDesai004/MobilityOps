@@ -1,0 +1,34 @@
+project_name: MobilityOps
+execution_mode: local
+demo_mode: snapshot
+dataset_id: fixture
+source_month: "2026-01"
+contract_version: v1
+chunk_rows: 10000
+paths:
+  contract_yaml: config/contracts/yellow_taxi_v1.yaml
+  fixture_parquet: tests/fixtures/yellow_taxi_fixture.parquet
+  zone_lookup_csv: tests/fixtures/taxi_zone_lookup_fixture.csv
+  expected_results_json: tests/expected/yellow_taxi_fixture_v1.json
+  manifest_json: data/manifests/fixture_source.json
+  attempt_history_jsonl: data/manifests/attempt_history.jsonl
+  real_parquet: data/raw/real/2026-01/yellow_tripdata_2026-01.parquet
+  real_zone_lookup_csv: data/reference/real/taxi_zone_lookup.csv
+  real_manifest_json: data/manifests/real_yellow_taxi_2026-01.json
+  real_attempt_history_jsonl: data/manifests/real_yellow_taxi_2026-01_attempts.jsonl
+  real_profile_json: reports/real/2026-01/profile.json
+  source_schema_json: reports/source_schema.json
+  sample_parquet: data/samples/2026-01/yellow_taxi_sample.parquet
+  sample_manifest_json: data/manifests/sample_yellow_taxi_2026-01.json
+  sample_attempt_history_jsonl: data/manifests/sample_yellow_taxi_2026-01_attempts.jsonl
+  sample_profile_json: reports/sample/2026-01/profile.json
+real_source:
+  dataset_id: real-yellow-taxi-2026-01
+  sample_dataset_id: sample-yellow-taxi-2026-01
+  parquet_url: https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2026-01.parquet
+  zone_lookup_url: https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
+  sample_limit_rows: 10000
+  retry_attempts: 3
+  retry_backoff_seconds: 0.5
+  connect_timeout_seconds: 10
+  read_timeout_seconds: 60

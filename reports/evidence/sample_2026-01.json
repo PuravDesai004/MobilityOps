@@ -1,0 +1,405 @@
+{
+  "current_source": {
+    "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+    "bytes": 1428141,
+    "checksum_rechecked": true,
+    "field_count": 21,
+    "row_groups": 1,
+    "rows": 10000
+  },
+  "dbt_execution": {
+    "outcomes": [
+      {
+        "command": [
+          ".\\.venv-dbt-local\\Scripts\\python.exe",
+          ".\\scripts\\dbt_local.py",
+          "build",
+          "--project-dir",
+          ".\\dbt",
+          "--profiles-dir",
+          ".\\dbt",
+          "--target",
+          "local",
+          "--target-path",
+          ".\\reports\\local\\sample\\2026-01\\dbt_target",
+          "--log-path",
+          ".\\reports\\local\\sample\\2026-01\\dbt_logs"
+        ],
+        "elapsed_seconds": 4.168,
+        "exit_code": 0
+      },
+      {
+        "command": [
+          ".\\.venv-dbt-local\\Scripts\\python.exe",
+          ".\\scripts\\dbt_local.py",
+          "docs",
+          "generate",
+          "--project-dir",
+          ".\\dbt",
+          "--profiles-dir",
+          ".\\dbt",
+          "--target",
+          "local",
+          "--target-path",
+          ".\\reports\\local\\sample\\2026-01\\dbt_target",
+          "--log-path",
+          ".\\reports\\local\\sample\\2026-01\\dbt_logs"
+        ],
+        "elapsed_seconds": 3.44,
+        "exit_code": 0
+      }
+    ],
+    "target": "local"
+  },
+  "dbt_results": [
+    {
+      "adapter_response": {},
+      "execution_time": 0.0075037479400634766,
+      "status": "success",
+      "unique_id": "model.mobilityops.stg_trips"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.00569915771484375,
+      "status": "success",
+      "unique_id": "model.mobilityops.dim_zone"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.0063533782958984375,
+      "status": "success",
+      "unique_id": "test.mobilityops.accepted_quarantine_disjoint"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.01090860366821289,
+      "status": "success",
+      "unique_id": "model.mobilityops.dim_date"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.011152029037475586,
+      "status": "success",
+      "unique_id": "model.mobilityops.fct_trip"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.018189668655395508,
+      "status": "success",
+      "unique_id": "model.mobilityops.mart_daily_reconciliation"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.021033048629760742,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_stg_trips_artifact_id.b52974211f"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.012105226516723633,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_stg_trips_recorded_charge.3a5b940b40"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.017031192779541016,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_stg_trips_trip_record_id.4a822f940d"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.018290042877197266,
+      "status": "success",
+      "unique_id": "test.mobilityops.unique_stg_trips_trip_record_id.0fc5fa1747"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.011799812316894531,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_dim_zone_zone_key.5c509768f0"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.010712862014770508,
+      "status": "success",
+      "unique_id": "test.mobilityops.unique_dim_zone_zone_key.9eff645dea"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.012059211730957031,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_dim_date_pickup_date.638da5ee74"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.0036661624908447266,
+      "status": "success",
+      "unique_id": "model.mobilityops.mart_zone_hour"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.01458883285522461,
+      "status": "success",
+      "unique_id": "test.mobilityops.unique_dim_date_pickup_date.5255b861fe"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.010309934616088867,
+      "status": "success",
+      "unique_id": "test.mobilityops.fact_domain"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.012196779251098633,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_fct_trip_dropoff_zone_key.8c2591ff2d"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.010872602462768555,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_fct_trip_pickup_date.b98ac10783"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.005038738250732422,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_fct_trip_recorded_charge.4695519c50"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.016116857528686523,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_fct_trip_pickup_zone_key.375934bcf9"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.016702890396118164,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_fct_trip_trip_record_id.979e5fab6e"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.023779630661010742,
+      "status": "success",
+      "unique_id": "test.mobilityops.relationships_fct_trip_dropoff_zone_key__zone_key__ref_dim_zone_.092da05b53"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.022408008575439453,
+      "status": "success",
+      "unique_id": "test.mobilityops.relationships_fct_trip_pickup_date__pickup_date__ref_dim_date_.1d761f3c4c"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.01642775535583496,
+      "status": "success",
+      "unique_id": "test.mobilityops.relationships_fct_trip_pickup_zone_key__zone_key__ref_dim_zone_.72c2d176ea"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.010212182998657227,
+      "status": "success",
+      "unique_id": "test.mobilityops.unique_fct_trip_trip_record_id.9936028485"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.012348651885986328,
+      "status": "success",
+      "unique_id": "test.mobilityops.artifact_coverage"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.013198614120483398,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_mart_daily_reconciliation_source_count.cfe0b97607"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.007418155670166016,
+      "status": "success",
+      "unique_id": "test.mobilityops.fact_mart_reconciliation"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.01012563705444336,
+      "status": "success",
+      "unique_id": "test.mobilityops.mart_grain"
+    },
+    {
+      "adapter_response": {},
+      "execution_time": 0.0077342987060546875,
+      "status": "success",
+      "unique_id": "test.mobilityops.not_null_mart_zone_hour_trip_count.ddb50beabe"
+    }
+  ],
+  "scope": "sample",
+  "verification": {
+    "accepted_rows": 10000,
+    "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+    "dataset_id": "sample-yellow-taxi-2026-01",
+    "differences": {
+      "accepted_charge_minus_daily": "0.00",
+      "accepted_charge_minus_fact": "0.00",
+      "accepted_minus_fact": 0,
+      "fact_charge_minus_mart": "0.00",
+      "fact_minus_mart": 0,
+      "independent_charge_minus_accepted": "0.00",
+      "independent_eligible_minus_accepted": 0,
+      "source_minus_daily": 0,
+      "source_minus_dispositions": 0
+    },
+    "distinct_keys": 10000,
+    "elapsed_seconds": 0.084,
+    "engine": "duckdb",
+    "fact_rows": 10000,
+    "independent_eligible_source_charge_usd": "293899.66",
+    "mart_trip_count": 10000,
+    "overlap_keys": 0,
+    "policy_version": "python_v1_half_up",
+    "quarantined_rows": 0,
+    "recorded_charge_usd": "293899.66",
+    "source_partition": "2026-01",
+    "source_rows": 10000,
+    "status": "PASSED",
+    "verified_at": "2026-10-10T14:18:35Z"
+  },
+  "workflow": {
+    "command": [
+      ".\\src\\mobilityops\\cli.py",
+      "run-local",
+      "--scope",
+      "sample",
+      "--month",
+      "2026-01",
+      "--stage",
+      "all",
+      "--offline"
+    ],
+    "database": ".\\data\\db\\sample.duckdb",
+    "elapsed_seconds": 8.647,
+    "ended_at": "2026-10-10T14:18:36Z",
+    "outcome": "SUCCEEDED",
+    "results": {
+      "classification": {
+        "accepted_rows": 10000,
+        "elapsed_seconds": 0.592,
+        "quarantined_rows": 0,
+        "recorded_charge": "293899.66",
+        "source_rows": 10000
+      },
+      "dbt": [
+        {
+          "command": [
+            ".\\.venv-dbt-local\\Scripts\\python.exe",
+            ".\\scripts\\dbt_local.py",
+            "build",
+            "--project-dir",
+            ".\\dbt",
+            "--profiles-dir",
+            ".\\dbt",
+            "--target",
+            "local",
+            "--target-path",
+            ".\\reports\\local\\sample\\2026-01\\dbt_target",
+            "--log-path",
+            ".\\reports\\local\\sample\\2026-01\\dbt_logs"
+          ],
+          "elapsed_seconds": 4.168,
+          "exit_code": 0
+        },
+        {
+          "command": [
+            ".\\.venv-dbt-local\\Scripts\\python.exe",
+            ".\\scripts\\dbt_local.py",
+            "docs",
+            "generate",
+            "--project-dir",
+            ".\\dbt",
+            "--profiles-dir",
+            ".\\dbt",
+            "--target",
+            "local",
+            "--target-path",
+            ".\\reports\\local\\sample\\2026-01\\dbt_target",
+            "--log-path",
+            ".\\reports\\local\\sample\\2026-01\\dbt_logs"
+          ],
+          "elapsed_seconds": 3.44,
+          "exit_code": 0
+        }
+      ],
+      "ingestion": {
+        "accepted_inserted": 0,
+        "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+        "attempt_id": "1385387f-6c3f-4ec2-8adf-8e61854f1f9d",
+        "dataset_id": "sample-yellow-taxi-2026-01",
+        "elapsed_seconds": 0.433,
+        "ended_at": "2026-10-10T14:18:27Z",
+        "engine": "duckdb",
+        "event_type": "LOCAL_INGESTION",
+        "outcome": "COMMITTED",
+        "quarantined_inserted": 0,
+        "replay_records": 10000,
+        "started_at": "2026-10-10T14:18:27Z"
+      },
+      "prepare": {
+        "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+        "dataset_id": "sample-yellow-taxi-2026-01"
+      },
+      "snapshot": {
+        "accepted_rows": 10000,
+        "path": ".\\demo\\sample",
+        "status": "VALIDATED"
+      },
+      "verification": {
+        "accepted_rows": 10000,
+        "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+        "dataset_id": "sample-yellow-taxi-2026-01",
+        "differences": {
+          "accepted_charge_minus_daily": "0.00",
+          "accepted_charge_minus_fact": "0.00",
+          "accepted_minus_fact": 0,
+          "fact_charge_minus_mart": "0.00",
+          "fact_minus_mart": 0,
+          "independent_charge_minus_accepted": "0.00",
+          "independent_eligible_minus_accepted": 0,
+          "source_minus_daily": 0,
+          "source_minus_dispositions": 0
+        },
+        "distinct_keys": 10000,
+        "elapsed_seconds": 0.102,
+        "engine": "duckdb",
+        "fact_rows": 10000,
+        "independent_eligible_source_charge_usd": "293899.66",
+        "mart_trip_count": 10000,
+        "overlap_keys": 0,
+        "policy_version": "python_v1_half_up",
+        "quarantined_rows": 0,
+        "recorded_charge_usd": "293899.66",
+        "source_partition": "2026-01",
+        "source_rows": 10000,
+        "status": "PASSED",
+        "verified_at": "2026-10-10T14:18:35Z"
+      }
+    },
+    "run_id": "db5ac5c5-df9a-43d5-9a12-a12da96d8dab",
+    "scope": "sample",
+    "source_month": "2026-01",
+    "stage": "all",
+    "started_at": "2026-10-10T14:18:27Z",
+    "versions": {
+      "PyYAML": "6.0.3",
+      "duckdb": "1.5.6",
+      "pandas": "3.0.6",
+      "plotly": "7.1.0",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "pytest": "9.1.1",
+      "python": "3.14.7",
+      "requests": "2.34.2",
+      "ruff": "0.16.10",
+      "streamlit": "1.65.0"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: curated
+    schema: curated
+    tables:
+      - name: accepted_trips
+      - name: quarantined_trips
+      - name: zones
+  - name: control
+    schema: control
+    tables:
+      - name: source_artifacts
+      - name: ingestion_audit

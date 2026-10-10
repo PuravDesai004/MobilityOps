@@ -1,0 +1,61 @@
+{
+  "dataset_id": "fixture",
+  "contract_version": "v1",
+  "classification_implemented": false,
+  "classification_run": false,
+  "status": "expected_only",
+  "expected_source_rows": 12,
+  "expected_distinct_source_keys": 12,
+  "expected_dispositions": {
+    "accepted": 8,
+    "quarantined": 4
+  },
+  "scenarios": [
+    {
+      "source_row_numbers": [1, 2, 3, 4],
+      "scenario": "ordinary valid trips; rows 1 and 2 have identical payloads but distinct physical rows",
+      "expected_disposition": "accepted"
+    },
+    {
+      "source_row_numbers": [5],
+      "scenario": "pickup timestamp is null while the column remains present",
+      "expected_disposition": "quarantined"
+    },
+    {
+      "source_row_numbers": [6],
+      "scenario": "dropoff timestamp precedes pickup timestamp",
+      "expected_disposition": "quarantined"
+    },
+    {
+      "source_row_numbers": [7],
+      "scenario": "negative trip distance",
+      "expected_disposition": "quarantined"
+    },
+    {
+      "source_row_numbers": [8],
+      "scenario": "total amount is null",
+      "expected_disposition": "quarantined"
+    },
+    {
+      "source_row_numbers": [9],
+      "scenario": "unknown pickup zone, accepted with warning and unknown-zone mapping",
+      "expected_disposition": "accepted_with_warning"
+    },
+    {
+      "source_row_numbers": [10],
+      "scenario": "negative recorded total charge, signed amount retained with warning",
+      "expected_disposition": "accepted_with_warning"
+    },
+    {
+      "source_row_numbers": [11],
+      "scenario": "passenger count is zero, accepted with warning",
+      "expected_disposition": "accepted_with_warning"
+    },
+    {
+      "source_row_numbers": [12],
+      "scenario": "valid pickup timestamp falls outside source partition 2026-01",
+      "expected_disposition": "accepted_with_warning"
+    }
+  ],
+  "note": "These are architecture expectations only. No row classification has been implemented or run in this milestone."
+}

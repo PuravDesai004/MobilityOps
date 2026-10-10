@@ -1,0 +1,113 @@
+{
+  "command": [
+    "scripts/verify_local_scenarios.py"
+  ],
+  "ended_at": "2026-10-10T13:28:21Z",
+  "engine": "duckdb",
+  "scenarios": [
+    {
+      "after_retry": {
+        "control.ingestion_audit": 1,
+        "control.source_artifacts": 1,
+        "curated.accepted_trips": 8,
+        "curated.quarantined_trips": 4
+      },
+      "after_rollback": {
+        "control.ingestion_audit": 0,
+        "control.source_artifacts": 0,
+        "curated.accepted_trips": 0,
+        "curated.quarantined_trips": 0
+      },
+      "failure": "Controlled fixture ingestion failure before commit",
+      "replay": {
+        "accepted_inserted": 0,
+        "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+        "attempt_id": "4041921c-de70-46c0-8bcd-0bf9689028d2",
+        "dataset_id": "fixture",
+        "elapsed_seconds": 0.066,
+        "ended_at": "2026-10-10T13:27:59Z",
+        "engine": "duckdb",
+        "event_type": "LOCAL_INGESTION",
+        "outcome": "COMMITTED",
+        "quarantined_inserted": 0,
+        "replay_records": 12,
+        "started_at": "2026-10-10T13:27:59Z"
+      },
+      "retry": {
+        "accepted_inserted": 8,
+        "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+        "attempt_id": "8a7695b6-7c35-466e-af0d-b73839485355",
+        "dataset_id": "fixture",
+        "elapsed_seconds": 0.105,
+        "ended_at": "2026-10-10T13:27:59Z",
+        "engine": "duckdb",
+        "event_type": "LOCAL_INGESTION",
+        "outcome": "COMMITTED",
+        "quarantined_inserted": 4,
+        "replay_records": 0,
+        "started_at": "2026-10-10T13:27:59Z"
+      },
+      "scenario": "local_rollback_retry_replay",
+      "status": "PASSED"
+    },
+    {
+      "actual_date_coverage": [
+        "2026-02-05",
+        "2026-02-05"
+      ],
+      "artifact_id": "571851e418568bbb8779a48e0c054bb4d318f27d04840d626364d07900a6c725",
+      "fact_rows": 2,
+      "fixture_month": "2026-02",
+      "new_accepted_keys": 2,
+      "scenario": "new_month_artifact",
+      "status": "PASSED"
+    },
+    {
+      "actual_date_coverage": [
+        "2026-02-05",
+        "2026-03-05"
+      ],
+      "artifact_id": "a8373e4677a49219a7ed506f7a16b23dcfe37cd1f8d0fc012360edd71a609b3c",
+      "fact_rows": 4,
+      "fixture_month": "2026-03",
+      "new_accepted_keys": 2,
+      "scenario": "new_month_artifact",
+      "status": "PASSED"
+    },
+    {
+      "actual_date_coverage": [
+        "2026-01-05",
+        "2026-03-05"
+      ],
+      "artifact_id": "09562f5b81be694343e63852eb5e088d80f5410e58dc7fa9df4c8dbdc4e15891",
+      "fact_rows": 6,
+      "fixture_month": "2026-01",
+      "new_accepted_keys": 2,
+      "scenario": "older_month_backfill",
+      "status": "PASSED"
+    },
+    {
+      "audit": {
+        "accepted_inserted": 0,
+        "artifact_id": "09562f5b81be694343e63852eb5e088d80f5410e58dc7fa9df4c8dbdc4e15891",
+        "attempt_id": "b8cb16e8-a69f-412a-9010-d7a2a79e3825",
+        "dataset_id": "fixture-month-2026-01",
+        "elapsed_seconds": 0.077,
+        "ended_at": "2026-10-10T13:28:15Z",
+        "engine": "duckdb",
+        "event_type": "LOCAL_INGESTION",
+        "outcome": "COMMITTED",
+        "quarantined_inserted": 0,
+        "replay_records": 2,
+        "started_at": "2026-10-10T13:28:15Z"
+      },
+      "fact_rows": 6,
+      "logical_records_added": 0,
+      "scenario": "incremental_fact_replay",
+      "status": "PASSED"
+    }
+  ],
+  "scope": "isolated_deterministic_fixture",
+  "started_at": "2026-10-10T13:27:58Z",
+  "status": "PASSED"
+}

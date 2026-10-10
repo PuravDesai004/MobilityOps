@@ -1,0 +1,54 @@
+contract_version: v1
+timezone_assumption: America/New_York
+required_columns:
+  - tpep_pickup_datetime
+  - tpep_dropoff_datetime
+  - trip_distance
+  - total_amount
+optional_columns:
+  - VendorID
+  - PULocationID
+  - DOLocationID
+  - passenger_count
+  - payment_type
+  - fare_amount
+  - tip_amount
+  - cbd_congestion_fee
+fields:
+  tpep_pickup_datetime:
+    target_type: timestamp_ntz
+    nullable_value_policy: quarantine
+  tpep_dropoff_datetime:
+    target_type: timestamp_ntz
+    nullable_value_policy: quarantine
+    rule: must_not_precede_pickup
+  trip_distance:
+    target_type: decimal(18,3)
+    nullable_value_policy: quarantine
+    rule: finite_and_nonnegative
+  total_amount:
+    target_type: decimal(18,2)
+    nullable_value_policy: quarantine
+    rule: finite; negative_values_are_accepted_with_warning
+  PULocationID:
+    target_type: integer
+    nullable_value_policy: accepted_with_unknown_zone_warning
+  DOLocationID:
+    target_type: integer
+    nullable_value_policy: accepted_with_unknown_zone_warning
+  passenger_count:
+    target_type: integer
+    nullable_value_policy: accepted
+    zero_policy: accepted_with_warning
+  payment_type:
+    target_type: integer
+    nullable_value_policy: accepted
+  fare_amount:
+    target_type: decimal(18,2)
+    nullable_value_policy: preserve_as_null
+  tip_amount:
+    target_type: decimal(18,2)
+    nullable_value_policy: preserve_as_null
+  cbd_congestion_fee:
+    target_type: decimal(18,2)
+    nullable_field_policy: unavailable_not_zero

@@ -1,0 +1,1227 @@
+[
+  {
+    "label": "fixture_row_1",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": 20.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "20.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":20.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_2",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": 20.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "20.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":20.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_3",
+    "payload": {
+      "VendorID": 2,
+      "tpep_pickup_datetime": "2026-01-05T09:10:00",
+      "tpep_dropoff_datetime": "2026-01-05T09:29:00",
+      "passenger_count": 2,
+      "trip_distance": 3.15,
+      "PULocationID": 162,
+      "DOLocationID": 161,
+      "payment_type": 1,
+      "fare_amount": 16.5,
+      "tip_amount": 2.0,
+      "total_amount": 23.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T09:10:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T09:29:00"
+      },
+      "pickup_zone_source_id": 162,
+      "dropoff_zone_source_id": 161,
+      "pickup_zone_key": 162,
+      "dropoff_zone_key": 161,
+      "passenger_count": 2,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "3.150"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "23.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "16.50"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "2.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1140.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":2,\"tpep_pickup_datetime\":\"2026-01-05T09:10:00\",\"tpep_dropoff_datetime\":\"2026-01-05T09:29:00\",\"passenger_count\":2,\"trip_distance\":3.15,\"PULocationID\":162,\"DOLocationID\":161,\"payment_type\":1,\"fare_amount\":16.5,\"tip_amount\":2.0,\"total_amount\":23.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_4",
+    "payload": {
+      "VendorID": 2,
+      "tpep_pickup_datetime": "2026-01-06T17:20:00",
+      "tpep_dropoff_datetime": "2026-01-06T17:43:00",
+      "passenger_count": 1,
+      "trip_distance": 4.1,
+      "PULocationID": 132,
+      "DOLocationID": 161,
+      "payment_type": 1,
+      "fare_amount": 21.0,
+      "tip_amount": 4.0,
+      "total_amount": 29.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-06T17:20:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-06T17:43:00"
+      },
+      "pickup_zone_source_id": 132,
+      "dropoff_zone_source_id": 161,
+      "pickup_zone_key": 132,
+      "dropoff_zone_key": 161,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "4.100"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "29.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "21.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "4.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1380.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":2,\"tpep_pickup_datetime\":\"2026-01-06T17:20:00\",\"tpep_dropoff_datetime\":\"2026-01-06T17:43:00\",\"passenger_count\":1,\"trip_distance\":4.1,\"PULocationID\":132,\"DOLocationID\":161,\"payment_type\":1,\"fare_amount\":21.0,\"tip_amount\":4.0,\"total_amount\":29.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_5",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": null,
+      "tpep_dropoff_datetime": "2026-01-07T07:16:00",
+      "passenger_count": 1,
+      "trip_distance": 1.8,
+      "PULocationID": 161,
+      "DOLocationID": 138,
+      "payment_type": 1,
+      "fare_amount": 12.0,
+      "tip_amount": 2.4,
+      "total_amount": 17.65,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": null,
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-07T07:16:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 138,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 138,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "1.800"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "17.65"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "12.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "2.40"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": null,
+      "warning_codes": [],
+      "reason_codes": [
+        "MISSING_PICKUP"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":null,\"tpep_dropoff_datetime\":\"2026-01-07T07:16:00\",\"passenger_count\":1,\"trip_distance\":1.8,\"PULocationID\":161,\"DOLocationID\":138,\"payment_type\":1,\"fare_amount\":12.0,\"tip_amount\":2.4,\"total_amount\":17.65,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_6",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-08T08:15:00",
+      "tpep_dropoff_datetime": "2026-01-08T08:10:00",
+      "passenger_count": 1,
+      "trip_distance": 0.8,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 8.0,
+      "tip_amount": 0.0,
+      "total_amount": 10.75,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-08T08:15:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-08T08:10:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "0.800"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "10.75"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "8.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "0.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": -300.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "DROPOFF_BEFORE_PICKUP"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-08T08:15:00\",\"tpep_dropoff_datetime\":\"2026-01-08T08:10:00\",\"passenger_count\":1,\"trip_distance\":0.8,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":8.0,\"tip_amount\":0.0,\"total_amount\":10.75,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_7",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-09T10:00:00",
+      "tpep_dropoff_datetime": "2026-01-09T10:12:00",
+      "passenger_count": 1,
+      "trip_distance": -0.25,
+      "PULocationID": 162,
+      "DOLocationID": 161,
+      "payment_type": 1,
+      "fare_amount": 9.0,
+      "tip_amount": 1.0,
+      "total_amount": 13.75,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-09T10:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-09T10:12:00"
+      },
+      "pickup_zone_source_id": 162,
+      "dropoff_zone_source_id": 161,
+      "pickup_zone_key": 162,
+      "dropoff_zone_key": 161,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "-0.250"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "13.75"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "9.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "1.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 720.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "NEGATIVE_DISTANCE"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-09T10:00:00\",\"tpep_dropoff_datetime\":\"2026-01-09T10:12:00\",\"passenger_count\":1,\"trip_distance\":-0.25,\"PULocationID\":162,\"DOLocationID\":161,\"payment_type\":1,\"fare_amount\":9.0,\"tip_amount\":1.0,\"total_amount\":13.75,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_8",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-10T11:00:00",
+      "tpep_dropoff_datetime": "2026-01-10T11:14:00",
+      "passenger_count": 1,
+      "trip_distance": 1.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 10.0,
+      "tip_amount": 2.0,
+      "total_amount": null,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-10T11:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-10T11:14:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "1.400"
+      },
+      "recorded_charge": null,
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "10.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "2.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 840.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "MISSING_TOTAL_AMOUNT"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-10T11:00:00\",\"tpep_dropoff_datetime\":\"2026-01-10T11:14:00\",\"passenger_count\":1,\"trip_distance\":1.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":10.0,\"tip_amount\":2.0,\"total_amount\":null,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_9",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-11T12:00:00",
+      "tpep_dropoff_datetime": "2026-01-11T12:19:00",
+      "passenger_count": 1,
+      "trip_distance": 2.2,
+      "PULocationID": 999,
+      "DOLocationID": 161,
+      "payment_type": 1,
+      "fare_amount": 13.0,
+      "tip_amount": 2.0,
+      "total_amount": 18.75,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-11T12:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-11T12:19:00"
+      },
+      "pickup_zone_source_id": 999,
+      "dropoff_zone_source_id": 161,
+      "pickup_zone_key": 0,
+      "dropoff_zone_key": 161,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.200"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "18.75"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "13.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "2.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1140.0,
+      "warning_codes": [
+        "UNRESOLVED_PICKUP_ZONE"
+      ],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-11T12:00:00\",\"tpep_dropoff_datetime\":\"2026-01-11T12:19:00\",\"passenger_count\":1,\"trip_distance\":2.2,\"PULocationID\":999,\"DOLocationID\":161,\"payment_type\":1,\"fare_amount\":13.0,\"tip_amount\":2.0,\"total_amount\":18.75,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_10",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-12T13:00:00",
+      "tpep_dropoff_datetime": "2026-01-12T13:13:00",
+      "passenger_count": 1,
+      "trip_distance": 1.25,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": -3.0,
+      "tip_amount": 0.0,
+      "total_amount": -2.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-12T13:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-12T13:13:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "1.250"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "-2.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "-3.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "0.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 780.0,
+      "warning_codes": [
+        "NEGATIVE_RECORDED_CHARGE"
+      ],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-12T13:00:00\",\"tpep_dropoff_datetime\":\"2026-01-12T13:13:00\",\"passenger_count\":1,\"trip_distance\":1.25,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":-3.0,\"tip_amount\":0.0,\"total_amount\":-2.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_11",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-13T14:00:00",
+      "tpep_dropoff_datetime": "2026-01-13T14:12:00",
+      "passenger_count": 0,
+      "trip_distance": 1.3,
+      "PULocationID": 162,
+      "DOLocationID": 161,
+      "payment_type": 1,
+      "fare_amount": 9.5,
+      "tip_amount": 1.5,
+      "total_amount": 13.75,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-13T14:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-13T14:12:00"
+      },
+      "pickup_zone_source_id": 162,
+      "dropoff_zone_source_id": 161,
+      "pickup_zone_key": 162,
+      "dropoff_zone_key": 161,
+      "passenger_count": 0,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "1.300"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "13.75"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "9.50"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "1.50"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 720.0,
+      "warning_codes": [
+        "ZERO_PASSENGER_COUNT"
+      ],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-13T14:00:00\",\"tpep_dropoff_datetime\":\"2026-01-13T14:12:00\",\"passenger_count\":0,\"trip_distance\":1.3,\"PULocationID\":162,\"DOLocationID\":161,\"payment_type\":1,\"fare_amount\":9.5,\"tip_amount\":1.5,\"total_amount\":13.75,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "fixture_row_12",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2025-12-31T23:50:00",
+      "tpep_dropoff_datetime": "2025-12-31T23:59:00",
+      "passenger_count": 1,
+      "trip_distance": 0.9,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 7.0,
+      "tip_amount": 1.0,
+      "total_amount": 10.75,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2025-12-31T23:50:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2025-12-31T23:59:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "0.900"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "10.75"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "7.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "1.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 540.0,
+      "warning_codes": [
+        "OUT_OF_PARTITION_PICKUP"
+      ],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2025-12-31T23:50:00\",\"tpep_dropoff_datetime\":\"2025-12-31T23:59:00\",\"passenger_count\":1,\"trip_distance\":0.9,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":7.0,\"tip_amount\":1.0,\"total_amount\":10.75,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "positive_half_cent",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": "1.005",
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "1.01"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":\"1.005\",\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "negative_half_cent",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": "-1.005",
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "-1.01"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [
+        "NEGATIVE_RECORDED_CHARGE"
+      ],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":\"-1.005\",\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "rounding_overflow",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": "9999999999999999.995",
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": null,
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "INVALID_TOTAL_AMOUNT"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":\"9999999999999999.995\",\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "nonfinite_required",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": "NaN",
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": 20.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": null,
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "20.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "INVALID_DISTANCE"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":\"NaN\",\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":20.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "multiple_reasons",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "bad",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": null,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": null,
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": null,
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": null,
+      "warning_codes": [],
+      "reason_codes": [
+        "INVALID_PICKUP_TIMESTAMP",
+        "MISSING_TOTAL_AMOUNT"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"bad\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":null,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "negative_before_rounding",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": "-0.00001",
+      "PULocationID": 161,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": 20.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 161,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 161,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "-0.000"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "20.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [
+        "NEGATIVE_DISTANCE"
+      ],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":\"-0.00001\",\"PULocationID\":161,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":20.25,\"cbd_congestion_fee\":0.75}"
+    }
+  },
+  {
+    "label": "official_unknown_member",
+    "payload": {
+      "VendorID": 1,
+      "tpep_pickup_datetime": "2026-01-05T08:00:00",
+      "tpep_dropoff_datetime": "2026-01-05T08:18:00",
+      "passenger_count": 1,
+      "trip_distance": 2.4,
+      "PULocationID": 264,
+      "DOLocationID": 162,
+      "payment_type": 1,
+      "fare_amount": 14.0,
+      "tip_amount": 3.0,
+      "total_amount": 20.25,
+      "cbd_congestion_fee": 0.75
+    },
+    "expected": {
+      "dataset_id": "fixture",
+      "artifact_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_partition": "2026-01",
+      "source_row_number": 1,
+      "trip_record_id": "b275cc3e1fd59369adf26b216d0196140480d9a5c0ec5b25151a8c1bef346cf7",
+      "parent_artifact_id": null,
+      "parent_source_row_number": null,
+      "pickup_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:00:00"
+      },
+      "dropoff_at": {
+        "__type__": "datetime",
+        "value": "2026-01-05T08:18:00"
+      },
+      "pickup_zone_source_id": 264,
+      "dropoff_zone_source_id": 162,
+      "pickup_zone_key": 264,
+      "dropoff_zone_key": 162,
+      "passenger_count": 1,
+      "payment_type": 1,
+      "distance_miles": {
+        "__type__": "decimal",
+        "value": "2.400"
+      },
+      "recorded_charge": {
+        "__type__": "decimal",
+        "value": "20.25"
+      },
+      "fare_amount": {
+        "__type__": "decimal",
+        "value": "14.00"
+      },
+      "tip_amount": {
+        "__type__": "decimal",
+        "value": "3.00"
+      },
+      "cbd_congestion_fee": {
+        "__type__": "decimal",
+        "value": "0.75"
+      },
+      "duration_seconds": 1080.0,
+      "warning_codes": [],
+      "reason_codes": [],
+      "raw_payload_json": "{\"VendorID\":1,\"tpep_pickup_datetime\":\"2026-01-05T08:00:00\",\"tpep_dropoff_datetime\":\"2026-01-05T08:18:00\",\"passenger_count\":1,\"trip_distance\":2.4,\"PULocationID\":264,\"DOLocationID\":162,\"payment_type\":1,\"fare_amount\":14.0,\"tip_amount\":3.0,\"total_amount\":20.25,\"cbd_congestion_fee\":0.75}"
+    }
+  }
+]

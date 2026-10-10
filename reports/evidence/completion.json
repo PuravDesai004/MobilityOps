@@ -1,0 +1,622 @@
+{
+  "artifacts": [
+    {
+      "accepted_rows": 8,
+      "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+      "dataset_id": "fixture",
+      "dbt_data_tests_passed": 24,
+      "dbt_models_passed": 6,
+      "differences": {
+        "accepted_charge_minus_daily": "0.00",
+        "accepted_charge_minus_fact": "0.00",
+        "accepted_minus_fact": 0,
+        "fact_charge_minus_mart": "0.00",
+        "fact_minus_mart": 0,
+        "independent_charge_minus_accepted": "0.00",
+        "independent_eligible_minus_accepted": 0,
+        "source_minus_daily": 0,
+        "source_minus_dispositions": 0
+      },
+      "distinct_keys": 12,
+      "elapsed_seconds": 0.041,
+      "engine": "duckdb",
+      "fact_rows": 8,
+      "independent_eligible_source_charge_usd": "134.00",
+      "mart_trip_count": 8,
+      "overlap_keys": 0,
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 4,
+      "recorded_charge_usd": "134.00",
+      "scope": "fixture",
+      "source_partition": "2026-01",
+      "source_rows": 12,
+      "status": "PASSED",
+      "verified_at": "2026-10-10T14:18:26Z"
+    },
+    {
+      "accepted_rows": 10000,
+      "artifact_id": "108744581071d56e9d3f17d85279012c96a70b4d6684495030920117847522aa",
+      "dataset_id": "sample-yellow-taxi-2026-01",
+      "dbt_data_tests_passed": 24,
+      "dbt_models_passed": 6,
+      "differences": {
+        "accepted_charge_minus_daily": "0.00",
+        "accepted_charge_minus_fact": "0.00",
+        "accepted_minus_fact": 0,
+        "fact_charge_minus_mart": "0.00",
+        "fact_minus_mart": 0,
+        "independent_charge_minus_accepted": "0.00",
+        "independent_eligible_minus_accepted": 0,
+        "source_minus_daily": 0,
+        "source_minus_dispositions": 0
+      },
+      "distinct_keys": 10000,
+      "elapsed_seconds": 0.084,
+      "engine": "duckdb",
+      "fact_rows": 10000,
+      "independent_eligible_source_charge_usd": "293899.66",
+      "mart_trip_count": 10000,
+      "overlap_keys": 0,
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 0,
+      "recorded_charge_usd": "293899.66",
+      "scope": "sample",
+      "source_partition": "2026-01",
+      "source_rows": 10000,
+      "status": "PASSED",
+      "verified_at": "2026-10-10T14:18:35Z"
+    },
+    {
+      "accepted_rows": 3724888,
+      "artifact_id": "8b3933fe6f0d7b6d8826613c0dd724edc680ff7c49e2bd4c7635c05102728637",
+      "dataset_id": "real-yellow-taxi-2026-01",
+      "dbt_data_tests_passed": 24,
+      "dbt_models_passed": 6,
+      "differences": {
+        "accepted_charge_minus_daily": "0.00",
+        "accepted_charge_minus_fact": "0.00",
+        "accepted_minus_fact": 0,
+        "fact_charge_minus_mart": "0.00",
+        "fact_minus_mart": 0,
+        "independent_charge_minus_accepted": "0.00",
+        "independent_eligible_minus_accepted": 0,
+        "source_minus_daily": 0,
+        "source_minus_dispositions": 0
+      },
+      "distinct_keys": 3724889,
+      "elapsed_seconds": 26.101,
+      "engine": "duckdb",
+      "fact_rows": 3724888,
+      "independent_eligible_source_charge_usd": "108686701.73",
+      "mart_trip_count": 3724888,
+      "overlap_keys": 0,
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 1,
+      "recorded_charge_usd": "108686701.73",
+      "scope": "real",
+      "source_partition": "2026-01",
+      "source_rows": 3724889,
+      "status": "PASSED",
+      "verified_at": "2026-10-10T14:21:06Z"
+    },
+    {
+      "accepted_rows": 3399864,
+      "artifact_id": "5352ca800f29c40a221ed5b0c6392c451fde7fcd236a73651bd5aea74713a26c",
+      "dataset_id": "real-yellow-taxi-2026-02",
+      "dbt_data_tests_passed": 24,
+      "dbt_models_passed": 6,
+      "differences": {
+        "accepted_charge_minus_daily": "0.00",
+        "accepted_charge_minus_fact": "0.00",
+        "accepted_minus_fact": 0,
+        "fact_charge_minus_mart": "0.00",
+        "fact_minus_mart": 0,
+        "independent_charge_minus_accepted": "0.00",
+        "independent_eligible_minus_accepted": 0,
+        "source_minus_daily": 0,
+        "source_minus_dispositions": 0
+      },
+      "distinct_keys": 3399866,
+      "elapsed_seconds": 23.53,
+      "engine": "duckdb",
+      "fact_rows": 3399864,
+      "independent_eligible_source_charge_usd": "102381010.56",
+      "mart_trip_count": 3399864,
+      "overlap_keys": 0,
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 2,
+      "recorded_charge_usd": "102381010.56",
+      "scope": "real",
+      "source_partition": "2026-02",
+      "source_rows": 3399866,
+      "status": "PASSED",
+      "verified_at": "2026-10-10T14:21:30Z"
+    },
+    {
+      "accepted_rows": 3952449,
+      "artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+      "dataset_id": "real-yellow-taxi-2026-03",
+      "dbt_data_tests_passed": 24,
+      "dbt_models_passed": 6,
+      "differences": {
+        "accepted_charge_minus_daily": "0.00",
+        "accepted_charge_minus_fact": "0.00",
+        "accepted_minus_fact": 0,
+        "fact_charge_minus_mart": "0.00",
+        "fact_minus_mart": 0,
+        "independent_charge_minus_accepted": "0.00",
+        "independent_eligible_minus_accepted": 0,
+        "source_minus_daily": 0,
+        "source_minus_dispositions": 0
+      },
+      "distinct_keys": 3952451,
+      "elapsed_seconds": 28.135,
+      "engine": "duckdb",
+      "fact_rows": 3952449,
+      "independent_eligible_source_charge_usd": "118958427.44",
+      "mart_trip_count": 3952449,
+      "overlap_keys": 0,
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 2,
+      "recorded_charge_usd": "118958427.44",
+      "scope": "real",
+      "source_partition": "2026-03",
+      "source_rows": 3952451,
+      "status": "PASSED",
+      "verified_at": "2026-10-10T14:21:58Z"
+    }
+  ],
+  "clean_install": {
+    "dashboard_checks": {
+      "command": ".checks/clean-app/Scripts/python.exe -m pytest -q tests/test_snapshot_dashboard.py",
+      "elapsed_seconds": 4.38,
+      "offline": true,
+      "passed": 11
+    },
+    "existing_environments_preserved": true,
+    "fixture_workflow": "reports/local/clean-fixture-run.log",
+    "status": "PASSED"
+  },
+  "dashboard": {
+    "accepted_rows": 11077201,
+    "actual_date_coverage": [
+      "2008-12-31",
+      "2026-04-01"
+    ],
+    "browser": "Codex in-app browser, actual visible app",
+    "charge_usd": "330026139.73",
+    "health": {
+      "response": "ok",
+      "status_code": 200
+    },
+    "network_independent_loading": "Verified by offline pytest with network calls denied",
+    "observed_at": "2026-10-10T14:30:45Z",
+    "observed_views": [
+      "Operations",
+      "Reliability",
+      "Replay/recovery audit section"
+    ],
+    "origin_engine": "duckdb_real",
+    "public_deployment_performed": false,
+    "quarantined_rows": 5,
+    "screenshots": {
+      "operations": {
+        "bytes": 56639,
+        "path": "docs/screenshots/operations.jpg",
+        "sha256": "28fd1f0a0bbfc4eb24c3334ea7eae8356eef6f149326cdc02ce49be693df4e40"
+      },
+      "reliability": {
+        "bytes": 63471,
+        "path": "docs/screenshots/reliability.jpg",
+        "sha256": "5a47b8d7109744469b2e819cea93892ae3511930b4407ed77aec4320b4f47f7a"
+      },
+      "replay_recovery": {
+        "bytes": 70762,
+        "path": "docs/screenshots/replay_recovery.jpg",
+        "sha256": "384b6e69ad9589cde8351b3c4d6c376fd4d0961dea7a8faf06c7b6ab3ba49038"
+      }
+    },
+    "snapshot_manifest_sha256": "ac2c1285d92dc4c585f1fa25224cfd69894382ab2b0be20327cd0e75a27a29cb",
+    "source_months": [
+      "2026-01",
+      "2026-02",
+      "2026-03"
+    ],
+    "source_rows": 11077206,
+    "status": "PASSED",
+    "url": "http://127.0.0.1:8501/"
+  },
+  "environments": {
+    ".checks/clean-app": {
+      "pip_check": {
+        "command": [
+          ".\\.checks\\clean-app\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "No broken requirements found."
+      },
+      "snowflake_connection_performed": false,
+      "versions": {
+        "packages": {
+          "duckdb": "1.5.6",
+          "mobilityops": "0.1.0",
+          "pyarrow": "25.0.1"
+        },
+        "python": "3.14.7"
+      }
+    },
+    ".checks/clean-dbt": {
+      "pip_check": {
+        "command": [
+          ".\\.checks\\clean-dbt\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "No broken requirements found."
+      },
+      "snowflake_connection_performed": false,
+      "versions": {
+        "packages": {
+          "dbt-core": "1.12.5",
+          "dbt-duckdb": "1.11.0"
+        },
+        "python": "3.14.7"
+      }
+    },
+    ".venv": {
+      "pip_check": {
+        "command": [
+          ".\\.venv\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "No broken requirements found."
+      },
+      "snowflake_connection_performed": false,
+      "versions": {
+        "packages": {
+          "PyYAML": "6.0.3",
+          "duckdb": "1.5.6",
+          "pandas": "3.0.6",
+          "plotly": "7.1.0",
+          "pyarrow": "25.0.1",
+          "pydantic": "2.13.5",
+          "pytest": "9.1.1",
+          "requests": "2.34.2",
+          "ruff": "0.16.10",
+          "streamlit": "1.65.0"
+        },
+        "python": "3.14.7"
+      }
+    },
+    ".venv-dbt-local": {
+      "pip_check": {
+        "command": [
+          ".\\.venv-dbt-local\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "No broken requirements found."
+      },
+      "snowflake_connection_performed": false,
+      "versions": {
+        "packages": {
+          "dbt-core": "1.12.5",
+          "dbt-duckdb": "1.11.0"
+        },
+        "python": "3.14.7"
+      }
+    },
+    ".venv-dbt-snowflake": {
+      "pip_check": {
+        "command": [
+          ".\\.venv-dbt-snowflake\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "No broken requirements found."
+      },
+      "snowflake_connection_performed": false,
+      "versions": {
+        "packages": {
+          "dbt-core": "1.12.5",
+          "dbt-snowflake": "1.12.1"
+        },
+        "python": "3.14.7"
+      }
+    }
+  },
+  "git_preparation": {
+    "branch": "main",
+    "candidate_files": 155,
+    "forbidden_runtime_candidates": [],
+    "pushed": false
+  },
+  "isolated_recovery_and_backfill": {
+    "command": [
+      "scripts/verify_local_scenarios.py"
+    ],
+    "ended_at": "2026-10-10T13:28:21Z",
+    "engine": "duckdb",
+    "scenarios": [
+      {
+        "after_retry": {
+          "control.ingestion_audit": 1,
+          "control.source_artifacts": 1,
+          "curated.accepted_trips": 8,
+          "curated.quarantined_trips": 4
+        },
+        "after_rollback": {
+          "control.ingestion_audit": 0,
+          "control.source_artifacts": 0,
+          "curated.accepted_trips": 0,
+          "curated.quarantined_trips": 0
+        },
+        "failure": "Controlled fixture ingestion failure before commit",
+        "replay": {
+          "accepted_inserted": 0,
+          "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+          "attempt_id": "4041921c-de70-46c0-8bcd-0bf9689028d2",
+          "dataset_id": "fixture",
+          "elapsed_seconds": 0.066,
+          "ended_at": "2026-10-10T13:27:59Z",
+          "engine": "duckdb",
+          "event_type": "LOCAL_INGESTION",
+          "outcome": "COMMITTED",
+          "quarantined_inserted": 0,
+          "replay_records": 12,
+          "started_at": "2026-10-10T13:27:59Z"
+        },
+        "retry": {
+          "accepted_inserted": 8,
+          "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+          "attempt_id": "8a7695b6-7c35-466e-af0d-b73839485355",
+          "dataset_id": "fixture",
+          "elapsed_seconds": 0.105,
+          "ended_at": "2026-10-10T13:27:59Z",
+          "engine": "duckdb",
+          "event_type": "LOCAL_INGESTION",
+          "outcome": "COMMITTED",
+          "quarantined_inserted": 4,
+          "replay_records": 0,
+          "started_at": "2026-10-10T13:27:59Z"
+        },
+        "scenario": "local_rollback_retry_replay",
+        "status": "PASSED"
+      },
+      {
+        "actual_date_coverage": [
+          "2026-02-05",
+          "2026-02-05"
+        ],
+        "artifact_id": "571851e418568bbb8779a48e0c054bb4d318f27d04840d626364d07900a6c725",
+        "fact_rows": 2,
+        "fixture_month": "2026-02",
+        "new_accepted_keys": 2,
+        "scenario": "new_month_artifact",
+        "status": "PASSED"
+      },
+      {
+        "actual_date_coverage": [
+          "2026-02-05",
+          "2026-03-05"
+        ],
+        "artifact_id": "a8373e4677a49219a7ed506f7a16b23dcfe37cd1f8d0fc012360edd71a609b3c",
+        "fact_rows": 4,
+        "fixture_month": "2026-03",
+        "new_accepted_keys": 2,
+        "scenario": "new_month_artifact",
+        "status": "PASSED"
+      },
+      {
+        "actual_date_coverage": [
+          "2026-01-05",
+          "2026-03-05"
+        ],
+        "artifact_id": "09562f5b81be694343e63852eb5e088d80f5410e58dc7fa9df4c8dbdc4e15891",
+        "fact_rows": 6,
+        "fixture_month": "2026-01",
+        "new_accepted_keys": 2,
+        "scenario": "older_month_backfill",
+        "status": "PASSED"
+      },
+      {
+        "audit": {
+          "accepted_inserted": 0,
+          "artifact_id": "09562f5b81be694343e63852eb5e088d80f5410e58dc7fa9df4c8dbdc4e15891",
+          "attempt_id": "b8cb16e8-a69f-412a-9010-d7a2a79e3825",
+          "dataset_id": "fixture-month-2026-01",
+          "elapsed_seconds": 0.077,
+          "ended_at": "2026-10-10T13:28:15Z",
+          "engine": "duckdb",
+          "event_type": "LOCAL_INGESTION",
+          "outcome": "COMMITTED",
+          "quarantined_inserted": 0,
+          "replay_records": 2,
+          "started_at": "2026-10-10T13:28:15Z"
+        },
+        "fact_rows": 6,
+        "logical_records_added": 0,
+        "scenario": "incremental_fact_replay",
+        "status": "PASSED"
+      }
+    ],
+    "scope": "isolated_deterministic_fixture",
+    "started_at": "2026-10-10T13:27:58Z",
+    "status": "PASSED"
+  },
+  "limitations": {
+    "airflow_runtime": "PENDING_DOCKER_UNAVAILABLE",
+    "github_ci_execution": "PREPARED_NOT_EXECUTED",
+    "public_deployment": "NOT_DEPLOYED",
+    "snowflake_execution": "UNVERIFIED_USER_ONLY"
+  },
+  "local_dbt_imports": {
+    "command": [
+      ".\\.venv-dbt-local\\Scripts\\python.exe",
+      "-I",
+      "-c",
+      "import dbt.cli.main,dbt.adapters.duckdb; print('Local dbt imports passed')"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "Local dbt imports passed"
+  },
+  "lock_sha256": {
+    "requirements/app.lock.txt": "5ac89a7a84095c5c0243b8b17b7a5f02242a1df7dc91293c733fabf758722e3b",
+    "requirements/core.lock.txt": "eb91cdca9c3c27d312f109df6c6f9b9ba4a5ac0202211f1b99d151a71d2f5a0f",
+    "requirements/dbt-local.lock.txt": "617980c431000d8b7448a0f49684b3b04e59ef4202bfa8bcbf2de45bec068fbc",
+    "requirements/dbt-snowflake.lock.txt": "d3d7094fde84b9e9a21a85b9a1e4af2ff193433e023b1d270f73acbca86831f1",
+    "requirements/dev.lock.txt": "5dcf91ae82e70e21914bb44821ce9169ec4c8184ec078bfffe93ed34dbfc3d15",
+    "requirements/local.lock.txt": "7bd9de1320daf322c3c967cc4aec2704f783a1d522c0f9ef2def9ca9ef5ef6ca"
+  },
+  "main_imports": {
+    "command": [
+      ".\\.venv\\Scripts\\python.exe",
+      "-I",
+      "-c",
+      "import requests,pyarrow,duckdb,yaml,pydantic,streamlit,pandas,plotly,pytest; print('Application imports passed')"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "Application imports passed"
+  },
+  "pytest": {
+    "command": ".venv/Scripts/python.exe -m pytest -q",
+    "elapsed_seconds": 8.18,
+    "offline": true,
+    "passed": 65
+  },
+  "real_incremental_and_replay": {
+    "command": ".venv/Scripts/python.exe scripts/verify_real_replay.py",
+    "engine": "duckdb",
+    "monthly_increments": [
+      {
+        "actual_accepted_inserted": 3724888,
+        "artifact_id": "8b3933fe6f0d7b6d8826613c0dd724edc680ff7c49e2bd4c7635c05102728637",
+        "elapsed_seconds": 666.263,
+        "expected_accepted_keys": 3724888,
+        "month": "2026-01",
+        "verified_fact_total_after": 3724888,
+        "verified_fact_total_before": 0,
+        "workflow_run_id": "a38b0515-3e72-426b-868f-360daaf27e96"
+      },
+      {
+        "actual_accepted_inserted": 3399864,
+        "artifact_id": "5352ca800f29c40a221ed5b0c6392c451fde7fcd236a73651bd5aea74713a26c",
+        "elapsed_seconds": 594.119,
+        "expected_accepted_keys": 3399864,
+        "month": "2026-02",
+        "verified_fact_total_after": 7124752,
+        "verified_fact_total_before": 3724888,
+        "workflow_run_id": "dc4507b9-4053-4634-979e-2d16f167860f"
+      },
+      {
+        "actual_accepted_inserted": 3952449,
+        "artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+        "elapsed_seconds": 862.995,
+        "expected_accepted_keys": 3952449,
+        "month": "2026-03",
+        "verified_fact_total_after": 11077201,
+        "verified_fact_total_before": 7124752,
+        "workflow_run_id": "89a43424-ca04-4cc9-b245-d7150caab75d"
+      }
+    ],
+    "older_month_backfill": "Isolated deterministic fixtures: reports/evidence/local_scenarios.json",
+    "real_replay": {
+      "accepted_inserted": 0,
+      "after": {
+        "analytics.fct_trip": 11077201,
+        "curated.accepted_trips": 11077201,
+        "curated.quarantined_trips": 5
+      },
+      "before": {
+        "analytics.fct_trip": 11077201,
+        "curated.accepted_trips": 11077201,
+        "curated.quarantined_trips": 5
+      },
+      "elapsed_seconds": 205.092,
+      "month": "2026-01",
+      "quarantined_inserted": 0,
+      "replay_records": 3724889,
+      "run_id": "0a70891d-4457-4891-b9a5-e1154115c0df"
+    },
+    "status": "PASSED",
+    "verified_at": "2026-10-10T14:22:02Z"
+  },
+  "ruff": {
+    "diagnostics": [],
+    "runtime": "official Ruff WASM",
+    "version": "0.16.10"
+  },
+  "snapshots": {
+    "fixture": {
+      "accepted_rows": 8,
+      "actual_date_coverage": [
+        "2025-12-31",
+        "2026-01-13"
+      ],
+      "file_bytes": 15905,
+      "manifest_sha256": "c094d70c142b84a7561eafb0f098c95f2c7704e5e3cc1288e6c25ce4a0bf0f79",
+      "origin_engine": "duckdb_fixture",
+      "path": "demo/fixture",
+      "quarantined_rows": 4,
+      "recorded_charge_usd": "134.00",
+      "source_rows": 12,
+      "status": "VALIDATED"
+    },
+    "real": {
+      "accepted_rows": 11077201,
+      "actual_date_coverage": [
+        "2008-12-31",
+        "2026-04-01"
+      ],
+      "file_bytes": 4680078,
+      "manifest_sha256": "ac2c1285d92dc4c585f1fa25224cfd69894382ab2b0be20327cd0e75a27a29cb",
+      "origin_engine": "duckdb_real",
+      "path": "demo/published",
+      "quarantined_rows": 5,
+      "recorded_charge_usd": "330026139.73",
+      "source_rows": 11077206,
+      "status": "VALIDATED"
+    },
+    "sample": {
+      "accepted_rows": 10000,
+      "actual_date_coverage": [
+        "2026-01-01",
+        "2026-01-31"
+      ],
+      "file_bytes": 95140,
+      "manifest_sha256": "5608a260a948f8d5cfb114f4f6ab940fc60644f5bb5b2fd5ce30f018bb1e8609",
+      "origin_engine": "duckdb_sample",
+      "path": "demo/sample",
+      "quarantined_rows": 0,
+      "recorded_charge_usd": "293899.66",
+      "source_rows": 10000,
+      "status": "VALIDATED"
+    }
+  },
+  "status": "LOCAL_COMPLETION_VERIFIED",
+  "verified_at": "2026-10-10T14:47:33Z"
+}

@@ -1,0 +1,57 @@
+{
+  "command": ".venv/Scripts/python.exe scripts/verify_real_replay.py",
+  "engine": "duckdb",
+  "monthly_increments": [
+    {
+      "actual_accepted_inserted": 3724888,
+      "artifact_id": "8b3933fe6f0d7b6d8826613c0dd724edc680ff7c49e2bd4c7635c05102728637",
+      "elapsed_seconds": 666.263,
+      "expected_accepted_keys": 3724888,
+      "month": "2026-01",
+      "verified_fact_total_after": 3724888,
+      "verified_fact_total_before": 0,
+      "workflow_run_id": "a38b0515-3e72-426b-868f-360daaf27e96"
+    },
+    {
+      "actual_accepted_inserted": 3399864,
+      "artifact_id": "5352ca800f29c40a221ed5b0c6392c451fde7fcd236a73651bd5aea74713a26c",
+      "elapsed_seconds": 594.119,
+      "expected_accepted_keys": 3399864,
+      "month": "2026-02",
+      "verified_fact_total_after": 7124752,
+      "verified_fact_total_before": 3724888,
+      "workflow_run_id": "dc4507b9-4053-4634-979e-2d16f167860f"
+    },
+    {
+      "actual_accepted_inserted": 3952449,
+      "artifact_id": "d7af794a7ac06cbbb5afb4d1df9e86d84f2e878584de708ff2ffca4bd7d234d9",
+      "elapsed_seconds": 862.995,
+      "expected_accepted_keys": 3952449,
+      "month": "2026-03",
+      "verified_fact_total_after": 11077201,
+      "verified_fact_total_before": 7124752,
+      "workflow_run_id": "89a43424-ca04-4cc9-b245-d7150caab75d"
+    }
+  ],
+  "older_month_backfill": "Isolated deterministic fixtures: reports/evidence/local_scenarios.json",
+  "real_replay": {
+    "accepted_inserted": 0,
+    "after": {
+      "analytics.fct_trip": 11077201,
+      "curated.accepted_trips": 11077201,
+      "curated.quarantined_trips": 5
+    },
+    "before": {
+      "analytics.fct_trip": 11077201,
+      "curated.accepted_trips": 11077201,
+      "curated.quarantined_trips": 5
+    },
+    "elapsed_seconds": 205.092,
+    "month": "2026-01",
+    "quarantined_inserted": 0,
+    "replay_records": 3724889,
+    "run_id": "0a70891d-4457-4891-b9a5-e1154115c0df"
+  },
+  "status": "PASSED",
+  "verified_at": "2026-10-10T14:22:02Z"
+}

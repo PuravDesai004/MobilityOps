@@ -1,0 +1,21 @@
+# Manual reference only; no pipeline, dashboard, DAG or CI reads this file.
+# All Snowflake execution remains UNVERIFIED and exclusively user-run.
+execution_owner: user
+execution_status: UNVERIFIED
+role: MOBILITYOPS_ENGINEER
+warehouse: MOBILITYOPS_WH
+warehouse_size: XSMALL
+auto_suspend_seconds: 60
+statement_timeout_seconds: 600
+databases:
+  fixture: MOBILITYOPS_FIXTURE
+  fixture_recovery: MOBILITYOPS_FIXTURE_RECOVERY
+  real: MOBILITYOPS_REAL
+schemas: [RAW, CONTROL, CURATED, WORK, ANALYTICS]
+source_stage: RAW.SOURCE_STAGE
+code_stage: CONTROL.CODE_STAGE
+source_stream: RAW.TRIPS_STREAM
+promotion_procedure: CONTROL.PROMOTE
+promotion_owner: one_manual_caller_or_one_suspended_by_default_task
+private_dbt_profile_example: .private/snowflake/profiles.yml
+instructions: docs/snowflake_implementation.md

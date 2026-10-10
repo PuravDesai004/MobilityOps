@@ -1,0 +1,25 @@
+{
+  "contract_version": "v1",
+  "exported_at": "2026-10-10T14:21:59Z",
+  "files": {
+    "daily_reconciliation.csv": {
+      "bytes": 13805,
+      "path": "generations/9bf05a5e29ea41058f54437a4289a6c8/daily_reconciliation.csv",
+      "sha256": "721a2916346d37e0ed4038a81f5898ece027ae6f26a0a8992d4a2d83ed7c0e6d"
+    },
+    "run_summary.json": {
+      "bytes": 11700,
+      "path": "generations/9bf05a5e29ea41058f54437a4289a6c8/run_summary.json",
+      "sha256": "e3c3573b2b3fb9aee040bb88de729b4f1cf7ea46746c970621c480978470de80"
+    },
+    "zone_hour.parquet": {
+      "bytes": 4654573,
+      "path": "generations/9bf05a5e29ea41058f54437a4289a6c8/zone_hour.parquet",
+      "sha256": "6eeb803e7e2fefd5e7f3ed3d6e615fd082d3c3492f75b15b3901315b656d1229"
+    }
+  },
+  "metric_version": "signed_charge_usd_half_up_v1",
+  "origin_engine": "duckdb_real",
+  "scope": "real",
+  "snapshot_version": 1
+}

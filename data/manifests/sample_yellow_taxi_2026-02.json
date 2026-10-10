@@ -1,0 +1,216 @@
+{
+  "artifact_sha256": "ced05d88ba07948e14f9dac57170b80b80f163315068abb8c15148b677297d13",
+  "classification_run": false,
+  "contract_version": "v1",
+  "created_at": "2026-10-10T13:38:55Z",
+  "dataset_id": "sample-yellow-taxi-2026-02",
+  "dataset_scope": "sample",
+  "expected_row_count": 10000,
+  "identity": {
+    "parent_lineage_column": "_mobilityops_source_row_number",
+    "source_artifact_id": "ced05d88ba07948e14f9dac57170b80b80f163315068abb8c15148b677297d13",
+    "source_row_number": "one-based physical row in this sample artifact",
+    "trip_record_id_input": "sample_artifact_id:sample_physical_row_number"
+  },
+  "local_path": "data/samples/2026-02/yellow_taxi_sample.parquet",
+  "manifest_version": 1,
+  "observed_schema_hash": "e19025af738d8151277804ed28252df159f98fa65af712bb935e47742bada760",
+  "original_bytes": 1424848,
+  "parent_artifact_id": "5352ca800f29c40a221ed5b0c6392c451fde7fcd236a73651bd5aea74713a26c",
+  "parent_dataset_id": "real-yellow-taxi-2026-02",
+  "parent_row_count": 3399866,
+  "parent_source_partition": "2026-02",
+  "profile": {
+    "fields": [
+      {
+        "arrow_type": "int32",
+        "name": "VendorID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "timestamp[us]",
+        "name": "tpep_pickup_datetime",
+        "nullable": true,
+        "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "timestamp[us]",
+        "name": "tpep_dropoff_datetime",
+        "nullable": true,
+        "parquet_logical_type": "Timestamp(isAdjustedToUTC=false, timeUnit=microseconds, is_from_converted_type=false, force_set_converted_type=false)",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "passenger_count",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "double",
+        "name": "trip_distance",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "RatecodeID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "large_string",
+        "name": "store_and_fwd_flag",
+        "nullable": true,
+        "parquet_logical_type": "String",
+        "parquet_physical_type": "BYTE_ARRAY"
+      },
+      {
+        "arrow_type": "int32",
+        "name": "PULocationID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "int32",
+        "name": "DOLocationID",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT32"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "payment_type",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      },
+      {
+        "arrow_type": "double",
+        "name": "fare_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "extra",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "mta_tax",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "tip_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "tolls_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "improvement_surcharge",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "total_amount",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "congestion_surcharge",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "Airport_fee",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "double",
+        "name": "cbd_congestion_fee",
+        "nullable": true,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "DOUBLE"
+      },
+      {
+        "arrow_type": "int64",
+        "name": "_mobilityops_source_row_number",
+        "nullable": false,
+        "parquet_logical_type": "None",
+        "parquet_physical_type": "INT64"
+      }
+    ],
+    "file_name": "yellow_taxi_sample.parquet",
+    "file_size_bytes": 1424848,
+    "null_counts": {
+      "Airport_fee": 3010,
+      "DOLocationID": 0,
+      "PULocationID": 0,
+      "RatecodeID": 3010,
+      "VendorID": 0,
+      "_mobilityops_source_row_number": 0,
+      "cbd_congestion_fee": 0,
+      "congestion_surcharge": 3010,
+      "extra": 0,
+      "fare_amount": 0,
+      "improvement_surcharge": 0,
+      "mta_tax": 0,
+      "passenger_count": 3010,
+      "payment_type": 0,
+      "store_and_fwd_flag": 3010,
+      "tip_amount": 0,
+      "tolls_amount": 0,
+      "total_amount": 0,
+      "tpep_dropoff_datetime": 0,
+      "tpep_pickup_datetime": 0,
+      "trip_distance": 0
+    },
+    "row_count": 10000,
+    "row_group_count": 1,
+    "schema_sha256": "e19025af738d8151277804ed28252df159f98fa65af712bb935e47742bada760",
+    "source_artifact_id": "ced05d88ba07948e14f9dac57170b80b80f163315068abb8c15148b677297d13"
+  },
+  "sampled_at": "2026-10-10T13:38:55Z",
+  "sampling": {
+    "first_source_row_number": 1,
+    "last_source_row_number": 3399866,
+    "limit_rows": 10000,
+    "method": "evenly_spaced_source_rows_v1",
+    "sampled_rows": 10000,
+    "source_row_number_column": "_mobilityops_source_row_number"
+  },
+  "source_artifact_id": "ced05d88ba07948e14f9dac57170b80b80f163315068abb8c15148b677297d13",
+  "source_name": "yellow_taxi_sample.parquet",
+  "source_partition": "2026-02",
+  "status": "SAMPLED"
+}
