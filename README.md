@@ -1,5 +1,7 @@
 # MobilityOps
 
+[![Offline fixture, SQL and snapshot checks](https://github.com/PuravDesai004/MobilityOps/actions/workflows/offline-checks.yml/badge.svg?branch=presentation%2Fsql-business-findings)](https://github.com/PuravDesai004/MobilityOps/actions/workflows/offline-checks.yml?query=branch%3Apresentation%2Fsql-business-findings)
+
 MobilityOps turns NYC Yellow Taxi source records into traceable operations metrics and
 three measured business findings: where pickups concentrate, how monthly activity changes
 after normalizing month length, and where optional-field warnings concentrate.
@@ -194,10 +196,13 @@ and 24 data tests, pytest, lint, dependency checks, small-fixture SQL analysis, 
 validation and rollback/backfill scenarios. No Snowflake secrets, full TLC downloads or
 private real database are needed. Published real results are static offline artifacts.
 
-The existing main-branch [GitHub run succeeded](https://github.com/PuravDesai004/MobilityOps/actions/runs/38061991256)
-at commit `07b9295f492be028eef21c5dcb5b3de727a1e155`. The presentation update's dedicated-branch
-run status and exact SHA are recorded in [progress](docs/progress.md); local checks alone
-are not a GitHub Actions result. Default main is preserved during this update.
+**GitHub Actions: verified SUCCESS** for the presentation implementation at
+[`f41d2abaef23153bca8a524c26b63ffd8c7d9c12`](https://github.com/PuravDesai004/MobilityOps/commit/f41d2abaef23153bca8a524c26b63ffd8c7d9c12),
+[run 38065316682](https://github.com/PuravDesai004/MobilityOps/actions/runs/38065316682).
+Every job/step passed, including the new small-fixture SQL-analysis check. The badge tracks
+`presentation/sql-business-findings`; [the CI receipt](reports/evidence/presentation_ci.json)
+records actual API observations. The earlier main run also passed. Default main remains at
+`07b9295`; this update is on a dedicated branch awaiting your review/merge. No force push.
 
 **Three-minute recruiter path:** Operations → Business Insights (explain February's daily
 normalization and `LAG`) → Reliability (zero differences and zero-insert replay) → architecture.

@@ -3,7 +3,7 @@
 ## 1. Problem and outcome
 
 A mobility operator needs trustworthy trip counts, recorded passenger charges, and pickup
-zone/hour demand. Monthly deliveries can arrive twice, contain malformed values, or fail
+zone/hour pickup activity. Monthly deliveries can arrive twice, contain malformed values, or fail
 halfway through processing. MobilityOps makes the original source, each disposition, and
 each reported total traceable. Its working implementation runs on this Windows laptop
 without a cloud account. It is a portfolio system with measured correctness, rather than
@@ -198,8 +198,9 @@ UTC accuracy across DST. Valid pickup dates outside the file month remain accept
 a warning and appear in the date dimension and dashboard coverage.
 
 Unrecognized source zone IDs are retained in `*_zone_source_id` and map to dimension key
-0 (`Unresolved`). Official zone members 264/265 with an Unknown label remain valid lookup
-members. Fixture zones and official real/sample zones have distinct lookup checksums.
+0 (`Unresolved`). Official member 264 is N/A (borough Unknown), and 265 is Outside of NYC
+(borough N/A); both remain valid lookup members. Fixture zones and official real/sample
+zones have distinct lookup checksums.
 
 Broken checksum/row identity or parent lineage is a processing failure, not a quarantined
 business record. Output publication writes accepted/quarantine Parquet into a new immutable
@@ -559,4 +560,12 @@ for its actual commit and conclusion, with receipts linked in `docs/progress.md`
 earlier completion.json remains a historical pre-publication receipt. Airflow runtime is
 still pending without Docker; all Snowflake operations remain manual/unverified. No hosted
 app deployment, savings, causation, representative population estimate or SLA is claimed.
+
+**Observed remote result:** presentation implementation commit
+`f41d2abaef23153bca8a524c26b63ffd8c7d9c12` passed
+[GitHub run 38065316682](https://github.com/PuravDesai004/MobilityOps/actions/runs/38065316682),
+including every fixture, lint/test/dependency, SQL/snapshot and recovery step. The actual
+job/step API receipt is `reports/evidence/presentation_ci.json`. The README badge points to
+this repository/workflow and dedicated branch. Later evidence/documentation commits can
+follow the verified implementation commit; each subsequent run has its own actual status.
 

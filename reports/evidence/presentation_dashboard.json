@@ -5,6 +5,11 @@
   ],
   "analysis_generated_at": "2026-10-10T15:30:56Z",
   "business_insights_filters": "Fixed all source months, independent of Operations filters",
+  "health": {
+    "checked_at": "2026-10-10T15:54:40Z",
+    "response": "ok",
+    "status_code": 200
+  },
   "method": "Actual Streamlit app, Codex in-app browser JPEG screenshot; no image or metric editing",
   "observed_at": "2026-10-10T15:44:00Z",
   "operations_filters": {

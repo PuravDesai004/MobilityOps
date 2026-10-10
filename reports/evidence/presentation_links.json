@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-10T15:50:24Z",
+  "checked_at": "2026-10-10T15:55:50Z",
   "checks": [
     {
       "document": "README.md",
@@ -139,7 +139,7 @@
     {
       "document": "README.md",
       "exists": true,
-      "target": "docs/progress.md"
+      "target": "reports/evidence/presentation_ci.json"
     },
     {
       "document": "README.md",

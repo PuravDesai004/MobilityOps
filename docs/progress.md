@@ -197,7 +197,16 @@ Docker/Airflow runtime remains **PENDING**; Snowflake remains **UNVERIFIED / USE
 GitHub: original main run 38061991256 is now independently confirmed **SUCCESS** at
 07b9295f492be028eef21c5dcb5b3de727a1e155. Presentation changes use the dedicated branch
 `presentation/sql-business-findings`; main is preserved. The new branch's observed run URL,
-commit and conclusion will be recorded after execution, not inferred from local checks.
+commit and conclusion are confirmed, not inferred from local checks:
+
+- Implementation commit: `f41d2abaef23153bca8a524c26b63ffd8c7d9c12`.
+- Actual completed GitHub run: https://github.com/PuravDesai004/MobilityOps/actions/runs/38065316682.
+- Run/job/every step: **SUCCESS**, including the new fixture SQL/snapshot step.
+- API observation receipt: `reports/evidence/presentation_ci.json`; the local verification
+  receipt links this remote result separately from its 81 local tests.
+- Fresh remote main ref still equals `07b9295f492be028eef21c5dcb5b3de727a1e155`.
+- README's badge targets the correct repository/workflow/dedicated branch. Review/merge to
+  main and any hosted app deployment remain your later publication decisions.
 
 ## Preserved milestone history
 

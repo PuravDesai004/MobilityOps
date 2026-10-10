@@ -87,7 +87,13 @@
     "new_tests": 16,
     "passed": 81
   },
-  "github_ci": "DEDICATED_BRANCH_RUN_PENDING",
+  "github_ci": {
+    "branch": "presentation/sql-business-findings",
+    "commit_sha": "f41d2abaef23153bca8a524c26b63ffd8c7d9c12",
+    "receipt": "reports/evidence/presentation_ci.json",
+    "run_url": "https://github.com/PuravDesai004/MobilityOps/actions/runs/38065316682",
+    "status": "REMOTE_CI_SUCCESS"
+  },
   "isolated_scenarios": {
     "path": "reports/evidence/presentation_local_scenarios.json",
     "status": "PASSED"
