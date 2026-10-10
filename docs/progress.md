@@ -128,10 +128,17 @@ The user subsequently authorized pushing the completed project to
 https://github.com/PuravDesai004/MobilityOps. The public repository was verified empty with
 default branch main. The publishable candidate set is about 5.6 MB; excluded runtime paths
 and common credential patterns were checked. A repository-local GitHub noreply author
-identity is configured; no global Git settings changed. Publication is in progress.
+identity is configured; no global Git settings changed. The initial project push succeeded
+on 10 October 2026. Local and independently read remote main both matched project commit
+136c657a1c9d29689158eaca090f5961bf4e5a74. That commit contains 157 files, with every staged
+file verified byte-identical to the reviewed local file before publication.
 Git's default line-ending conversion changed staged bytes, including the snapshot CSV and
 locks. Repository .gitattributes disables that conversion to preserve exact reviewed bytes.
 The original completion.json is a historical local-build receipt from before this push.
+reports/evidence/github_publication.json records the verified first push and the observed
+GitHub Actions run. CI was in progress at 15:01:21 UTC (20:31:21 Asia/Kolkata); no remote
+passing result is claimed from that observation. Later documentation commits can follow the
+initial project commit without changing its saved publication identity.
 All Snowflake execution remains unverified/user-only; hosted app deployment is not authorized.
 
 ## Preserved milestone history
