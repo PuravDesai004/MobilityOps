@@ -1,5 +1,10 @@
 # MobilityOps completion audit
 
+This records the original completed-build audit. The later SQL/business-story/dashboard
+extension and actual remote CI observations are recorded in [progress](progress.md),
+[business findings](business_findings.md) and `reports/evidence/presentation_verification.json`.
+Original evidence and the original pre-publication statuses below remain historical.
+
 Reviewed 10 October 2026 against the full-build request in the referenced pasted text and
 the original architecture guide. The later request supersedes the old one-month calendar,
 milestone stops, SQL-classifier design and mandatory cloud completion. The required outcome

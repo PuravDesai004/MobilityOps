@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 import uuid
@@ -37,6 +38,11 @@ def table_counts(database):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--output", type=Path, default=ROOT / "reports/evidence/local_scenarios.json"
+    )
+    args = parser.parse_args()
     config = load_project_config(ROOT / "config/project.yaml")
     contract = load_yellow_taxi_contract(config)
     scope_root = ROOT / ".checks" / "scenarios" / uuid.uuid4().hex
@@ -143,7 +149,7 @@ def main():
         }
     )
     evidence.update(status="PASSED", ended_at=utc_now())
-    write_manifest_atomically(ROOT / "reports/evidence/local_scenarios.json", evidence)
+    write_manifest_atomically(args.output, evidence)
     print(json.dumps(evidence, indent=2))
 
 

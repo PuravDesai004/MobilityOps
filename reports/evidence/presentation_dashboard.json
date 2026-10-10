@@ -1,0 +1,66 @@
+{
+  "actual_date_coverage": [
+    "2008-12-31",
+    "2026-04-01"
+  ],
+  "analysis_generated_at": "2026-10-10T15:30:56Z",
+  "business_insights_filters": "Fixed all source months, independent of Operations filters",
+  "method": "Actual Streamlit app, Codex in-app browser JPEG screenshot; no image or metric editing",
+  "observed_at": "2026-10-10T15:44:00Z",
+  "operations_filters": {
+    "dates": [
+      "2008-12-31",
+      "2026-04-01"
+    ],
+    "pickup_zones": "All (empty selection)"
+  },
+  "origin_engine": "duckdb_real",
+  "public_deployment_performed": false,
+  "scope": "real",
+  "screenshots": {
+    "business_insights": {
+      "bytes": 91005,
+      "dimensions": [
+        1280,
+        1024
+      ],
+      "path": "assets/screenshots/business_insights.jpg",
+      "sha256": "a2300bd735e6b8e5c6ace3514d5dcb838f7dd041208c116863461fa32805da76"
+    },
+    "operations": {
+      "bytes": 106013,
+      "dimensions": [
+        1280,
+        1024
+      ],
+      "path": "assets/screenshots/operations.jpg",
+      "sha256": "6879d766cebc2d301d02ab12128d4f3af0038acef1369782c36f8a32fcb493c6"
+    },
+    "reliability": {
+      "bytes": 92531,
+      "dimensions": [
+        1280,
+        1024
+      ],
+      "path": "assets/screenshots/reliability.jpg",
+      "sha256": "cdbc0d959239364213b4dc00d5d830f50e77ef9cd9927fb2eb2631716a94ea31"
+    }
+  },
+  "snapshot_exported_at": "2026-10-10T14:21:59Z",
+  "snapshot_manifest_sha256": "5f50f458f6f723f93d261c820f1ab1f2cf4e8476cb2539a4fce52e55a7413963",
+  "source_months": [
+    "2026-01",
+    "2026-02",
+    "2026-03"
+  ],
+  "status": "PASSED",
+  "url": "http://127.0.0.1:8502/",
+  "viewport_override_reset": true,
+  "visual_review": {
+    "errors_or_loading_placeholders": false,
+    "headline_values_and_chart_axes_readable": true,
+    "operations_chart_and_12_zone_legend_complete": true,
+    "reliability_monthly_gates_and_all_warning_codes_visible": true,
+    "scope_origin_dates_visible": true
+  }
+}

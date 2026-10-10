@@ -1,0 +1,2 @@
+source_month,accepted_trips,recorded_charge_usd,avg_charge_usd,calendar_days,observed_in_partition_days,actual_pickup_min,actual_pickup_max,in_partition_trips,in_partition_charge_usd,excluded_out_of_partition_trips,excluded_charge_usd,trips_per_calendar_day,trips_per_observed_day,previous_source_month,trips_change,trips_change_pct,charge_change_usd,charge_change_pct,avg_charge_change_usd,avg_charge_change_pct,trips_per_day_change,trips_per_day_change_pct
+2026-01,8,134.00,16.75,31,5,2025-12-31,2026-01-13,7,123.25,1,10.75,0.22580645161290322,1.4,,,,,,,,,

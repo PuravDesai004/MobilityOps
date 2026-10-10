@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import shutil
 import uuid
 from decimal import Decimal
 from pathlib import Path
@@ -13,6 +14,7 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mobilityops.analysis import validate_analysis
 from mobilityops.identity import sha256_file
 from mobilityops.manifest import utc_now, write_manifest_atomically
 from mobilityops.storage import connect_local
@@ -146,7 +148,12 @@ def _load_validated(root: Path, manifest: dict[str, Any]):
     ):
         raise ValueError("Unsupported snapshot/metric version")
     paths = {}
-    for name in ("zone_hour.parquet", "daily_reconciliation.csv", "run_summary.json"):
+    base_files = {"zone_hour.parquet", "daily_reconciliation.csv", "run_summary.json"}
+    if not base_files.issubset(manifest["files"]) or not set(manifest["files"]).issubset(
+        base_files | {"business_insights.json"}
+    ):
+        raise ValueError("Snapshot file declarations mismatch")
+    for name in manifest["files"]:
         receipt = manifest["files"][name]
         path = (root / receipt["path"]).resolve()
         if not path.is_relative_to(root.resolve()) or not path.is_file():
@@ -291,6 +298,29 @@ def _load_validated(root: Path, manifest: dict[str, Any]):
     ]
     if not all(checks):
         raise ValueError("Snapshot reconciliation failed")
+    if "business_insights.json" in paths:
+        analysis = json.loads(paths["business_insights.json"].read_text(encoding="utf-8"))
+        validate_analysis(
+            analysis, {**summary, "accepted_any_warning_trips": int(zone.warning_trip_count.sum())}
+        )
+        hourly = zone.groupby(["pickup_zone_key", "pickup_hour"], as_index=False).trip_count.sum()
+        durations = zone.groupby("pickup_zone_key")[
+            ["duration_seconds_sum", "duration_count"]
+        ].sum()
+        for row in analysis["tables"]["pickup_zone_hour"]:
+            selected_hours = hourly[hourly.pickup_zone_key == row["pickup_zone_key"]].sort_values(
+                ["trip_count", "pickup_hour"], ascending=[False, True]
+            )
+            peak = selected_hours.iloc[0]
+            duration = durations.loc[row["pickup_zone_key"]]
+            expected_average = duration.duration_seconds_sum / duration.duration_count / 60
+            if (
+                row["peak_pickup_hour"] != peak.pickup_hour
+                or row["peak_hour_trips"] != peak.trip_count
+                or not math.isclose(row["avg_duration_minutes"], expected_average, rel_tol=1e-9)
+            ):
+                raise ValueError("Analysis zone/hour/duration disagrees with snapshot")
+        summary["business_insights"] = analysis
     return zone, daily, summary, manifest
 
 
@@ -303,6 +333,38 @@ def load_snapshot(root: Path):
         return _load_validated(root, json.loads(manifest_path.read_text(encoding="utf-8")))
     except (KeyError, OSError, TypeError, json.JSONDecodeError) as error:
         raise ValueError(f"Invalid snapshot: {error}") from error
+
+
+def attach_analysis_snapshot(root: Path, analysis_path: Path) -> dict[str, Any]:
+    """Preserve base file bytes; publish a validated optional fourth file atomically."""
+    _, _, summary, manifest = load_snapshot(root)
+    analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+    validate_analysis(analysis, summary)
+    generation = root / "generations" / uuid.uuid4().hex
+    generation.mkdir(parents=True)
+    candidate = json.loads(json.dumps(manifest))
+    candidate["files"] = {}
+    for name in ("zone_hour.parquet", "daily_reconciliation.csv", "run_summary.json"):
+        receipt = manifest["files"][name]
+        path = generation / name
+        shutil.copy2(root / receipt["path"], path)
+        candidate["files"][name] = {**receipt, "path": path.relative_to(root).as_posix()}
+    path = generation / "business_insights.json"
+    shutil.copy2(analysis_path, path)
+    candidate["files"][path.name] = {
+        "path": path.relative_to(root).as_posix(),
+        "sha256": sha256_file(path),
+        "bytes": path.stat().st_size,
+    }
+    candidate["analysis_generated_at"] = analysis["generated_at"]
+    _load_validated(root, candidate)
+    write_manifest_atomically(root / "snapshot_manifest.json", candidate)
+    # Existing published bundles keep prior generations locally; Git includes only this one.
+    if (root / ".gitignore").is_file():
+        (root / ".gitignore").write_text(
+            f"generations/*\n!generations/{generation.name}/\n", encoding="utf-8", newline="\n"
+        )
+    return candidate
 
 
 def filtered_metrics(zone: pd.DataFrame) -> dict[str, Any]:

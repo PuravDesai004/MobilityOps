@@ -1,22 +1,32 @@
 # Recruiter demonstration and optional hosting
 
-## Two-minute local demonstration
+## Three-minute recruiter walkthrough
 
-1. Start Streamlit from README and show **Operations**. Explain that the three source months
+1. **0:00–0:40 — Operations.** Start Streamlit from README. Explain that the three source months
    are January–March 2026; actual valid pickup dates also include out-of-partition rows.
    The app visibly reports source months, date coverage, origin and export time.
-2. Point to 11,077,201 accepted source records and $330,026,139.73 signed recorded passenger
+2. **0:40–1:00 — Filters and units.** Point to 11,077,201 accepted source records and $330,026,139.73 signed recorded passenger
    charge. This is neither physical-trip global deduplication nor profit. Select a smaller
    date range and one zone; count/charge and weighted distance/duration update together.
-3. Show zone/hour demand. The chart displays the 12 busiest selected pickup zones while
+3. Show observed zone/hour pickup activity. The chart displays the 12 busiest selected pickup zones while
    headline metrics cover all selected zones. Units are miles, minutes and USD.
-4. Open **Reliability**: 11,077,206 source = 11,077,201 accepted + 5 quarantined. Show artifact
+4. **1:00–1:50 — Business Insights and one SQL finding.** Open the fixed all-month view.
+   Upper East Side South contributes 479,826 accepted pickups (4.33%), peaking at 17:00–18:00.
+   Explain that this is observed Yellow Taxi activity, not all transport demand or a proven
+   staffing benefit. Open `sql/analysis/monthly_changes.sql`: named CTEs build monthly
+   measures, `LAG` reads the previous month, and `NULLIF` protects a zero denominator.
+   February's monthly count falls 8.73%, but its in-month trips/calendar day rise 1.05%.
+   Thirty-one versus twenty-eight days explains why the measures tell different stories;
+   this does not establish the cause of activity changes. Mention the 42 retained records
+   excluded only from daily normalization. Show `docs/business_findings.md` for evidence.
+5. **1:50–2:40 — Reliability.** 11,077,206 source = 11,077,201 accepted + 5 quarantined. Show artifact
    identities and zero count/charge differences, and the actual real January replay audit
    with zero inserts. Expand the separate isolated fixture rollback/retry/backfill evidence.
-5. Show `architecture.md` and the machine reports. Explain that original files are immutable,
+6. **2:40–3:00 — Architecture and scope.** Show `architecture.md` and machine reports. Explain that original files are immutable,
    identity uses hash plus physical position, models load unseen keys, and aggregates rebuild
    from the complete fact. Original payloads and warning/reason arrays remain preserved.
-6. State boundaries clearly: DuckDB/dbt/Python and the local app were demonstrated. Airflow's
+7. State boundaries clearly: DuckDB/dbt/Python, SQL findings, the local app and observed CI
+   were demonstrated. Cite the actual passing run from `docs/progress.md`. Airflow's
    Docker runtime is pending; Snowflake execution is your later manual implementation.
 
 For a live pipeline demo use the tiny fixture, which is fast and has interpretable expected
@@ -26,18 +36,27 @@ The 10,000-row sample is a distinct convenience artifact, not an estimate of all
 
 ## Screenshot evidence
 
-`docs/screenshots/operations.jpg` and `reliability.jpg` are captures of the actual locally
-running app. `replay_recovery.jpg` shows the actual committed zero-insert replay audit.
-Screen metadata in `reports/evidence/dashboard_smoke.json` records
-the local URL, checksums, source snapshot and observed views. Export times may change after
-rerun. Keep screenshot and snapshot provenance together when presenting them.
+Current README captures are `assets/screenshots/operations.jpg`, `reliability.jpg` and
+`business_insights.jpg`. They show the actual local app with the verified real snapshot,
+all dates/zones for Operations and fixed Jan–Mar scope for Insights. The existing
+`docs/screenshots/replay_recovery.jpg` is reused as historical zero-insert replay evidence;
+the other earlier screenshots are preserved. New capture metadata is
+`reports/evidence/presentation_dashboard.json`; the original receipt remains
+`reports/evidence/dashboard_smoke.json`. No images or metric values were edited.
+
+For replacement captures, launch the actual app, wait until the running indicator disappears
+and charts/axes render, then capture each tab. Review headline values, complete chart/legend,
+quality/reconciliation table, filters, origin and dates before saving. For desktop layout
+verification, the captured viewport was 1280×1024 and the temporary override was reset.
+Scroll to replay/recovery for the optional fourth view. Keep captions/provenance together.
 
 ## Launch commands
 
 ```powershell
 Set-Location 'C:\Users\purav\OneDrive\Desktop\Data Projects\MobilityOps'
 $env:PYTHONPATH = "$PWD\src"
-.\.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py --server.address 127.0.0.1 --browser.gatherUsageStats false
+.\.venv\Scripts\python.exe -m mobilityops.cli validate-snapshot --path demo/published
+.\.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
 ```
 
 Default: small verified `demo/published` bundle. To show fixture instead, set
@@ -68,7 +87,7 @@ status are recorded separately in docs/progress.md.
    verification of every dependency.
 5. Leave secrets empty and snapshot path at its default. Visitors get a fixed historical
    aggregate bundle, not raw trip data, private logs or a pipeline execution button.
-6. Personally verify both tabs, filter behavior, origin/date labels and corrupt-data errors
+6. Personally verify all three tabs, filter behavior, fixed Insights scope, origin/date labels and corrupt-data errors
    after deployment. Record the actual URL/build result separately. Hosting availability,
    quotas and future service changes are not guaranteed by local smoke tests.
 

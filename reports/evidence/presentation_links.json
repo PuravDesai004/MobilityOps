@@ -1,0 +1,258 @@
+{
+  "checked_at": "2026-10-10T15:50:24Z",
+  "checks": [
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "sql/analysis/pickup_zone_hour.sql"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/pickup_zone_hour.csv"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "sql/analysis/monthly_changes.sql"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/monthly_changes.csv"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "sql/analysis/quality_month.sql"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "sql/analysis/quality_zones.sql"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/quality_zones.csv"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/business_findings.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/pickup_month_coverage.csv"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/business_insights.json"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "assets/screenshots/operations.jpg"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "assets/screenshots/reliability.jpg"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "assets/screenshots/business_insights.jpg"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/evidence/presentation_dashboard.json"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "sql/analysis/"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/analysis/real/"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "architecture.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/progress.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/completion_audit.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/operations_runbook.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/data_dictionary.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/demo_walkthrough.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/business_findings.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/resume_and_handoff.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/snowflake_implementation.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "reports/evidence/"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": ".github/workflows/offline-checks.yml"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/progress.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/demo_walkthrough.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "docs/demo_walkthrough.md"
+    },
+    {
+      "document": "README.md",
+      "exists": true,
+      "target": "airflow/README.md"
+    },
+    {
+      "document": "architecture.md",
+      "exists": true,
+      "target": "docs/business_findings.md"
+    },
+    {
+      "document": "architecture.md",
+      "exists": true,
+      "target": "docs/demo_walkthrough.md"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/business_insights.json"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/pickup_zone_hour.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/pickup_zone_hour.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/monthly_changes.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/monthly_changes.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/pickup_month_coverage.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/pickup_month_coverage.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/quality_month.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/quality_month.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/warning_codes.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/warning_codes.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/quality_zones.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/quality_zones.csv"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../sql/analysis/quarantine_codes.sql"
+    },
+    {
+      "document": "docs/business_findings.md",
+      "exists": true,
+      "target": "../reports/analysis/real/quarantine_codes.csv"
+    },
+    {
+      "document": "docs/completion_audit.md",
+      "exists": true,
+      "target": "progress.md"
+    },
+    {
+      "document": "docs/completion_audit.md",
+      "exists": true,
+      "target": "business_findings.md"
+    }
+  ],
+  "markdown_files": 12,
+  "resolved_links": 50,
+  "status": "PASSED"
+}

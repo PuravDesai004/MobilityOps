@@ -116,7 +116,8 @@ Clean installation checks preserve original environments and original locks.
 
 - Docker/Compose absent. Airflow pinned to apache/airflow:3.3.2-python3.12 with matching
   official constraints reviewed/retrieved; container/DAG runtime is PENDING.
-- Offline CI is prepared; no GitHub execution result is claimed.
+- The original main-branch CI is now verified successful; presentation-branch status is
+  recorded in the extension section below. Original pre-publication receipts stay historical.
 - Optional public-hosting instructions prepared; no deployment.
 - Every Snowflake action is the user's: no agent account access, read-only connection,
   upload, SQL, dbt Snowflake target, Task, credential request or warehouse operation.
@@ -140,6 +141,63 @@ GitHub Actions run. CI was in progress at 15:01:21 UTC (20:31:21 Asia/Kolkata); 
 passing result is claimed from that observation. Later documentation commits can follow the
 initial project commit without changing its saved publication identity.
 All Snowflake execution remains unverified/user-only; hosted app deployment is not authorized.
+
+## Business story and recruiter presentation extension — 10 October 2026
+
+Implemented seven read-only DuckDB queries under `sql/analysis/`, a reusable analysis runner,
+CSV/JSON exports under `reports/analysis/real`, and a short `docs/business_findings.md`.
+No real source preparation, classification, ingestion or dbt rebuild was rerun. The existing
+real database, source bytes, fixture/expected results, config/contracts and exact locks have
+unchanged SHA-256 values; `reports/evidence/presentation_preservation.json` records the check.
+Original completed-build receipts and earlier screenshots remain historical evidence.
+
+Confirmed findings:
+
+- Upper East Side South: 479,826 accepted pickups (4.33%); peak hour 17:00–18:00 with 38,469.
+- February: −325,024 accepted records (−8.73%) versus January, but +1.05% in-month trips/day;
+  March in-month daily rate rises 5.00%. Per-day normalization alone excludes 42 retained
+  records and $1,191.26; full-source analytical totals still equal 11,077,201 accepted and
+  $330,026,139.73 with zero differences.
+- 3,186,377 distinct accepted records have warnings (28.77%). January Astoria has
+  8,593 / 10,044 = 85.55%, above January's 30.68% with the ≥10,000 accepted threshold.
+  Individual code counts overlap; all five quarantines are dropoff-before-pickup.
+
+`business_insights.json` is an optional fourth snapshot file with declared checksum/bytes/path.
+Attachment copies original data files byte-for-byte into a new generation, validates the
+candidate and atomically publishes the manifest. Old three-file bundles still work.
+The app's third tab reads only validated exports, displays a fixed all-month scope and never
+opens a database/network connection. Operations filters do not alter the Insights scope.
+Monthly formulas, denominators/exclusions, all record-level quality rates, official Unknown
+members and unresolved buckets are documented. Decimal wording now separates the unrounded
+input-range check from whether the rounded stored value fits DECIMAL(18,2).
+
+Confirmed local checks:
+
+- Full suite: **81 passed in 73.20 seconds** (65 original + 16 new checks), including actual
+  Business Insights rendering/filter independence with DB/network calls denied.
+- Ruff recheck and dependency consistency results are saved in the extension receipt.
+- Tiny fixture workflow: 8 accepted / 4 quarantined / $134.00; six local dbt models and
+  24 data tests passed, docs generated; source manifest restored to its historical bytes.
+- Small-fixture analysis/export and both fixture/published snapshot validations passed.
+- Isolated rollback/retry/replay and Feb → Mar → older-Jan backfill checks passed again;
+  the new `--output` option saved a separate presentation receipt without rewriting the
+  original scenario evidence. All 50 Markdown file/image links resolved.
+- Three genuine running-app JPEGs captured and visually checked: full Operations chart/legend,
+  Reliability reconciliation/quality, and Business Insights. Scope, origin and dates are
+  visible; `reports/evidence/presentation_dashboard.json` records checksums/provenance.
+  Desktop viewport verification used 1280×1024 and reset the override afterward.
+- Initial pytest attempts hit the existing Windows temporary-directory permission restriction;
+  the approved local run passed. A new AppTest initially used a relative path resolved from
+  tests/app; its absolute-path correction passed the full rerun. No check was weakened.
+
+README/root architecture, three-minute walkthrough and resume/handoff now connect the data
+engineering guarantees to measured analysis. Public app deployment is **NOT DEPLOYED**.
+Docker/Airflow runtime remains **PENDING**; Snowflake remains **UNVERIFIED / USER ONLY**.
+
+GitHub: original main run 38061991256 is now independently confirmed **SUCCESS** at
+07b9295f492be028eef21c5dcb5b3de727a1e155. Presentation changes use the dedicated branch
+`presentation/sql-business-findings`; main is preserved. The new branch's observed run URL,
+commit and conclusion will be recorded after execution, not inferred from local checks.
 
 ## Preserved milestone history
 

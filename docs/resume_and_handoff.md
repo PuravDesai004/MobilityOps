@@ -14,9 +14,14 @@
   incremental fact, rebuilt aggregate marts and generated documentation.
 - Built and locally smoke-tested a credential-free Streamlit dashboard using checksummed
   aggregate snapshots, date/zone filters, weighted metrics and historical reliability evidence;
-  prepared offline fixture CI and reproducible isolated dependency locks.
+  verified offline fixture CI and reproducible isolated dependency locks. Exact observed
+  remote run URLs and commits are linked from `docs/progress.md`.
+- Created seven reusable DuckDB analysis queries covering zone/hour activity, normalized
+  month changes and distinct-record quality rates; reconciled full-source analytical totals
+  and added a validated, snapshot-only Business Insights view.
 
-Use the exact final test count from `reports/evidence/completion.json` if adding that metric.
+Use the current test count from `docs/progress.md` and its presentation evidence if adding that metric;
+`reports/evidence/completion.json` preserves the original build's historical count.
 Timings are observed individual runs, not benchmark improvements. No production uptime,
 business savings, real-time feed, global trip deduplication, public deployment, Airflow run
 or executed Snowflake experience is established by these bullets.
@@ -66,7 +71,13 @@ Three official 2026 monthly artifacts were processed sequentially, with 11,077,2
 11,077,201 accepted and 5 quarantined records, $330,026,139.73 accepted recorded charge,
 and zero per-artifact reconciliation differences. Real replay and isolated fixture rollback,
 retry, incremental/backfill checks are saved as machine evidence. Six local dbt models,
-tests/docs, validated portable snapshots and a locally launched two-view Streamlit demo exist.
+tests/docs, validated portable snapshots and a locally launched three-view Streamlit demo exist.
+The presentation extension runs seven read-only SQL files against the existing verified real
+DB, exports actual CSV/JSON results, preserves source-file versus pickup-month meaning and
+reconciles full-scope counts/charges. Findings include 479,826 Upper East Side South pickups
+(4.33%), February −8.73% monthly count versus +1.05% in-month daily rate, and 28.77% distinct
+accepted warning coverage. Actual unedited screenshots and a three-minute walkthrough are saved.
+SQL/formula/scope/snapshot tests are offline; the app has no DB/network query path.
 
 Start from root `architecture.md`, `README.md`, `docs/progress.md` and
 `reports/evidence/completion.json`; inspect actual files/evidence before making new claims.

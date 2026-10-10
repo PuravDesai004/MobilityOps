@@ -32,7 +32,12 @@ flowchart TD
     M --> V[Per-artifact reconciliation]
     R --> V
     V --> E[Checksummed small snapshots]
-    E --> UI[Streamlit Operations + Reliability]
+    E --> UI[Streamlit Operations + Reliability + Business Insights]
+    F --> BA[Read-only DuckDB analysis SQL]
+    M --> BA
+    Q --> BA
+    BA --> BR[CSV + JSON findings and validation]
+    BR --> E
     O[Python workflow / local CLI] -. coordinates .-> D
     O -. coordinates .-> C
     O -. coordinates .-> I
@@ -83,12 +88,14 @@ cash-tip information. It is not profit or complete business revenue. See the
 | `workflow.py` | `run_workflow()`, `run_dbt()` | Ordered stages, failing exit codes, versions, command and timing receipts |
 | `dbt/models/`, `dbt/tests/` | SQL models and data tests | Curated sources → dimensions/fact/marts |
 | `snapshot.py` | `export_snapshot()`, `load_snapshot()`, `filtered_metrics()` | Candidate validation, checksums, schemas and weighted metrics |
+| `sql/analysis/`, `analysis.py` | `execute_queries()`, `run_analysis()`, `validate_analysis()` | Read-only findings; exported formulas, scope/grain/count/charge validation |
+| `scripts/run_analysis.py` | `main()` | Run existing verified DB SQL; optionally attach findings to a new snapshot generation |
 | `app/streamlit_app.py` | `main()` | Reads snapshots only; does not run a pipeline or contact a warehouse |
 | `scripts/verify_local_scenarios.py` | `main()` | Isolated fixture rollback, retry, replay, incremental and backfill evidence |
 | `scripts/package_demo.py` | `main()` | Copies a verified small bundle to `demo/published` for review/hosting |
 | `airflow/` | `mobilityops_local` DAG | Prepared Docker runtime and sequential local stages |
 | `sql/snowflake/` | Ordered SQL and shared-policy ZIP | User-run templates with explicit unverified status |
-| `.github/workflows/offline-checks.yml` | Fixture job | Prepared CI with no cloud secrets and no real-month download |
+| `.github/workflows/offline-checks.yml` | Fixture job | Offline pipeline/dbt/tests/lint/SQL/snapshot checks; observed remote status in progress |
 
 Names without a directory in this table are under `src/mobilityops`. `tests/fixtures` and
 `tests/expected` are the preserved tiny source and reviewed expectations. Raw monthly
@@ -173,8 +180,14 @@ project warning threshold, not an official TLC validity rule. Known payment code
 
 Money is `DECIMAL(18,2)` and distance `DECIMAL(18,3)`. Conversion uses `Decimal(str(value))`,
 not `Decimal(binary_float)`, and `ROUND_HALF_UP`, whose ties go away from zero for either
-sign. Both input and rounded result must fit precision 18. `9999999999999999.994` is
-valid charge; rounding `9999999999999999.995` overflows and produces `INVALID_TOTAL_AMOUNT`.
+sign. The **input-range check** requires a finite absolute input smaller than `10^16` for
+charge; it does not require the unrounded input to have only 18 decimal digits. The value
+is then rounded to two places, and the **stored-value check** requires the rounded result
+to fit `DECIMAL(18,2)` (maximum absolute stored value `9999999999999999.99`). Thus
+`9999999999999999.994` passes the input-range check and stores as `9999999999999999.99`;
+`9999999999999999.995` passes the input-range check but rounds to `10000000000000000.00`,
+which fails the stored-value check and produces `INVALID_TOTAL_AMOUNT`. Distance uses the
+same two checks at scale 3, with input absolute value smaller than `10^15`.
 Negative signed charges remain negative; they are warnings, not discarded revenue.
 Distance negativity is checked before rounding, so a tiny negative cannot become valid zero.
 
@@ -272,15 +285,21 @@ No Snowflake operator or task group is enabled.
 ## 9. Snapshots and dashboard
 
 The export contains `zone_hour.parquet`, `daily_reconciliation.csv`, `run_summary.json`
-and a manifest. The manifest stores each file's SHA-256, bytes, relative path, origin,
+and a manifest. An optional fourth file, `business_insights.json`, carries validated SQL
+results. Original three-file fixture/sample bundles remain supported. The manifest stores
+each file's SHA-256, bytes, relative path, origin,
 scope, export time, contract and metric versions. The loader checks path containment,
 bytes/checksum, schema/types, nulls, counts, grain, artifact coverage and money equality.
-It uses no network, credentials or database. Missing/corrupt data gives an explicit error.
+It uses no network, credentials or database. Business analysis additionally checks artifact
+identities, complete month/zone coverage, distinct warning denominators, counts/Decimal
+charges, exclusions, safe ratios, adjacent-month changes and volume flags. Zone/hour peaks
+and weighted durations are cross-checked against the base snapshot aggregate. Missing,
+corrupt or inconsistent data gives an explicit error.
 Checksums detect alteration; they are not cryptographic signatures proving who exported data.
 
 The app's default bundle is `demo/published`; internal real exports live in `demo/snapshots`.
 Fixture/sample bundles have their own directories. Operations filters dates/zones and shows
-trip counts, signed charge, demand and weighted distance/duration. Reliability shows historical
+trip counts, signed charge, observed pickup activity and weighted distance/duration. Reliability shows historical
 per-artifact gates, warnings/reasons and actual committed replay plus isolated recovery evidence.
 Origin engine, scope, source months, actual pickup coverage, units and export time remain visible.
 The UI never invokes a download/pipeline/warehouse and has no cloud fallback.
@@ -371,8 +390,10 @@ and 11 additional dashboard checks in the clean application environment all pass
 
 Current measured source results and version/check gates are in `docs/progress.md`. Timings are
 single observed local runs, not throughput benchmarks or savings. Streamlit startup/rendering
-and screenshots show actual local behavior, not a deployed public site. CI is prepared but
-cannot be called a successful GitHub run until uploaded and executed by the user.
+and screenshots show actual local behavior, not a deployed public site. The original main
+workflow has an observed successful GitHub run; this presentation update uses a dedicated
+branch. Exact successful run URLs and commits are recorded in `docs/progress.md` and its
+linked evidence; a local test pass is never substituted for a remote run.
 
 Native Ruff/dbt executables are blocked by this Windows Application Control policy. The local
 dbt runner uses the installed Python API; lint uses the official Ruff 0.16.10 WASM Node build,
@@ -430,4 +451,112 @@ The user must execute and save warehouse evidence before claiming Snowflake exec
 
 Your first warehouse step is the private context/privilege/budget inspection in
 `docs/snowflake_implementation.md`, not loading a full month immediately.
+
+## 14. Business analysis: existing database to reviewable findings
+
+`scripts/run_analysis.py` → `analysis.run_analysis()` opens the existing DuckDB **read-only**.
+It requires passed local verification reports for the exact active artifact set, a single
+explicit scope, no unregistered records, and fresh accepted/quarantine/fact count/unique-key
+and charge checks. It runs these SQL files within one consistent read transaction:
+
+| SQL file under sql/analysis | Inputs | Output grain / responsibility |
+| --- | --- | --- |
+| pickup_zone_hour.sql | mart_zone_hour, dim_zone | Pickup zone; volume rank/share, weighted duration, signed charge, peak hour with deterministic earliest-hour tie break |
+| monthly_changes.sql | source_artifacts, fct_trip | Source-file month; all accepted count/charge, mean charge, coverage/exclusions, daily rates and adjacent-month LAG changes |
+| pickup_month_coverage.sql | fct_trip | Source month × actual pickup month; explains date anomalies without hiding them |
+| quality_month.sql | accepted_trips, quarantined_trips, source_artifacts | Source month; distinct any-warning count/rate and quarantine count/rate |
+| warning_codes.sql | accepted_trips, source_artifacts | Source month × warning code; distinct records per code, accepted denominator |
+| quarantine_codes.sql | quarantined_trips | Source month × blocking reason; distinct records per reason |
+| quality_zones.sql | accepted/quarantined trips, dim_zone | Source month × pickup zone; rates, monthly baselines and minimum-volume flags |
+
+**Formulas:** zone share = zone accepted / all accepted × 100. Weighted duration = summed
+seconds / summed duration count / 60. Mean charge = signed charge / accepted count.
+Any-warning rate = distinct accepted records with ≥1 warning / accepted × 100.
+Quarantine rate = distinct quarantined / source × 100. Code counts overlap between codes.
+Stable curated keys are checked unique before zone metrics use one-row-per-record sums.
+
+**Month definitions:** source-file totals retain every accepted date, so they reconcile
+exactly to prior evidence. Per-calendar-day rate includes only pickups in their own file
+month, divided by calendar days. Per-observed-day rate uses distinct observed in-month
+dates; observed dates do not establish complete reporting. `LAG` accesses the previous
+source month; a comparison is available only for adjacent calendar months. Changes are
+current − previous, and percentages are change / `NULLIF(previous,0)` × 100. Missing
+comparisons and zero denominators remain null, not fake 0%. The source/pickup-month cross-tab
+accounts for every accepted record, including the 42 excluded only from daily normalization.
+
+**Zone screening:** retain all groups, key 0 and official lookup members 264/265. The
+elevated-warning flag needs ≥10,000 accepted records and a warning rate above its source-month
+rate; elevated quarantine uses ≥10,000 source records and its own baseline. This is a
+documented screening choice, not statistical significance or evidence of incorrect trips.
+
+The seven CSV outputs and `business_insights.json` live in `reports/analysis/<scope>`.
+The JSON includes exact artifact IDs, query-file hashes, result checksums, definitions,
+generation time and passed reconciliation. [Business findings](docs/business_findings.md)
+connect each measured result to its SQL/result file, a practical interpretation and a limit.
+Counts/charges in every full-source analytical view reconcile to existing verified totals.
+SQL runs without pandas loading the monthly source; only small results reach the dashboard.
+
+`snapshot.attach_analysis_snapshot()` copies the existing three data files byte-for-byte to
+a new immutable generation, adds the exported analysis, declares its hash/bytes/path and
+generation time, validates the whole candidate, then atomically replaces the manifest.
+It leaves earlier generations recoverable. The normal pipeline snapshot stage exports the
+base three files; **run analysis afterward** to attach findings for the new complete scope.
+This explicit step avoids displaying findings from a prior artifact set. A mismatch fails.
+`package_demo.py` copies every declared file and validates the candidate, including analysis.
+
+Streamlit's **Business Insights** tab uses only this validated optional file. Its Jan–Mar
+scope is fixed and visibly independent of Operations date/zone filters. A snapshot without
+analysis shows an honest unavailable message while its original two views still work.
+No dashboard path opens DuckDB, downloads data or contacts Snowflake.
+
+```powershell
+$env:PYTHONPATH = "$PWD\src"
+.\.venv\Scripts\python.exe scripts/run_analysis.py --snapshot demo/published
+.\.venv\Scripts\python.exe -m mobilityops.cli validate-snapshot --path demo/published
+.\.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
+```
+
+The real analysis command requires the existing private DB and verification receipts.
+For a fresh clone, the committed real CSV/JSON and snapshot suffice for review/app launch.
+For reproducible offline SQL execution, run the fixture workflow, then:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_analysis.py --database data/db/fixture.duckdb --scope fixture --verification reports/local/fixture/fixture/verification.json --output reports/analysis/fixture --snapshot demo/fixture
+```
+
+## 15. Presentation and remote checks
+
+The earlier screenshots were inspected first; the Operations image clipped its chart and
+the images lacked the new view. New **actual running-app** captures under
+`assets/screenshots/` show Operations, Reliability and Business Insights. The old images
+remain as historical evidence. The data-export bytes/timestamp are unchanged; the analysis
+generation has its own timestamp. Browser automation waits for metrics/charts, captures
+unedited JPEGs and visually reviews readable values, axes, labels, loading/error absence
+and filter/scope context. `reports/evidence/presentation_dashboard.json` records actual
+paths, checksums, dimensions, local URL and observed views. README uses relative image links.
+
+To recapture: launch the exact command above, wait for app/Plotly rendering, select all
+dates and no zones, capture Operations with metrics/complete chart, click Reliability for
+reconciliation/quality, then Business Insights for fixed SQL findings. Review each image
+before replacing a current one; keep scope/filters/origin/dates visible or captioned. The
+app's top padding is reduced and its activity chart enlarged for readable desktop review.
+Use [the timed three-minute walkthrough](docs/demo_walkthrough.md): app → one SQL explanation
+→ reconciliation/replay → honest pending platform boundaries.
+
+CI uses pinned application/local-dbt locks in separate Python 3.14 venvs on Linux. Its
+fixture job executes the full tiny workflow twice (including local dbt build/tests/docs),
+pytest, native Ruff, dependency checks, fixture SQL/analysis attachment, both fixture and
+published-snapshot validation, and isolated rollback/backfill. Tests cover multi-warning
+distinct counts, zero denominators, missing/nonadjacent comparisons, weighted means,
+out-of-partition filtering, zone buckets/volume flags, scope drift, live-total reconciliation,
+updated-checksum semantic corruption, failed attachment preserving the old manifest, and
+the actual Business Insights app with database/network calls denied. No real download,
+private database or Snowflake secret is required by CI.
+
+The intended existing GitHub remote is preserved. Presentation work is published to a
+dedicated branch, with the default branch unchanged and no force push. Remote CI is checked
+for its actual commit and conclusion, with receipts linked in `docs/progress.md`. The
+earlier completion.json remains a historical pre-publication receipt. Airflow runtime is
+still pending without Docker; all Snowflake operations remain manual/unverified. No hosted
+app deployment, savings, causation, representative population estimate or SLA is claimed.
 

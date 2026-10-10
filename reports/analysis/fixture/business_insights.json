@@ -1,0 +1,360 @@
+{
+  "analysis_version": 1,
+  "artifacts": [
+    {
+      "accepted_rows": 8,
+      "artifact_id": "19d61b096876bd9739a6d09a601f096d76f2186ffac87b9e281e087dc20668a8",
+      "dataset_id": "fixture",
+      "policy_version": "python_v1_half_up",
+      "quarantined_rows": 4,
+      "recorded_charge": "134.00",
+      "scope": "fixture",
+      "source_partition": "2026-01",
+      "source_rows": 12,
+      "zone_sha256": "7d2f34d513df6285a2d2e1c861fe3012ae2ef9ccd6bbfc74fa5c4dcabb5e6db8"
+    }
+  ],
+  "definitions": {
+    "activity": "Observed accepted Yellow Taxi source records; not total transport demand.",
+    "charge": "Signed recorded passenger charge USD; not profit; cash tips incomplete.",
+    "coverage": "An observed date is not proof of complete service or provider reporting.",
+    "duration": "Sum of naive New York wall-clock seconds / accepted count / 60.",
+    "mom": "Only adjacent source months compare; missing/zero prior denominator gives null.",
+    "monthly_totals": "Source-file month; all accepted pickups, including out-of-partition.",
+    "peak": "Largest zone/hour count across scope; earliest hour wins ties.",
+    "quarantine_rate": "Distinct quarantined records / source records x 100.",
+    "scope": "All active artifacts in one isolated database; fixture/sample/real never mix.",
+    "trips_per_calendar_day": "In-partition accepted pickups / days in source-file month.",
+    "trips_per_observed_day": "In-partition accepted pickups / distinct observed pickup dates.",
+    "warning_codes": "Distinct records per code; counts overlap across different codes.",
+    "warning_rate": "Distinct accepted records with >=1 warning / accepted records x 100.",
+    "zone_flags": "Rate exceeds source-month rate, with >=10,000 in its own denominator.",
+    "zone_members": "Unresolved key 0 and official Unknown keys remain separate members."
+  },
+  "generated_at": "2026-10-10T15:37:25Z",
+  "minimum_zone_volume": 10000,
+  "origin_engine": "duckdb_fixture",
+  "queries": {
+    "monthly_changes": {
+      "path": "sql/analysis/monthly_changes.sql",
+      "sha256": "975e17747ee5802e1da985199928fa6ae7749ddf7d1f77df1c1205c6d6ec194a"
+    },
+    "pickup_month_coverage": {
+      "path": "sql/analysis/pickup_month_coverage.sql",
+      "sha256": "b889f1f170b451709c98567a9c6f83eaf3c835da54e5782543b94b31b84b663c"
+    },
+    "pickup_zone_hour": {
+      "path": "sql/analysis/pickup_zone_hour.sql",
+      "sha256": "14b30e635d7ba1e83786fc729307794a583cd7a50d5fa41713ae361e11077d18"
+    },
+    "quality_month": {
+      "path": "sql/analysis/quality_month.sql",
+      "sha256": "6dab17125c6e47bd408edf35be30996a9faed42af337187c8a2f33d0522988c2"
+    },
+    "quality_zones": {
+      "path": "sql/analysis/quality_zones.sql",
+      "sha256": "fd1e97e4f640ca53e21796645a69bb52340f83a4e0f3591df00fb569cb65bcc5"
+    },
+    "quarantine_codes": {
+      "path": "sql/analysis/quarantine_codes.sql",
+      "sha256": "b97cc3e44da3ddee94aeeba5549d675a9655d2b986271aa0f64c908edf5d6c08"
+    },
+    "warning_codes": {
+      "path": "sql/analysis/warning_codes.sql",
+      "sha256": "2a240c398b7d143b9225fd708158163dd44d780f4f96cf582042c62569542fb7"
+    }
+  },
+  "reconciliation": {
+    "accepted_rows": 8,
+    "charge_difference_usd": "0.00",
+    "count_difference": 0,
+    "recorded_charge_usd": "134.00",
+    "source_rows": 12,
+    "status": "PASSED"
+  },
+  "result_files": {
+    "monthly_changes": {
+      "bytes": 561,
+      "path": "reports/analysis/fixture/monthly_changes.csv",
+      "rows": 1,
+      "sha256": "d286ff3d888e26c37a381a7c4e07ecd95213a98fbac2d45aeac7e53375082f7c"
+    },
+    "pickup_month_coverage": {
+      "bytes": 113,
+      "path": "reports/analysis/fixture/pickup_month_coverage.csv",
+      "rows": 2,
+      "sha256": "684ea56738b90c5222933e20ea8dfbcea688195bcbaaeca3140a8953d88a91aa"
+    },
+    "pickup_zone_hour": {
+      "bytes": 407,
+      "path": "reports/analysis/fixture/pickup_zone_hour.csv",
+      "rows": 4,
+      "sha256": "ef04f4b0834e577087dee2342c93b7ac7e56769f237bf510a9edc8ab2c629a9c"
+    },
+    "quality_month": {
+      "bytes": 157,
+      "path": "reports/analysis/fixture/quality_month.csv",
+      "rows": 1,
+      "sha256": "210b35f11bfbf4465978c1fa7e4852a731bd97c971610cc780ddbf3508c4c427"
+    },
+    "quality_zones": {
+      "bytes": 665,
+      "path": "reports/analysis/fixture/quality_zones.csv",
+      "rows": 4,
+      "sha256": "6fcc14b1e7c7eb34ba80675ced817296c374552f73e8c139b7efe86a39c906cb"
+    },
+    "quarantine_codes": {
+      "bytes": 157,
+      "path": "reports/analysis/fixture/quarantine_codes.csv",
+      "rows": 4,
+      "sha256": "426c0e7300148f45ac5e572a379188f1758b89edfaa58d92f4473dec1b1d1a47"
+    },
+    "warning_codes": {
+      "bytes": 230,
+      "path": "reports/analysis/fixture/warning_codes.csv",
+      "rows": 4,
+      "sha256": "a25c47c2a7ca6bb1cc48c5f4723c9a57e6e358bd6e9dda7264ade729e2d23ccb"
+    }
+  },
+  "scope": "fixture",
+  "source_months": [
+    "2026-01"
+  ],
+  "status": "PASSED",
+  "tables": {
+    "monthly_changes": [
+      {
+        "accepted_trips": 8,
+        "actual_pickup_max": "2026-01-13",
+        "actual_pickup_min": "2025-12-31",
+        "avg_charge_change_pct": null,
+        "avg_charge_change_usd": null,
+        "avg_charge_usd": 16.75,
+        "calendar_days": 31,
+        "charge_change_pct": null,
+        "charge_change_usd": null,
+        "excluded_charge_usd": "10.75",
+        "excluded_out_of_partition_trips": 1,
+        "in_partition_charge_usd": "123.25",
+        "in_partition_trips": 7,
+        "observed_in_partition_days": 5,
+        "previous_source_month": null,
+        "recorded_charge_usd": "134.00",
+        "source_month": "2026-01",
+        "trips_change": null,
+        "trips_change_pct": null,
+        "trips_per_calendar_day": 0.22580645161290322,
+        "trips_per_day_change": null,
+        "trips_per_day_change_pct": null,
+        "trips_per_observed_day": 1.4
+      }
+    ],
+    "pickup_month_coverage": [
+      {
+        "accepted_trips": 1,
+        "pickup_month": "2025-12",
+        "recorded_charge_usd": "10.75",
+        "source_month": "2026-01"
+      },
+      {
+        "accepted_trips": 7,
+        "pickup_month": "2026-01",
+        "recorded_charge_usd": "123.25",
+        "source_month": "2026-01"
+      }
+    ],
+    "pickup_zone_hour": [
+      {
+        "accepted_share_pct": 50.0,
+        "accepted_trips": 4,
+        "avg_duration_minutes": 14.5,
+        "borough": "Manhattan",
+        "peak_hour_trips": 2,
+        "peak_hour_zone_share_pct": 50.0,
+        "peak_pickup_hour": 8,
+        "pickup_zone_key": 161,
+        "recorded_charge_usd": "49.00",
+        "volume_rank": 1,
+        "zone_name": "Midtown Center"
+      },
+      {
+        "accepted_share_pct": 25.0,
+        "accepted_trips": 2,
+        "avg_duration_minutes": 15.5,
+        "borough": "Manhattan",
+        "peak_hour_trips": 1,
+        "peak_hour_zone_share_pct": 50.0,
+        "peak_pickup_hour": 9,
+        "pickup_zone_key": 162,
+        "recorded_charge_usd": "37.00",
+        "volume_rank": 2,
+        "zone_name": "Midtown East"
+      },
+      {
+        "accepted_share_pct": 12.5,
+        "accepted_trips": 1,
+        "avg_duration_minutes": 19.0,
+        "borough": "Unresolved",
+        "peak_hour_trips": 1,
+        "peak_hour_zone_share_pct": 100.0,
+        "peak_pickup_hour": 12,
+        "pickup_zone_key": 0,
+        "recorded_charge_usd": "18.75",
+        "volume_rank": 3,
+        "zone_name": "Unresolved"
+      },
+      {
+        "accepted_share_pct": 12.5,
+        "accepted_trips": 1,
+        "avg_duration_minutes": 23.0,
+        "borough": "Queens",
+        "peak_hour_trips": 1,
+        "peak_hour_zone_share_pct": 100.0,
+        "peak_pickup_hour": 17,
+        "pickup_zone_key": 132,
+        "recorded_charge_usd": "29.25",
+        "volume_rank": 4,
+        "zone_name": "JFK Airport"
+      }
+    ],
+    "quality_month": [
+      {
+        "accepted_trips": 8,
+        "any_warning_trips": 4,
+        "quarantine_rate_pct": 33.333333333333336,
+        "quarantined_trips": 4,
+        "source_month": "2026-01",
+        "source_trips": 12,
+        "warning_rate_pct": 50.0
+      }
+    ],
+    "quality_zones": [
+      {
+        "accepted_trips": 1,
+        "any_warning_trips": 1,
+        "borough": "Unresolved",
+        "elevated_quarantine_rate": false,
+        "elevated_warning_rate": false,
+        "minimum_volume": 10000,
+        "month_quarantine_rate_pct": 33.333333333333336,
+        "month_warning_rate_pct": 50.0,
+        "pickup_zone_key": 0,
+        "quarantine_rate_pct": 0.0,
+        "quarantined_trips": 0,
+        "source_month": "2026-01",
+        "source_trips": 1,
+        "warning_rate_pct": 100.0,
+        "zone_name": "Unresolved"
+      },
+      {
+        "accepted_trips": 4,
+        "any_warning_trips": 2,
+        "borough": "Manhattan",
+        "elevated_quarantine_rate": false,
+        "elevated_warning_rate": false,
+        "minimum_volume": 10000,
+        "month_quarantine_rate_pct": 33.333333333333336,
+        "month_warning_rate_pct": 50.0,
+        "pickup_zone_key": 161,
+        "quarantine_rate_pct": 42.857142857142854,
+        "quarantined_trips": 3,
+        "source_month": "2026-01",
+        "source_trips": 7,
+        "warning_rate_pct": 50.0,
+        "zone_name": "Midtown Center"
+      },
+      {
+        "accepted_trips": 2,
+        "any_warning_trips": 1,
+        "borough": "Manhattan",
+        "elevated_quarantine_rate": false,
+        "elevated_warning_rate": false,
+        "minimum_volume": 10000,
+        "month_quarantine_rate_pct": 33.333333333333336,
+        "month_warning_rate_pct": 50.0,
+        "pickup_zone_key": 162,
+        "quarantine_rate_pct": 33.333333333333336,
+        "quarantined_trips": 1,
+        "source_month": "2026-01",
+        "source_trips": 3,
+        "warning_rate_pct": 50.0,
+        "zone_name": "Midtown East"
+      },
+      {
+        "accepted_trips": 1,
+        "any_warning_trips": 0,
+        "borough": "Queens",
+        "elevated_quarantine_rate": false,
+        "elevated_warning_rate": false,
+        "minimum_volume": 10000,
+        "month_quarantine_rate_pct": 33.333333333333336,
+        "month_warning_rate_pct": 50.0,
+        "pickup_zone_key": 132,
+        "quarantine_rate_pct": 0.0,
+        "quarantined_trips": 0,
+        "source_month": "2026-01",
+        "source_trips": 1,
+        "warning_rate_pct": 0.0,
+        "zone_name": "JFK Airport"
+      }
+    ],
+    "quarantine_codes": [
+      {
+        "code": "DROPOFF_BEFORE_PICKUP",
+        "quarantined_trips": 1,
+        "source_month": "2026-01"
+      },
+      {
+        "code": "MISSING_PICKUP",
+        "quarantined_trips": 1,
+        "source_month": "2026-01"
+      },
+      {
+        "code": "MISSING_TOTAL_AMOUNT",
+        "quarantined_trips": 1,
+        "source_month": "2026-01"
+      },
+      {
+        "code": "NEGATIVE_DISTANCE",
+        "quarantined_trips": 1,
+        "source_month": "2026-01"
+      }
+    ],
+    "warning_codes": [
+      {
+        "accepted_trips": 8,
+        "code": "NEGATIVE_RECORDED_CHARGE",
+        "source_month": "2026-01",
+        "warning_rate_pct": 12.5,
+        "warning_trips": 1
+      },
+      {
+        "accepted_trips": 8,
+        "code": "OUT_OF_PARTITION_PICKUP",
+        "source_month": "2026-01",
+        "warning_rate_pct": 12.5,
+        "warning_trips": 1
+      },
+      {
+        "accepted_trips": 8,
+        "code": "UNRESOLVED_PICKUP_ZONE",
+        "source_month": "2026-01",
+        "warning_rate_pct": 12.5,
+        "warning_trips": 1
+      },
+      {
+        "accepted_trips": 8,
+        "code": "ZERO_PASSENGER_COUNT",
+        "source_month": "2026-01",
+        "warning_rate_pct": 12.5,
+        "warning_trips": 1
+      }
+    ]
+  },
+  "verification_inputs": [
+    {
+      "path": "reports/local/fixture/fixture/verification.json",
+      "sha256": "b22535e5b3750a1e1f181d98e0444cd05a6d11914888f1588ead81a6b2f98cf5"
+    }
+  ]
+}

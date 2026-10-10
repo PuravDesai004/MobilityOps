@@ -1,0 +1,5 @@
+source_month,pickup_zone_key,source_trips,accepted_trips,any_warning_trips,quarantined_trips,warning_rate_pct,quarantine_rate_pct,month_warning_rate_pct,month_quarantine_rate_pct,zone_name,borough,minimum_volume,elevated_warning_rate,elevated_quarantine_rate
+2026-01,0,1,1,1,0,100.0,0.0,50.0,33.333333333333336,Unresolved,Unresolved,10000,False,False
+2026-01,161,7,4,2,3,50.0,42.857142857142854,50.0,33.333333333333336,Midtown Center,Manhattan,10000,False,False
+2026-01,162,3,2,1,1,50.0,33.333333333333336,50.0,33.333333333333336,Midtown East,Manhattan,10000,False,False
+2026-01,132,1,1,0,0,0.0,0.0,50.0,33.333333333333336,JFK Airport,Queens,10000,False,False

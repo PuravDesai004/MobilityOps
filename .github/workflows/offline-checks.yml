@@ -29,6 +29,13 @@ jobs:
           .venv/bin/python -m ruff check src tests app scripts airflow/dags
           .venv/bin/python -m pip check
           .venv-dbt-local/bin/python -m pip check
+      - name: SQL analysis on the small verified fixture and snapshot validation
+        env:
+          PYTHONPATH: src
+        run: |
+          .venv/bin/python scripts/run_analysis.py --database data/db/fixture.duckdb --scope fixture --verification reports/local/fixture/fixture/verification.json --output reports/analysis/fixture --snapshot demo/fixture
+          .venv/bin/python -m mobilityops.cli validate-snapshot --path demo/fixture
+          .venv/bin/python -m mobilityops.cli validate-snapshot --path demo/published
       - name: Isolated local rollback and backfill
         env:
           PYTHONPATH: src
@@ -38,5 +45,6 @@ jobs:
           name: local-fixture-evidence
           path: |
             reports/evidence/
+            reports/analysis/fixture/
             reports/local/fixture/fixture/verification.json
             reports/local/fixture/fixture/dbt_execution.json
