@@ -238,3 +238,21 @@ The fixture expectation file's old expected_only flags remain historical documen
 actual completed classification results are saved separately. Removing this project folder
 later removes its local files/environments; globally installed Python remains separate.
 
+## Verified cleanup — 11 October 2026
+
+Removed duplicate clean-install environments, abandoned isolated test state, Python caches,
+inactive duplicate fixture/sample/published exports and the obsolete original-build evidence
+collector. The published manifest's active generation remains complete. Historical real-month
+exports, original source bytes, databases, manifests, reports, screenshots and all three
+installed environments/locks are retained. The original clean-install receipts/logs remain
+evidence of the earlier installation; their temporary `.checks/clean-*` environments are gone.
+
+The cleanup recheck passed **81 tests**, official Ruff WASM, application/local-dbt dependency
+checks, an isolated fixture workflow/replay, **six dbt models / 24 data tests**, fixture SQL,
+snapshot validation and isolated rollback/retry/backfill. Fixture reconciliation remains
+8 accepted / 4 quarantined / $134.00, with zero count/currency differences and zero replay
+inserts. SHA-256 checks confirmed **665 retained files unchanged**. No full real-data rerun
+or download was needed. [Cleanup receipt](reports/evidence/cleanup_verification.json) records
+the commands, results, backup, deletion inventory and limits. Normal deletion commits retain
+earlier Git history. Cleanup uses the existing presentation branch; main awaits review/merge.
+

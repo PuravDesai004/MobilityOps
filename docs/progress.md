@@ -1,6 +1,6 @@
 # MobilityOps progress — authoritative local state
 
-Updated 10 October 2026, Asia/Kolkata. The later full-build objective supersedes the original
+Updated 11 October 2026, Asia/Kolkata. The later full-build objective supersedes the original
 milestone stopping/calendar instructions. All Snowflake actions remain user-only and unverified.
 
 ## Confirmed implementation
@@ -207,6 +207,45 @@ commit and conclusion are confirmed, not inferred from local checks:
 - Fresh remote main ref still equals `07b9295f492be028eef21c5dcb5b3de727a1e155`.
 - README's badge targets the correct repository/workflow/dedicated branch. Review/merge to
   main and any hosted app deployment remain your later publication decisions.
+
+## Confirmed cleanup — 11 October 2026
+
+- Backed up reviewed nontrivial deletions outside the repository in the sibling directory
+  `MobilityOps_cleanup_backup_20261011`; archive CRC and every member SHA-256 passed.
+  Duplicate temporary clean-install environments and regenerable caches were excluded.
+- Removed old isolated test state, the two duplicate validation environments, Python caches,
+  inactive duplicate fixture/sample/published generations and `scripts/collect_evidence.py`.
+  That unused collector depended on the deleted validation environments and could replace
+  historical completion evidence with obsolete pre-publication status. Its outputs remain.
+- Kept exact real sources, all real/sample databases/classified data/manifests/history, real
+  historical snapshots, selected dbt documentation/results, genuine screenshots, tests,
+  fixture/expectations, SQL, contracts and original environments/locks. SHA-256 verification
+  confirmed **665 retained files unchanged**; no real pipeline rerun/download occurred.
+- Existing suite: **81 passed in 31.94 seconds**. Official Ruff 0.16.10 WASM: zero diagnostics.
+  Application and local dbt imports passed; both isolated-interpreter `pip check` calls passed.
+  CLI help passed. Nothing was installed and no Snowflake command was invoked.
+- Isolated fixture workflow and replay: 12 source / 8 accepted / 4 quarantined / $134.00,
+  zero count/currency reconciliation differences, 12 distinct keys, zero overlapping keys;
+  replay inserted zero accepted and zero quarantine records. Both local dbt builds passed
+  six models and 24 data tests (`PASS=30`), with successful documentation generation.
+- Seven fixture SQL analyses and fixture/published manifest/schema/checksum/semantic checks
+  passed. Existing AppTest checks exercised the dashboard and its fixed analysis scope with
+  database/network access denied. The published real bundle still describes 11,077,206
+  source rows; that is preserved evidence, not a new real-data processing run.
+- Isolated recovery: rollback left all four transaction tables at zero; retry committed
+  8 accepted / 4 quarantined; replay inserted zero. Incremental Feb → Mar → older-Jan
+  backfill produced 2 → 4 → 6 fact rows; fact replay added zero. The first recovery attempt
+  failed at a Windows path limit in a deeply nested disposable copy. A shorter copy path
+  resolved the failure without modifying application logic. Both attempt logs are retained.
+- `.gitignore` now covers specific coverage/build/editor caches. `.env.example` references
+  the retained local dbt environment. Original completion-audit `.checks/clean-*` paths are
+  historical; `reports/local/clean-install.log`, `clean-fixture-run.log` and
+  `clean-dashboard-pytest.log` remain locally preserved.
+- [Cleanup receipt](../reports/evidence/cleanup_verification.json) records deletion groups,
+  exact verification evidence, recovery backup and scope limits. This cleanup is prepared
+  on `presentation/sql-business-findings`; remote publication is checked after its normal
+  commit/push. Main still awaits review/merge. Ordinary deletion does not purge Git history.
+  Public hosting is not deployed; Docker/Airflow remains pending; Snowflake is user-only.
 
 ## Preserved milestone history
 

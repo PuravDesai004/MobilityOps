@@ -569,3 +569,24 @@ job/step API receipt is `reports/evidence/presentation_ci.json`. The README badg
 this repository/workflow and dedicated branch. Later evidence/documentation commits can
 follow the verified implementation commit; each subsequent run has its own actual status.
 
+## 16. Cleanup and retained evidence — 11 October 2026
+
+The repository keeps one active published demo generation. Duplicate inactive fixture/sample/
+published generations and old isolated test workspaces were removed after a verified external
+backup. All historical real-month snapshot generations remain locally available because their
+coverage and totals support incremental/replay evidence. Exact monthly inputs, operational
+databases, classified outputs, source manifests and attempt histories also remain unchanged.
+The three existing environments, dependency locks, Ruff fallback, focused suite, SQL, manual
+Snowflake assets and pending Airflow assets are retained. The unused original-build collector
+was removed: it depended on disposable clean-install environments and emitted superseded
+pre-publication statuses. Its historical results and logs remain preserved.
+
+The [cleanup receipt](reports/evidence/cleanup_verification.json) separates fresh isolated
+fixture checks from preserved real-source evidence. The recheck passed 81 tests (including
+credential-free Streamlit AppTest), local dbt build/tests/docs, fixture reconciliation/replay,
+SQL export, strict snapshot validation and rollback/retry/backfill. All 665 protected file
+hashes matched before and after cleanup. Recovery's first temporary copy exceeded Windows
+path limits; moving only that disposable copy to a shorter path resolved it. Application
+logic and policies did not change. Docker/Airflow runtime remains pending; Snowflake remains
+manual and unexecuted. Normal Git deletion preserves recovery through earlier commits.
+

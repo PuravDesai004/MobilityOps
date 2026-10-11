@@ -26,7 +26,6 @@ airflow/plugins/
 airflow/config/airflow.cfg
 profiles.yml
 dbt_packages/
-target/
 state/
 .checks/
 pytest-cache-files-*/
@@ -49,3 +48,14 @@ demo/*/generations/
 demo/fixture/
 demo/sample/
 demo/snapshots/
+
+# Regenerable coverage/build output and editor/system caches.
+/.coverage
+/.coverage.*
+/coverage.xml
+/htmlcov/
+/build/
+/dbt/logs/
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini
