@@ -2,7 +2,7 @@
 
 This records the original completed-build audit. The later SQL/business-story/dashboard
 extension, measured findings and actual remote CI observations are summarized in
-[README](../README.md) and `reports/evidence/presentation_verification.json`.
+[README](../README.md) and the [SQL analysis receipt](../reports/analysis/real/business_insights.json).
 Original evidence and the original pre-publication statuses below remain historical.
 
 Reviewed 10 October 2026 against the full-build request in the referenced pasted text and
@@ -60,7 +60,7 @@ PREPARED refers to inspected source/configuration that has not run in its future
 | Per-artifact source=A+Q, unique/disjoint, A=fact=mart counts | reconcile.py queries and saved verification differences all zero across fixture/sample/three real months | PASSED |
 | Accepted/fact/mart/daily charge matches independent eligible source | reference.py independently parses original four fields; reconcile.py pre/post source checksums; all Decimal differences 0.00 | PASSED |
 | Reason occurrences can exceed rejected rows; honest metric meaning | Distinct-row count vs Counter reasons; docs and app label signed recorded passenger charge, units and cash-tip limitation | PASSED |
-| Machine evidence includes identities/versions/commands/outcomes/counts/differences/timings | completion.json plus five portable detailed reports, local_scenarios.json, real_incremental.json and dashboard_smoke.json | PASSED |
+| Machine evidence includes identities/versions/commands/outcomes/counts/differences/timings | completion.json plus five portable detailed reports, local_scenarios.json, real_incremental.json and current presentation_dashboard.json; original smoke/captures remain recoverable in history | PASSED |
 | Complete local workflow without Docker; same tested stage functions | Actual Windows Python-orchestrated fixture/sample/Jan/Feb/Mar + real replay; no Docker dependency | PASSED |
 | Operations and Reliability dashboard with filters, demand, weighted measures and historical recovery | streamlit_app.py + AppTest date/zone/filter/error checks; actual startup/render and three inspected screenshots | PASSED |
 | Small validated snapshots only; checksums/schema/grains/coverage/units visible | snapshot.py candidate validation/atomic pointer, strict loader; published data files 4,680,078 bytes with checksummed manifest | PASSED |
@@ -150,7 +150,8 @@ The original build included progress, learning and demonstration guides. Their u
 is now consolidated into README and the implemented architecture. The data dictionary,
 operations runbook, resume/handoff, blank warehouse evidence template and this matrix remain.
 The final UTF-8 Markdown link check covered 12 files and resolved all 10 local links;
-reports/evidence/documentation_links.json records the observed result.
+The original link-check receipt is preserved in the local archive and
+[its historical Git version](https://github.com/PuravDesai004/MobilityOps/blob/e73ea9512cf96df1126e79741614cc7d573b3374/reports/evidence/documentation_links.json).
 Local results and conditional Snowflake/Airflow wording remain separate. A video/public host
 is an optional later user presentation action; actual screenshots and a walkthrough satisfy
 the amended local demonstration request. No claim is made that the learner has answered

@@ -167,8 +167,8 @@ or warehouse operation. .env.example shows explicit overrides; it is not automat
 
 Genuine unedited localhost:8502 captures show real data, all dates/zones for Operations and
 fixed Jan–Mar Insights. [Capture receipt](reports/evidence/presentation_dashboard.json) records
-hashes, provenance and 1280×1024 review. [Earlier replay/recovery capture](docs/screenshots/replay_recovery.jpg)
-and [original app receipt](reports/evidence/dashboard_smoke.json) remain historical evidence.
+hashes, provenance and 1280×1024 review. Earlier captures and their original receipts are
+preserved in the local historical archive and earlier Git commits.
 For replacements, wait for complete charts/loading to finish; retain filters, units, origin,
 dates and export timestamps, and review values/axes/legends before replacing images.
 
@@ -184,14 +184,18 @@ dates and export timestamps, and review values/axes/legends before replacing ima
 - **Recovery:** isolated fixture rollback leaves accepted/quarantine/artifact/audit tables
   empty; retry produces 8/4/1/1; replay inserts zero. Feb → Mar → older-Jan fixtures yield
   2 → 4 → 6 facts and replay keeps six. [Original scenarios](reports/evidence/local_scenarios.json).
-- **Checks on 11 October:** **81 offline tests**, zero Ruff diagnostics, app/local-dbt
-  dependency checks, six dbt models / 24 data tests, fixture SQL, snapshot validation and
-  dashboard AppTest passed. Fixture recheck: 12 source / 8 accepted / 4 quarantined / $134.00,
-  zero count/currency differences; 665 protected files unchanged.
-  [Cleanup verification](reports/evidence/cleanup_verification.json).
-- **Executed CI:** every step passed for cleanup commit
-  [467dcba](https://github.com/PuravDesai004/MobilityOps/commit/467dcba0af3a46314da707e022c50a4b54ff6c05),
-  [GitHub run 38152281988](https://github.com/PuravDesai004/MobilityOps/actions/runs/38152281988).
+- **Executed validation:** the passing fixture CI checks the complete offline test suite,
+  Ruff, app/local-dbt dependency consistency, six dbt models / 24 data tests, fixture SQL,
+  strict snapshots and recovery. [Original build evidence](reports/evidence/completion.json)
+  records completed fixture/sample/real scope results; newer CI has its own run identity.
+- **Local organization recheck, 12 October 2026:** **81 tests passed**, including dashboard
+  AppTest; Ruff, imports and both dependency checks passed. A fresh isolated fixture run/replay
+  built six models/24 tests and reconciled 12 source / 8 accepted / 4 quarantined / $134.00 at
+  zero count/currency differences and zero replay inserts. Fixture SQL/snapshots and isolated
+  rollback/retry/backfill passed. No full-source rerun/download or Snowflake action occurred.
+- **Executed CI:** every step passed for documentation commit
+  [e73ea95](https://github.com/PuravDesai004/MobilityOps/commit/e73ea9512cf96df1126e79741614cc7d573b3374),
+  [GitHub run 38209761737](https://github.com/PuravDesai004/MobilityOps/actions/runs/38209761737).
   The [offline workflow](.github/workflows/offline-checks.yml) checks fixture/replay, tests,
   SQL/snapshots and recovery in separate exact-lock app/dbt environments. This is fixture
   CI, not full-month processing; later commits have their own run status.
@@ -228,10 +232,15 @@ allowed. Keep isolated recovery paths short on Windows. See the runbook for diag
   real-time feed, causal business improvement or measured performance improvement is claimed.
   Source-revision adoption needs deliberate review. Trial expiry does not affect the local demo.
 
-Original raw inputs, databases, private logs and environments remain local and Git-ignored.
-Cleanup removed duplicate validation environments and abandoned test/export state, with a
-verified sibling backup; original source bytes, real history, selected dbt docs, screenshots,
-locks and the active demo remain. Ordinary commits retain earlier Git history. Work is on
+Original raw inputs, samples, databases, active classifications, source manifests/attempts
+and environments remain at their working paths, locally retained and Git-ignored. Their
+reviewed identities and reconciliations remain in the public per-scope evidence. The latest
+full-source dbt docs retain their index/catalog/manifest together locally; the runbook gives
+regeneration commands. Required fixture/sample/real snapshots and the public bundle remain.
+Superseded diagnostics, earlier screenshots and inactive snapshot history are archived in
+the sibling local archive with original paths/checksums. Regenerable dbt SQL/parser/graph
+outputs are removed; canonical models/tests and build logs remain. Ordinary commits retain
+earlier Git history. Work is on
 **presentation/sql-business-findings**; default **main** awaits review/merge.
 
 ## Focused documentation and evidence
@@ -244,17 +253,13 @@ locks and the active demo remain. Ordinary commits retain earlier Git history. W
 | [Completion matrix](docs/completion_audit.md) | Original requirement-to-code/test/evidence mapping; historical statuses labeled |
 | [Resume and handoff](docs/resume_and_handoff.md) | Actual resume evidence equivalent; interview defense and conditional cloud wording |
 | [Manual Snowflake guide](docs/snowflake_implementation.md) · [evidence template](docs/evidence_template.md) | Ordered user-only warehouse work and blank actual-result capture |
-| [Evidence](reports/evidence/) · [SQL exports](reports/analysis/real/) · [demo manifest](demo/published/snapshot_manifest.json) | Immutable verification, CI, reconciliation, analysis and provenance |
+| [Evidence](reports/evidence/) · [SQL exports](reports/analysis/real/) · [demo manifest](demo/published/snapshot_manifest.json) | Curated original build/scope, replay/recovery, current screenshot, CI and lint receipts; immutable analysis/provenance |
 
-Business findings, demo walkthrough and current progress are consolidated above; learning
-explanations are in architecture.md. Original completion/publication/link receipts remain
-unchanged historical observations, even where they name earlier documentation paths or
-snapshot generations. Removed documents are recoverable exactly from commit **467dcba**.
-The [original completion](reports/evidence/completion.json) and
-[presentation receipt](reports/evidence/presentation_verification.json) retain their own dates,
-versions, commands and results; they are not rewritten as current status.
-
-Consolidation rechecked 62 local links/images (including seven section anchors), five scope
-receipts, SQL-export figures, both snapshots and 27 dashboard/analysis tests. All 655 protected
-non-document assets were unchanged. No full dataset rerun, download or Snowflake action occurred.
+Business findings, demo walkthrough and status are consolidated above; learning explanations
+are in architecture.md. [Original completion](reports/evidence/completion.json) retains its
+own date, versions and results. Historical diagnostic paths inside immutable receipts remain
+historical; the local archive index maps their original files. Previously tracked receipts,
+captures and documentation also remain accessible at
+[commit e73ea95](https://github.com/PuravDesai004/MobilityOps/tree/e73ea9512cf96df1126e79741614cc7d573b3374).
+They are preserved rather than rewritten as current evidence.
 

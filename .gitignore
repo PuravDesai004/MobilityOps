@@ -31,6 +31,8 @@ state/
 pytest-cache-files-*/
 data/classified/
 data/db/
+# Source manifests and their attempt histories are active local state.
+/data/manifests/
 reports/local/*/*/dbt_target/
 reports/local/*/*/dbt_logs/
 *.duckdb

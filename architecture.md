@@ -95,7 +95,7 @@ cash-tip information. It is not profit or complete business revenue. See the
 | `scripts/package_demo.py` | `main()` | Copies a verified small bundle to `demo/published` for review/hosting |
 | `airflow/` | `mobilityops_local` DAG | Prepared Docker runtime and sequential local stages |
 | `sql/snowflake/` | Ordered SQL and shared-policy ZIP | User-run templates with explicit unverified status |
-| `.github/workflows/offline-checks.yml` | Fixture job | Offline pipeline/dbt/tests/lint/SQL/snapshot checks; observed remote status in progress |
+| `.github/workflows/offline-checks.yml` | Fixture job | Verified fixture pipeline/dbt/tests/lint/SQL/snapshot checks; each commit has its own remote run |
 
 Names without a directory in this table are under `src/mobilityops`. `tests/fixtures` and
 `tests/expected` are the preserved tiny source and reviewed expectations. Raw monthly
@@ -609,24 +609,29 @@ job/step API receipt is `reports/evidence/presentation_ci.json`. The README badg
 this repository/workflow and dedicated branch. Later evidence/documentation commits can
 follow the verified implementation commit; each subsequent run has its own actual status.
 
-## 16. Cleanup and retained evidence — 11 October 2026
+## 16. Operational assets and local archive
 
-The repository keeps one active published demo generation. Duplicate inactive fixture/sample/
-published generations and old isolated test workspaces were removed after a verified external
-backup. All historical real-month snapshot generations remain locally available because their
-coverage and totals support incremental/replay evidence. Exact monthly inputs, operational
-databases, classified outputs, source manifests and attempt histories also remain unchanged.
-The three existing environments, dependency locks, Ruff fallback, focused suite, SQL, manual
-Snowflake assets and pending Airflow assets are retained. The unused original-build collector
-was removed: it depended on disposable clean-install environments and emitted superseded
-pre-publication statuses. Its historical results and logs remain preserved.
+Public source/model/test definitions, exact dependency locks, genuine final screenshots,
+reviewed scope receipts and the active portable demo stay in Git. Exact raw inputs, samples,
+databases, active classifications, source manifests/attempts, required snapshots, editable
+package metadata, environments and Ruff tooling remain at their original local paths.
+Manifests are operational local state; public receipts retain their reviewed artifact identity
+and reconciliation. Fixture/sample/real scope separation and application policies are unchanged.
 
-The [cleanup receipt](reports/evidence/cleanup_verification.json) separates fresh isolated
-fixture checks from preserved real-source evidence. The recheck passed 81 tests (including
-credential-free Streamlit AppTest), local dbt build/tests/docs, fixture reconciliation/replay,
-SQL export, strict snapshot validation and rollback/retry/backfill. All 665 protected file
-hashes matched before and after cleanup. Recovery's first temporary copy exceeded Windows
-path limits; moving only that disposable copy to a shorter path resolved it. Application
-logic and policies did not change. Docker/Airflow runtime remains pending; Snowflake remains
-manual and unexecuted. Normal Git deletion preserves recovery through earlier commits.
+Each completed workflow retains its verification, execution, workflow, build/docs console logs
+and original run_results. Only the latest real dbt documentation keeps its index/catalog/manifest
+together; see the operations runbook for regeneration. Compiled/run SQL and parser/graph/unused
+semantic outputs are regenerable. The recorded build logs prove six models/24 tests; a later
+docs-generation run_results file is not substituted for that evidence.
+
+Superseded receipts/link checks, earlier screenshots, duplicate dbt docs, detailed diagnostics
+and inactive snapshot generations are archived outside the repository with their original paths,
+bytes and SHA-256 values. Historical paths embedded in immutable receipts remain unchanged;
+the local archive index resolves them, and previously tracked versions remain available in Git.
+Public documentation links current retained evidence rather than ignored archive paths.
+
+Verification uses an isolated fixture copy and existing environments. Real databases, source
+bytes, classifications, manifests, histories and published snapshots are protected by hash checks.
+No real-source rerun/download, policy change, package upgrade, Snowflake operation or Airflow
+runtime execution is required for organization. Ordinary Git commits preserve earlier history.
 

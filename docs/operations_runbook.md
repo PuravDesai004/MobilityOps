@@ -33,7 +33,7 @@ History: `reports/local/workflow_attempts.jsonl`. Classified pointer:
 | Source checksum/provenance mismatch | Source manifest versus actual bytes/parent | Stop; preserve both source and diagnostics; revision review |
 | Classification fails partway | Latest successful pointer and FAILED attempt | Correct cause and rerun; prior output pair remains intact |
 | DuckDB ingestion error | FAILED history and committed audit/target counts | Rerun after correction; accepted/quarantine/audit rollback together |
-| dbt model/test fails | `dbt_build.log`, run_results | Fix SQL/data issue; rebuild local models and reconcile |
+| dbt model/test fails | `dbt_build.log`, execution receipt and run_results | Inspect the build log first; docs generation can replace run_results; rebuild and reconcile |
 | Reconciliation differs | Per-artifact differences and independent source result | Stop export; investigate the exact artifact rather than cancel errors across months |
 | Snapshot corrupt/missing | Manifest bytes/checksums/path/schema | Regenerate from passed model/verification data, preserving prior bundle |
 
@@ -106,6 +106,39 @@ use `.venv\Scripts\python.exe -m ruff check src tests app scripts airflow/dags`.
 This workspace's sandbox blocked pytest temporary-directory access and dbt process pipes;
 the agent's authorized elevated local runs succeeded. Ordinary user PowerShell does not have
 that agent sandbox. Keep dependencies isolated and preserve exact lock files.
+
+## Retained local dbt documentation and historical outputs
+
+All five completed scopes retain verification, workflow and dbt execution receipts, build/docs
+console logs and the original run_results. Build logs prove the recorded model/test pass counts;
+run_results may describe the later docs-generation command. Canonical SQL/YAML/macros/tests
+remain under dbt/. Compiled SQL, execution wrappers and parser/graph/unused semantic outputs
+are regenerable and were removed. Earlier duplicate documentation, detailed dbt logs, terminal
+logs and inactive snapshot history are preserved in the sibling local archive; its index maps
+original paths and checksums. Active source manifests, histories, databases and snapshot pointers
+remain at their working paths. Only historical inactive generations were archived.
+
+The latest full-source docs keep `index.html`, `catalog.json` and `manifest.json` together at
+`reports/local/real/2026-03/dbt_target`. To regenerate local documentation explicitly:
+
+```powershell
+$env:MOBILITYOPS_DB_PATH = "$PWD\data\db\real.duckdb"
+.\.venv-dbt-local\Scripts\python.exe scripts/dbt_local.py docs generate --project-dir dbt --profiles-dir dbt --target local --target-path reports/local/real/2026-03/dbt_target --log-path reports/local/real/2026-03/dbt_logs
+Remove-Item Env:MOBILITYOPS_DB_PATH
+```
+
+To inspect that retained bundle locally, serve its generated files, open localhost:8080,
+and stop the server with Ctrl+C:
+
+```powershell
+.\.venv-dbt-local\Scripts\python.exe scripts/dbt_local.py docs serve --project-dir dbt --profiles-dir dbt --target local --target-path reports/local/real/2026-03/dbt_target --port 8080
+```
+
+This requires the existing local real database. A new clone can run the bounded fixture workflow
+to generate fixture dbt docs instead. Documentation generation does not establish a model/test
+build pass. Historical diagnostic paths inside saved immutable receipts remain historical and
+are recoverable from the archive or earlier Git commits; current public claims link retained
+receipts, SQL exports, screenshots and actual CI. No Snowflake command is involved here.
 
 ## Future Snowflake Stream recovery (user only, unverified)
 
