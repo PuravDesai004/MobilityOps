@@ -1,8 +1,8 @@
 # MobilityOps completion audit
 
 This records the original completed-build audit. The later SQL/business-story/dashboard
-extension and actual remote CI observations are recorded in [progress](progress.md),
-[business findings](business_findings.md) and `reports/evidence/presentation_verification.json`.
+extension, measured findings and actual remote CI observations are summarized in
+[README](../README.md) and `reports/evidence/presentation_verification.json`.
 Original evidence and the original pre-publication statuses below remain historical.
 
 Reviewed 10 October 2026 against the full-build request in the referenced pasted text and
@@ -11,7 +11,7 @@ milestone stops, SQL-classifier design and mandatory cloud completion. The requi
 is a verified local system plus prepared manual Snowflake and conditional Airflow deliverables.
 At this initial audit, no Snowflake execution, hosted app deployment, GitHub push or message
 was authorized or claimed. A subsequent user request authorized repository publication;
-docs/progress.md records that later status. The original local audit evidence is preserved.
+README records that later status. The original local audit evidence is preserved.
 
 This is a requirement-level review of current source, tests, logs, reports, preserved bytes,
 database results and rendered screenshots. `reports/evidence/completion.json` collects the
@@ -70,7 +70,7 @@ PREPARED refers to inspected source/configuration that has not run in its future
 | Clean reproducible install/run without replacing user environments | Exact-lock .checks/clean-app/.checks/clean-dbt installs, full fixture log SUCCEEDED; extra 11 dashboard checks in 4.38s | PASSED |
 | GitHub-ready exclusions and portable demo/evidence | Actual git candidate inspection; raw/full data, classified data, private profiles/logs, DBs, .tools/.checks and venvs excluded; only manifest-referenced public generation allowed | PASSED locally; no staging/push |
 | CI fixture/lint/local dbt/snapshot without real downloads/cloud secrets | .github/workflows/offline-checks.yml inspected; local equivalent gates observed | PREPARED; GitHub execution not claimed |
-| Exact routine commands, walkthrough, public-hosting guidance and resume wording | README, architecture, operations, demo_walkthrough and resume_and_handoff; local launch remains usable after warehouse trial | COMPLETE documentation; no public deployment |
+| Exact routine commands, walkthrough, public-hosting guidance and resume wording | README, architecture, operations_runbook and resume_and_handoff; local launch remains usable after warehouse trial | COMPLETE documentation; no public deployment |
 
 ## Conditional orchestration deliverable
 
@@ -146,8 +146,9 @@ lineage/revisions, rule/type/decimal/timestamp policy, transactional local inges
 failure/resume flow, snapshots/weighted metrics, measured evidence/tradeoffs, exact PowerShell,
 accepted/quarantine/replay/retry journeys, glossary and interview questions.
 
-The README/progress, data dictionary, operations runbook, learning log, demonstration/hosting
-walkthrough, resume/handoff, blank warehouse evidence template and this audit are present.
+The original build included progress, learning and demonstration guides. Their useful content
+is now consolidated into README and the implemented architecture. The data dictionary,
+operations runbook, resume/handoff, blank warehouse evidence template and this matrix remain.
 The final UTF-8 Markdown link check covered 12 files and resolved all 10 local links;
 reports/evidence/documentation_links.json records the observed result.
 Local results and conditional Snowflake/Airflow wording remain separate. A video/public host
@@ -159,6 +160,7 @@ questions or personally executed warehouse work.
 
 The required local workflow, saved evidence, startup/rendering checks and documentation pass.
 The permitted environment limitation is Docker/Airflow runtime unavailable. Future Snowflake
-execution, GitHub CI execution and public hosting remain unverified/prepared as explicitly
-required boundaries, not secretly executed completion gates. No required authorized local
-implementation remains pending.
+execution, GitHub CI execution and public hosting were unverified/prepared at this original
+checkpoint. Later GitHub publication and passing CI are recorded in README; Snowflake,
+Airflow runtime and public hosting remain unexecuted. The preserved machine receipts retain
+their original dates and results. No required authorized local implementation remained pending.

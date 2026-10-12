@@ -15,12 +15,12 @@
 - Built and locally smoke-tested a credential-free Streamlit dashboard using checksummed
   aggregate snapshots, date/zone filters, weighted metrics and historical reliability evidence;
   verified offline fixture CI and reproducible isolated dependency locks. Exact observed
-  remote run URLs and commits are linked from `docs/progress.md`.
+  remote run URLs and commits are linked from [README](../README.md#reliability-and-executed-validation).
 - Created seven reusable DuckDB analysis queries covering zone/hour activity, normalized
   month changes and distinct-record quality rates; reconciled full-source analytical totals
   and added a validated, snapshot-only Business Insights view.
 
-Use the current test count from `docs/progress.md` and its presentation evidence if adding that metric;
+Use the current test count from README and its linked verification evidence if adding that metric;
 `reports/evidence/completion.json` preserves the original build's historical count.
 Timings are observed individual runs, not benchmark improvements. No production uptime,
 business savings, real-time feed, global trip deduplication, public deployment, Airflow run
@@ -79,10 +79,10 @@ reconciles full-scope counts/charges. Findings include 479,826 Upper East Side S
 accepted warning coverage. Actual unedited screenshots and a three-minute walkthrough are saved.
 SQL/formula/scope/snapshot tests are offline; the app has no DB/network query path.
 
-Start from root `architecture.md`, `README.md`, `docs/progress.md` and
+Start from root `architecture.md`, `README.md` and
 `reports/evidence/completion.json`; inspect actual files/evidence before making new claims.
 The repository was locally prepared at build completion; the later user-authorized GitHub
-publication status is recorded in docs/progress.md. Docker/Airflow runtime is pending because
+publication status is recorded in README. Docker/Airflow runtime is pending because
 Docker is absent. All Snowflake account/SQL/dbt/Task execution is manual,
 unverified and prohibited for the agent; ordered templates are in `docs/snowflake_implementation.md`.
 Future work should guide the user's own warehouse fixture checks, preserve local verified data,

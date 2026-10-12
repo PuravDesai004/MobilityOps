@@ -11,7 +11,7 @@ an operated service with availability guarantees.
 
 The implementation is Python → DuckDB → dbt → validated snapshots → Streamlit. January
 through March 2026 have completed verification; see `reports/evidence/completion.json` for
-the final coverage and checks, and `docs/progress.md` for current work. Generated Snowflake
+the original coverage and checks, and [README](README.md) for current status. Generated Snowflake
 objects and the Airflow DAG are separate prepared deliverables. Local transactions do not
 demonstrate Snowflake Streams, Tasks, permissions, or billing.
 
@@ -389,11 +389,11 @@ The requirement-level review is in `docs/completion_audit.md`: 65 offline tests,
 diagnostics, six models/24 dbt data tests per scope, five consistent isolated environments,
 and 11 additional dashboard checks in the clean application environment all passed.
 
-Current measured source results and version/check gates are in `docs/progress.md`. Timings are
+Current measured source results and version/check gates are in [README](README.md#reliability-and-executed-validation). Timings are
 single observed local runs, not throughput benchmarks or savings. Streamlit startup/rendering
 and screenshots show actual local behavior, not a deployed public site. The original main
 workflow has an observed successful GitHub run; this presentation update uses a dedicated
-branch. Exact successful run URLs and commits are recorded in `docs/progress.md` and its
+branch. Exact successful run URLs and commits are recorded in README and its
 linked evidence; a local test pass is never substituted for a remote run.
 
 Native Ruff/dbt executables are blocked by this Windows Application Control policy. The local
@@ -423,6 +423,28 @@ streaming live feed, production service monitoring or cloud automatic retries ar
 | Dimension / fact / mart | Lookup attributes / trip measurements / small aggregate summaries |
 | DAG / XCom | Directed dependency graph / small Airflow task-to-task receipt |
 | Snapshot | A fixed reviewed aggregate export for the offline dashboard |
+
+### Learning through the implementation
+
+Use these examples to explain the concepts; their presence does not claim the learner has
+answered interview questions or personally completed cloud exercises.
+
+| Concept | Concrete example / section |
+| --- | --- |
+| Parquet and Arrow batches | Section 5: metadata and bounded scans without full-month pandas |
+| File identity versus row identity | Section 4: original checksum/one-based position; fixture rows 1/2 |
+| Manifest versus attempt history | Section 4: stable receipt and successive success/failure events |
+| Contract versus quarantine | Sections 5/6: missing required column stops a file; null row value gets a reason |
+| Warnings versus reasons | Section 6: signed negative charge and unknown zone remain accepted |
+| Decimal rounding | Section 6 and policy vectors: positive/negative half-cent, bounds and rounding overflow |
+| Atomic publication | Sections 6/9: completed generation pointer preserves prior success on failure |
+| Transaction and replay | Sections 7/10: before-commit rollback, retry 8/4, rerun zero inserts |
+| dbt model and grain | Section 7: staging → dimensions/fact → two marts with explicit keys |
+| Incremental backfill | Section 10: older January arrives after February/March; unseen keys load |
+| Reconciliation | Section 8: independent eligible-source reference equals accepted/fact/mart counts and charge |
+| Snapshot metrics | Section 9: weighted sums/denominators after filters, schema/checksum gates |
+| Orchestration | Section 8: shared functions behind CLI, workflow and prepared Airflow stages |
+| Cloud evidence boundary | Section 12: manual Stream/Task checks are distinct from local tests |
 
 **Why hash bytes rather than filenames?** Names and paths can change; identical bytes preserve
 content identity. An altered file gets a different identity and needs revision review.
@@ -492,10 +514,28 @@ documented screening choice, not statistical significance or evidence of incorre
 
 The seven CSV outputs and `business_insights.json` live in `reports/analysis/<scope>`.
 The JSON includes exact artifact IDs, query-file hashes, result checksums, definitions,
-generation time and passed reconciliation. [Business findings](docs/business_findings.md)
+generation time and passed reconciliation. [Business findings](README.md#measured-business-findings)
 connect each measured result to its SQL/result file, a practical interpretation and a limit.
 Counts/charges in every full-source analytical view reconcile to existing verified totals.
 SQL runs without pandas loading the monthly source; only small results reach the dashboard.
+
+### Reading the analysis SQL
+
+- **CTE / WITH:** names an intermediate result, such as hourly zone counts; it does not
+  create a permanent table in these queries.
+- **Aggregation and joins:** GROUP BY/COUNT/SUM reduce records to the declared grain;
+  dimension joins attach names while retaining unresolved key 0 and official members 264/265.
+- **Window functions:** ROW_NUMBER ranks without collapsing rows, LAG reads the previous
+  source month, and partitioned sums supply source-month baselines.
+- **Safe division:** NULLIF protects zero denominators; unavailable comparisons remain null.
+- **Weighted means:** summed duration / summed count avoids giving small zones equal weight
+  with busy zones. Averaging zone averages would change the metric.
+- **UNNEST:** expands arrays to one row per code. Distinct records per code avoid duplicate
+  entries inflating one code; different codes still overlap across the same record.
+
+The reviewed [DuckDB window-function reference](https://duckdb.org/docs/current/sql/functions/window_functions)
+and [list-function reference](https://duckdb.org/docs/current/sql/functions/list) explain the
+engine features. Existing offline tests execute these exact SQL files on small synthetic tables.
 
 `snapshot.attach_analysis_snapshot()` copies the existing three data files byte-for-byte to
 a new immutable generation, adds the exported analysis, declares its hash/bytes/path and
@@ -541,7 +581,7 @@ dates and no zones, capture Operations with metrics/complete chart, click Reliab
 reconciliation/quality, then Business Insights for fixed SQL findings. Review each image
 before replacing a current one; keep scope/filters/origin/dates visible or captioned. The
 app's top padding is reduced and its activity chart enlarged for readable desktop review.
-Use [the timed three-minute walkthrough](docs/demo_walkthrough.md): app → one SQL explanation
+Use [the timed three-minute walkthrough](README.md#dashboard-and-three-minute-walkthrough): app → one SQL explanation
 → reconciliation/replay → honest pending platform boundaries.
 
 CI uses pinned application/local-dbt locks in separate Python 3.14 venvs on Linux. Its
@@ -556,7 +596,7 @@ private database or Snowflake secret is required by CI.
 
 The intended existing GitHub remote is preserved. Presentation work is published to a
 dedicated branch, with the default branch unchanged and no force push. Remote CI is checked
-for its actual commit and conclusion, with receipts linked in `docs/progress.md`. The
+for its actual commit and conclusion, with evidence linked in README. The
 earlier completion.json remains a historical pre-publication receipt. Airflow runtime is
 still pending without Docker; all Snowflake operations remain manual/unverified. No hosted
 app deployment, savings, causation, representative population estimate or SLA is claimed.
