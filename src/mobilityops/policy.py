@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import math
 import re
-from datetime import date, datetime
+from datetime import date, datetime, time, timedelta
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation, localcontext
 from typing import Any
 
@@ -62,8 +62,15 @@ def integer_value(value: Any) -> int | None:
 
 
 def _json_value(value: Any) -> Any:
-    if isinstance(value, (datetime, date)):
+    if isinstance(value, (datetime, date, time)):
         return {"__type__": type(value).__name__, "value": value.isoformat()}
+    if isinstance(value, timedelta):
+        return {
+            "__type__": "timedelta",
+            "days": value.days,
+            "seconds": value.seconds,
+            "microseconds": value.microseconds,
+        }
     if isinstance(value, Decimal):
         return {"__type__": "decimal", "value": str(value)}
     if isinstance(value, float) and not math.isfinite(value):

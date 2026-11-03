@@ -8,6 +8,7 @@ import logging
 import os
 import subprocess
 import sys
+import tempfile
 import time
 import uuid
 from pathlib import Path
@@ -65,10 +66,13 @@ def runtime_versions() -> dict[str, str]:
         "pytest",
         "ruff",
     ]
-    return {
-        "python": sys.version.split()[0],
-        **{name: importlib.metadata.version(name) for name in names},
-    }
+    versions = {"python": sys.version.split()[0]}
+    for name in names:
+        try:
+            versions[name] = importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            versions[name] = "not installed"
+    return versions
 
 
 def prepare(config: ProjectConfig, scope: str, *, offline: bool, run_id: str):
@@ -79,7 +83,16 @@ def prepare(config: ProjectConfig, scope: str, *, offline: bool, run_id: str):
             config.resolve_path("zone_lookup_csv"),
         )
         if not source.exists() or not zones.exists():
-            generate_fixture(source, zones)
+            with tempfile.TemporaryDirectory(
+                prefix=".fixture-", dir=config.project_root
+            ) as staging:
+                staged_source = Path(staging) / "source.parquet"
+                staged_zones = Path(staging) / "zones.csv"
+                generate_fixture(staged_source, staged_zones)
+                for target, replacement in ((source, staged_source), (zones, staged_zones)):
+                    if not target.exists():
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        os.replace(replacement, target)
         profile = profile_parquet(source, batch_rows=config.chunk_rows)
         validate_required_columns((f.name for f in profile.fields), contract)
         manifest_path = config.resolve_path("manifest_json")

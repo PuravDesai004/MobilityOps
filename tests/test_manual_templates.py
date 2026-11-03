@@ -79,3 +79,31 @@ def test_prepared_procedure_has_no_ddl_inside_explicit_transaction():
         "from mobilityops.policy import classify_row"
         in Path("sql/snowflake/05_shared_classifier.sql").read_text()
     )
+
+
+def test_manual_comparison_rejects_duplicate_local_artifacts(tmp_path):
+    report = Path("reports/local/fixture/fixture/verification.json")
+    with pytest.raises(ValueError, match="Duplicate local artifact"):
+        compare_export(tmp_path / "unused.csv", [report, report])
+
+
+@pytest.mark.parametrize("malformation", ["duplicate_header", "extra_cell", "missing_cell"])
+def test_manual_comparison_rejects_ambiguous_csv(tmp_path, malformation):
+    report = Path("reports/local/fixture/fixture/verification.json")
+    source = json.loads(report.read_text())
+    headers = ["dataset_id", "artifact_id", *FIELDS]
+    values = [source[field] for field in headers]
+    if malformation == "duplicate_header":
+        headers.append("recorded_charge_usd")
+        values.append(source["recorded_charge_usd"])
+    elif malformation == "extra_cell":
+        values.append("unexpected")
+    else:
+        values.pop()
+    export = tmp_path / "malformed.csv"
+    with export.open("w", newline="") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(headers)
+        writer.writerow(values)
+    with pytest.raises(ValueError, match="headers|malformed rows"):
+        compare_export(export, [report])

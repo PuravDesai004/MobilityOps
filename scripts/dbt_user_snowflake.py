@@ -1,13 +1,18 @@
 """USER-RUN ONLY: these commands connect to Snowflake. Never called by the local workflow."""
 
+import argparse
 import sys
 
 
 def main():
     args = sys.argv[1:]
-    if "--target" not in args or args[args.index("--target") + 1] != "snowflake":
+    parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
+    parser.add_argument("--target", "-t", action="append")
+    parser.add_argument("--profiles-dir", action="append")
+    options, _ = parser.parse_known_args(args)
+    if not options.target or any(target != "snowflake" for target in options.target):
         raise SystemExit("This manual entry point requires explicit --target snowflake")
-    if "--profiles-dir" not in args:
+    if not options.profiles_dir or not all(options.profiles_dir):
         raise SystemExit("Provide your private --profiles-dir; do not use the local-only profile")
     from dbt.cli.main import dbtRunner
 

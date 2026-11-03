@@ -119,7 +119,12 @@ def classify_artifact(
         if expected_zone_sha and zone_sha != expected_zone_sha:
             raise ProvenanceError("Zone bytes disagree with source manifest")
         zones = read_zones(zone_path)
+        if sha256_file(zone_path) != zone_sha:
+            raise ProvenanceError("Zone lookup changed during classification")
         zone_ids = {r["zone_key"] for r in zones if r["zone_key"] != 0}
+        scope = source_manifest.get(
+            "dataset_scope", "fixture" if dataset_id == "fixture" else "real"
+        )
         event.update(dataset_id=dataset_id, artifact_id=artifact_id)
         expected_rows = source_manifest.get("observed_row_count")
         if expected_rows is None:
@@ -147,8 +152,10 @@ def classify_artifact(
                 prior["zone_sha256"] == zone_sha
                 and prior["policy_version"] == POLICY_VERSION
                 and prior["long_duration_seconds"] == long_duration_seconds
+                and prior.get("scope") == scope
+                and prior.get("source_path") == str(source_path.resolve())
                 and all(
-                    sha256_file(Path(prior[k])) == prior[f"{k}_sha256"]
+                    Path(prior[k]).is_file() and sha256_file(Path(prior[k])) == prior[f"{k}_sha256"]
                     for k in ("accepted_path", "quarantined_path")
                 )
             ):
@@ -199,14 +206,14 @@ def classify_artifact(
                         raise RuntimeError("Controlled classification publication failure")
             if counts["source"] != expected_rows or sha256_file(source_path) != artifact_id:
                 raise ProvenanceError("Source changed during classification")
+            if sha256_file(zone_path) != zone_sha:
+                raise ProvenanceError("Zone lookup changed during classification")
         report = {
             "status": "CLASSIFIED",
             "policy_version": POLICY_VERSION,
             "long_duration_seconds": long_duration_seconds,
             "dataset_id": dataset_id,
-            "scope": source_manifest.get(
-                "dataset_scope", "fixture" if dataset_id == "fixture" else "real"
-            ),
+            "scope": scope,
             "artifact_id": artifact_id,
             "source_partition": partition,
             "zone_sha256": zone_sha,

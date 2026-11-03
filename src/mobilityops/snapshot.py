@@ -257,9 +257,41 @@ def _load_validated(root: Path, manifest: dict[str, Any]):
         ).any()
     ):
         raise ValueError("Snapshot aggregate grain is duplicated")
-    if {(r["dataset_id"], r["artifact_id"]) for r in summary["reconciliation"]} != expected_keys:
+    reports = summary["reconciliation"]
+    if {(r["dataset_id"], r["artifact_id"]) for r in reports} != expected_keys or len(
+        reports
+    ) != len(expected_keys):
         raise ValueError("Snapshot verification artifact coverage mismatch")
     for artifact in summary["artifacts"]:
+        report = next(
+            r
+            for r in reports
+            if (r["dataset_id"], r["artifact_id"])
+            == (artifact["dataset_id"], artifact["artifact_id"])
+        )
+        if (
+            report["status"] != "PASSED"
+            or report["engine"] != "duckdb"
+            or any(
+                report[field] != artifact[field]
+                for field in (
+                    "source_partition",
+                    "source_rows",
+                    "accepted_rows",
+                    "quarantined_rows",
+                )
+            )
+            or report["fact_rows"] != artifact["accepted_rows"]
+            or report["mart_trip_count"] != artifact["accepted_rows"]
+            or report["distinct_keys"] != artifact["source_rows"]
+            or report["overlap_keys"] != 0
+            or report.get("invalid_identity_rows", 0) != 0
+            or Decimal(report["recorded_charge_usd"]) != Decimal(artifact["recorded_charge"])
+            or Decimal(report["independent_eligible_source_charge_usd"])
+            != Decimal(artifact["recorded_charge"])
+            or any(Decimal(str(value)) != 0 for value in report["differences"].values())
+        ):
+            raise ValueError("Snapshot verification receipt disagrees with artifact")
         selected_zone = zone[
             (zone.dataset_id == artifact["dataset_id"])
             & (zone.artifact_id == artifact["artifact_id"])
@@ -307,7 +339,25 @@ def _load_validated(root: Path, manifest: dict[str, Any]):
         durations = zone.groupby("pickup_zone_key")[
             ["duration_seconds_sum", "duration_count"]
         ].sum()
-        for row in analysis["tables"]["pickup_zone_hour"]:
+        zone_totals = zone.groupby("pickup_zone_key")[["trip_count", "recorded_charge_sum"]].sum()
+        zone_labels = zone[["pickup_zone_key", "zone_name", "borough"]].drop_duplicates()
+        if zone_labels.pickup_zone_key.duplicated().any():
+            raise ValueError("Analysis zone labels disagree with snapshot")
+        zone_labels = zone_labels.set_index("pickup_zone_key")
+        analysis_zones = analysis["tables"]["pickup_zone_hour"]
+        if {row["pickup_zone_key"] for row in analysis_zones} != set(zone_totals.index):
+            raise ValueError("Analysis zone coverage disagrees with snapshot")
+        for row in analysis_zones:
+            key = row["pickup_zone_key"]
+            total = zone_totals.loc[key]
+            labels = zone_labels.loc[key]
+            if (
+                row["accepted_trips"] != total.trip_count
+                or Decimal(row["recorded_charge_usd"]) != total.recorded_charge_sum
+                or row["zone_name"] != labels.zone_name
+                or row["borough"] != labels.borough
+            ):
+                raise ValueError("Analysis zone count/charge/labels disagree with snapshot")
             selected_hours = hourly[hourly.pickup_zone_key == row["pickup_zone_key"]].sort_values(
                 ["trip_count", "pickup_hour"], ascending=[False, True]
             )

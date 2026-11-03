@@ -2,7 +2,9 @@ import hashlib
 import shutil
 
 import pyarrow.parquet as pq
+import pytest
 
+from mobilityops import sample as sample_module
 from mobilityops.config import load_project_config, load_yellow_taxi_contract
 from mobilityops.fixture import generate_fixture
 from mobilityops.identity import trip_record_id
@@ -89,3 +91,54 @@ def test_sample_rejects_a_parent_checksum_mismatch(tmp_path):
         assert "checksum does not match" in str(error)
     else:
         raise AssertionError("mismatched parent artifact identity was accepted")
+
+
+def test_sample_cannot_overwrite_its_parent_artifact(tmp_path):
+    _config, contract = _temporary_contract(tmp_path)
+    source = tmp_path / "yellow.parquet"
+    generate_fixture(source, tmp_path / "zones.csv")
+    original = source.read_bytes()
+
+    with pytest.raises(ValueError, match="separate from the parent"):
+        create_deterministic_sample(
+            source_path=source,
+            sample_path=source.parent / "." / source.name,
+            contract=contract,
+            parent_artifact_id=hashlib.sha256(original).hexdigest(),
+            limit_rows=5,
+        )
+
+    assert source.read_bytes() == original
+
+
+def test_sample_rejects_parent_changed_during_scan(tmp_path, monkeypatch):
+    _config, contract = _temporary_contract(tmp_path)
+    source = tmp_path / "yellow.parquet"
+    generate_fixture(source, tmp_path / "zones.csv")
+    parent_id = hashlib.sha256(source.read_bytes()).hexdigest()
+    target = tmp_path / "sample.parquet"
+    target.write_bytes(b"previous sample")
+    actual_sha256_file = sample_module.sha256_file
+    source_hash_calls = 0
+
+    def changed_parent_hash(path):
+        nonlocal source_hash_calls
+        if path == source:
+            source_hash_calls += 1
+            if source_hash_calls > 1:
+                return "0" * 64
+        return actual_sha256_file(path)
+
+    monkeypatch.setattr(sample_module, "sha256_file", changed_parent_hash)
+
+    with pytest.raises(ValueError, match="parent artifact changed"):
+        create_deterministic_sample(
+            source_path=source,
+            sample_path=target,
+            contract=contract,
+            parent_artifact_id=parent_id,
+            limit_rows=5,
+        )
+
+    assert target.read_bytes() == b"previous sample"
+    assert not list(tmp_path.glob(".*.part"))

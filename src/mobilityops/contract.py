@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Iterable
 from dataclasses import dataclass
 
@@ -9,7 +10,7 @@ from mobilityops.config import YellowTaxiContract
 
 
 class FileContractError(ValueError):
-    """Raised when a source artifact is missing required payload columns."""
+    """Raised when a source artifact has missing or ambiguous payload columns."""
 
 
 @dataclass(frozen=True)
@@ -25,6 +26,11 @@ def validate_required_columns(
     """Require contract columns while leaving every observed source field intact."""
 
     columns = tuple(observed_columns)
+    duplicates = [name for name, count in Counter(columns).items() if count > 1]
+    if duplicates:
+        raise FileContractError(
+            "Yellow Taxi file contract failed; duplicate columns: " + ", ".join(duplicates)
+        )
     observed = set(columns)
     missing = [name for name in contract.required_columns if name not in observed]
     if missing:

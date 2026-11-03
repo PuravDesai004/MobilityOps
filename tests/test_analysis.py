@@ -194,6 +194,17 @@ def test_analysis_rejects_unregistered_and_changed_counts(analysis_database, tmp
         )
 
 
+def test_analysis_rejects_invalid_identity_verification(analysis_database, tmp_path):
+    reports = fixture_reports(analysis_database, tmp_path)
+    report = json.loads(reports[0].read_text(encoding="utf-8"))
+    report["invalid_identity_rows"] = 1
+    reports[0].write_text(json.dumps(report), encoding="utf-8")
+    with pytest.raises(ValueError, match="passed local per-artifact verification"):
+        run_analysis(
+            analysis_database, tmp_path / "bad", scope="fixture", verification_paths=reports
+        )
+
+
 def test_enriched_snapshot_offline_validation_and_failed_attach(tmp_path, monkeypatch):
     import socket
 
@@ -255,6 +266,68 @@ def test_snapshot_rejects_bad_insight_with_updated_checksum(tmp_path):
     receipt.update(sha256=sha256_file(path), bytes=path.stat().st_size)
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(ValueError, match="zone/hour/duration"):
+        load_snapshot(root)
+
+
+@pytest.mark.parametrize(
+    "change", ["status", "count", "charge", "count_difference", "charge_difference"]
+)
+def test_analysis_rejects_changed_reconciliation(change):
+    _, _, summary, _ = load_snapshot(Path("demo/published"))
+    bundle = copy.deepcopy(summary["business_insights"])
+    reconciliation = bundle["reconciliation"]
+    if change == "status":
+        reconciliation["status"] = "FAILED"
+    elif change == "count":
+        reconciliation["accepted_rows"] -= 1
+    elif change == "charge":
+        reconciliation["recorded_charge_usd"] = "0.00"
+    elif change == "count_difference":
+        reconciliation["count_difference"] = 1
+    else:
+        reconciliation["charge_difference_usd"] = "0.01"
+    with pytest.raises(ValueError, match="Analysis validation.*reconciliation"):
+        validate_analysis(bundle, summary)
+
+
+def test_analysis_rejects_incorrect_busiest_zone_ranking():
+    _, _, summary, _ = load_snapshot(Path("demo/published"))
+    bundle = copy.deepcopy(summary["business_insights"])
+    zones = bundle["tables"]["pickup_zone_hour"]
+    zones[0], zones[1] = zones[1], zones[0]
+    for rank, row in enumerate(zones, 1):
+        row["volume_rank"] = rank
+    with pytest.raises(ValueError, match="zone volume ranking"):
+        validate_analysis(bundle, summary)
+
+
+@pytest.mark.parametrize("change", ["counts", "charge", "label"])
+def test_snapshot_rejects_redistributed_zone_insights(tmp_path, change):
+    root = tmp_path / "snapshot"
+    shutil.copytree("demo/published", root)
+    manifest_path = root / "snapshot_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    receipt = manifest["files"]["business_insights.json"]
+    path = root / receipt["path"]
+    bundle = json.loads(path.read_text(encoding="utf-8"))
+    first, second = bundle["tables"]["pickup_zone_hour"][:2]
+    if change == "counts":
+        first["accepted_trips"] += 1
+        second["accepted_trips"] -= 1
+        for row in (first, second):
+            row["accepted_share_pct"] = (
+                100 * row["accepted_trips"] / bundle["reconciliation"]["accepted_rows"]
+            )
+            row["peak_hour_zone_share_pct"] = 100 * row["peak_hour_trips"] / row["accepted_trips"]
+    elif change == "charge":
+        first["recorded_charge_usd"] = str(Decimal(first["recorded_charge_usd"]) + 1)
+        second["recorded_charge_usd"] = str(Decimal(second["recorded_charge_usd"]) - 1)
+    else:
+        first["zone_name"] = "Incorrect zone"
+    path.write_text(json.dumps(bundle), encoding="utf-8")
+    receipt.update(sha256=sha256_file(path), bytes=path.stat().st_size)
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="Analysis zone"):
         load_snapshot(root)
 
 

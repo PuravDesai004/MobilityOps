@@ -91,27 +91,26 @@ def create_deterministic_sample(
     target = Path(sample_path)
     if not source.is_file():
         raise FileNotFoundError(f"Parent Parquet file not found: {source}")
+    if source.resolve() == target.resolve() or (target.exists() and source.samefile(target)):
+        raise ValueError("sample path must be separate from the parent artifact")
     actual_parent_id = sha256_file(source)
     if actual_parent_id != parent_artifact_id:
         raise ValueError("parent artifact checksum does not match the supplied identity")
 
-    parquet_file = pq.ParquetFile(source)
-    source_schema = parquet_file.schema_arrow
-    validate_required_columns(source_schema.names, contract)
-    if SOURCE_ROW_NUMBER_COLUMN in source_schema.names:
-        raise ValueError(f"source already contains reserved field {SOURCE_ROW_NUMBER_COLUMN}")
-
-    total_rows = parquet_file.metadata.num_rows
-    selected_rows = evenly_spaced_source_rows(total_rows, limit_rows)
-    output_schema = source_schema.append(
-        pa.field(SOURCE_ROW_NUMBER_COLUMN, pa.int64(), nullable=False)
-    )
-    target.parent.mkdir(parents=True, exist_ok=True)
-    temp_path = target.with_name(f".{target.name}.{uuid.uuid4().hex}.part")
     selected_batches: list[pa.RecordBatch] = []
     selected_index = 0
     seen_source_rows = 0
-    try:
+    with pq.ParquetFile(source) as parquet_file:
+        source_schema = parquet_file.schema_arrow
+        validate_required_columns(source_schema.names, contract)
+        if SOURCE_ROW_NUMBER_COLUMN in source_schema.names:
+            raise ValueError(f"source already contains reserved field {SOURCE_ROW_NUMBER_COLUMN}")
+
+        total_rows = parquet_file.metadata.num_rows
+        selected_rows = evenly_spaced_source_rows(total_rows, limit_rows)
+        output_schema = source_schema.append(
+            pa.field(SOURCE_ROW_NUMBER_COLUMN, pa.int64(), nullable=False)
+        )
         for batch in parquet_file.iter_batches(batch_size=batch_rows, use_threads=False):
             batch_start = seen_source_rows
             batch_end = batch_start + batch.num_rows
@@ -139,6 +138,12 @@ def create_deterministic_sample(
                 "Parquet scan row count did not match metadata while constructing sample"
             )
 
+    if sha256_file(source) != parent_artifact_id:
+        raise ValueError("parent artifact changed while constructing sample")
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = target.with_name(f".{target.name}.{uuid.uuid4().hex}.part")
+    try:
         with pq.ParquetWriter(
             temp_path,
             output_schema,

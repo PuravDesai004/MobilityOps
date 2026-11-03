@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from decimal import Decimal
 from pathlib import Path
 
@@ -240,3 +240,80 @@ def test_sample_rows_have_separate_identity_and_parent_lineage(tmp_path):
         for i, r in enumerate(rows, 1)
     )
     assert rows[0]["trip_record_id"] != trip_record_id(parent, 1)
+
+
+@pytest.mark.parametrize("output", ["accepted_path", "quarantined_path"])
+def test_deleted_classification_output_is_rebuilt(classified_fixture, output):
+    prior, arguments, _ = classified_fixture
+    Path(prior[output]).unlink()
+    report = classify_artifact(**arguments)
+    assert report["accepted_rows"] == 8
+    assert report["quarantined_rows"] == 4
+    assert Path(report[output]).is_file()
+    assert report[output] != prior[output]
+
+
+def test_relocated_source_refreshes_classification_source_path(classified_fixture):
+    prior, arguments, _ = classified_fixture
+    old_path = arguments["source_path"]
+    relocated = old_path.with_name("relocated.parquet")
+    old_path.rename(relocated)
+    arguments["source_path"] = relocated
+    report = classify_artifact(**arguments)
+    assert report["artifact_id"] == prior["artifact_id"]
+    assert report["source_path"] == str(relocated.resolve())
+
+
+def test_duplicate_source_columns_are_rejected_before_rows_are_lost(classified_fixture):
+    _, arguments, _ = classified_fixture
+    source = arguments["source_path"]
+    table = pq.read_table(source)
+    pq.write_table(table.append_column("total_amount", table["total_amount"]), source)
+    arguments["source_manifest"]["source_artifact_id"] = sha256_file(source)
+    arguments["output_root"] = source.parent / "duplicate-output"
+    with pytest.raises(FileContractError, match="duplicate columns: total_amount"):
+        classify_artifact(**arguments)
+
+
+def test_extra_arrow_temporal_values_survive_raw_payload(classified_fixture):
+    _, arguments, _ = classified_fixture
+    source = arguments["source_path"]
+    table = pq.read_table(source)
+    extra_time = time(8, 12, 13, 456789)
+    extra_duration = timedelta(days=-2, seconds=7, microseconds=8)
+    table = table.append_column("extra_time", pa.array([extra_time] * 12, pa.time64("us")))
+    table = table.append_column(
+        "extra_duration", pa.array([extra_duration] * 12, pa.duration("us"))
+    )
+    pq.write_table(table, source)
+    arguments["source_manifest"]["source_artifact_id"] = sha256_file(source)
+    arguments["output_root"] = source.parent / "temporal-output"
+    report = classify_artifact(**arguments)
+    row = pq.read_table(report["accepted_path"]).to_pylist()[0]
+    payload = json.loads(row["raw_payload_json"])
+    assert payload["extra_time"] == {"__type__": "time", "value": "08:12:13.456789"}
+    assert payload["extra_duration"] == {
+        "__type__": "timedelta",
+        "days": -2,
+        "seconds": 7,
+        "microseconds": 8,
+    }
+
+
+def test_zone_mutation_during_classification_does_not_publish(classified_fixture, monkeypatch):
+    import mobilityops.classify as module
+
+    _, arguments, _ = classified_fixture
+    pointer = arguments["output_root"] / "classification.json"
+    before = pointer.read_bytes()
+    original = module.read_zones
+
+    def mutate_after_read(path):
+        zones = original(path)
+        path.write_bytes(path.read_bytes() + b"\n")
+        return zones
+
+    monkeypatch.setattr(module, "read_zones", mutate_after_read)
+    with pytest.raises(ProvenanceError, match="Zone lookup changed"):
+        classify_artifact(**arguments)
+    assert pointer.read_bytes() == before

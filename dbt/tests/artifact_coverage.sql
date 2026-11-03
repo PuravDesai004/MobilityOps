@@ -4,7 +4,11 @@ with counts as (
         sum(recorded_charge_sum) as money
     from {{ ref('mart_daily_reconciliation') }} group by dataset_id, artifact_id
 )
-select s.* from {{ source('control', 'source_artifacts') }} s
-left join counts c on s.dataset_id=c.dataset_id and s.artifact_id=c.artifact_id
-where c.n is null or c.n<>s.source_rows or c.a<>s.accepted_rows
-    or c.q<>s.quarantined_rows or c.money<>s.recorded_charge
+select coalesce(s.dataset_id, c.dataset_id) as dataset_id,
+    coalesce(s.artifact_id, c.artifact_id) as artifact_id,
+    s.* exclude (dataset_id, artifact_id)
+from {{ source('control', 'source_artifacts') }} s
+full outer join counts c on s.dataset_id=c.dataset_id and s.artifact_id=c.artifact_id
+where s.dataset_id is null or s.artifact_id is null
+    or coalesce(c.n, 0)<>s.source_rows or coalesce(c.a, 0)<>s.accepted_rows
+    or coalesce(c.q, 0)<>s.quarantined_rows or coalesce(c.money, 0)<>s.recorded_charge

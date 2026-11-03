@@ -93,6 +93,17 @@ def validate_analysis(bundle: dict[str, Any], summary: dict[str, Any]) -> None:
     _require(bundle["source_months"] == summary["source_months"], "month coverage")
     _require(bundle["definitions"] == DEFINITIONS, "metric definitions")
     _require(bundle["minimum_zone_volume"] == MINIMUM_ZONE_VOLUME, "zone threshold")
+    reconciliation = bundle["reconciliation"]
+    _require(
+        reconciliation["status"] == "PASSED"
+        and reconciliation["accepted_rows"] == summary["accepted_rows"]
+        and reconciliation["source_rows"] == summary["source_rows"]
+        and Decimal(reconciliation["recorded_charge_usd"])
+        == Decimal(summary["recorded_charge_usd"])
+        and reconciliation["count_difference"] == 0
+        and Decimal(reconciliation["charge_difference_usd"]) == 0,
+        "reconciliation",
+    )
 
     def keys(rows):
         return {(r["dataset_id"], r["artifact_id"]) for r in rows}
@@ -125,6 +136,14 @@ def validate_analysis(bundle: dict[str, Any], summary: dict[str, Any]) -> None:
         )
     zones = tables["pickup_zone_hour"]
     _require(len({r["pickup_zone_key"] for r in zones}) == len(zones), "zone grain")
+    _require(
+        [r["pickup_zone_key"] for r in zones]
+        == [
+            r["pickup_zone_key"]
+            for r in sorted(zones, key=lambda r: (-r["accepted_trips"], r["pickup_zone_key"]))
+        ],
+        "zone volume ranking",
+    )
     _require(sum(r["accepted_trips"] for r in zones) == summary["accepted_rows"], "zone count")
     _require(
         sum((Decimal(r["recorded_charge_usd"]) for r in zones), Decimal(0))
@@ -316,6 +335,7 @@ def run_analysis(
     if not reports or any(
         r["status"] != "PASSED"
         or r["engine"] != "duckdb"
+        or r.get("invalid_identity_rows", 0) != 0
         or any(Decimal(str(v)) != 0 for v in r["differences"].values())
         for r in reports
     ):
@@ -339,9 +359,7 @@ def run_analysis(
             unknown = connection.execute(f"""SELECT count(*) FROM {table} t WHERE NOT EXISTS (
                 SELECT 1 FROM control.source_artifacts a WHERE a.dataset_id=t.dataset_id
                 AND a.artifact_id=t.artifact_id
-                AND a.source_partition=t.source_partition)""").fetchone()[
-                0
-            ]
+                AND a.source_partition=t.source_partition)""").fetchone()[0]
             _require(unknown == 0, "unregistered records")
         for artifact in artifacts:
             report = next(

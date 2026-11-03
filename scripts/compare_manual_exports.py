@@ -24,11 +24,17 @@ def compare_export(export: Path, reports: list[Path]):
     if not local or any(report["status"] != "PASSED" for report in local):
         raise ValueError("Only passed local reconciliation reports may be comparison references")
     reference = {(report["dataset_id"], report["artifact_id"]): report for report in local}
+    if len(reference) != len(local):
+        raise ValueError("Duplicate local artifact references are ambiguous")
+    expected_fields = {"dataset_id", "artifact_id", *FIELDS}
     with export.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
-        if set(reader.fieldnames or []) != {"dataset_id", "artifact_id", *FIELDS}:
+        headers = reader.fieldnames or []
+        if len(headers) != len(expected_fields) or set(headers) != expected_fields:
             raise ValueError("Manual export CSV headers disagree with file 13 comparison query")
         rows = list(reader)
+    if any(set(row) != expected_fields or any(v is None for v in row.values()) for row in rows):
+        raise ValueError("Manual export CSV contains malformed rows")
     keys = [(row["dataset_id"], row["artifact_id"]) for row in rows]
     if len(set(keys)) != len(keys) or set(keys) != set(reference):
         raise ValueError("Manual export artifact identities/coverage differ from local reports")

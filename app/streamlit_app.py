@@ -43,16 +43,22 @@ def main():
     operations, reliability, insights = st.tabs(["Operations", "Reliability", "Business Insights"])
     with operations:
         dates = sorted(zone.pickup_date.unique())
-        selected_dates = st.date_input(
-            "Pickup date range", (dates[0], dates[-1]), min_value=dates[0], max_value=dates[-1]
+        selected_dates = (
+            st.date_input(
+                "Pickup date range", (dates[0], dates[-1]), min_value=dates[0], max_value=dates[-1]
+            )
+            if dates
+            else ()
         )
         zone_options = sorted(zone.zone_name.unique())
         selected_zones = st.multiselect("Pickup zones (empty means all)", zone_options)
-        if not selected_dates:
+        if dates and not selected_dates:
             st.info("Choose at least one pickup date.")
             st.stop()
-        start, end = selected_dates[0], selected_dates[-1]
-        selected = zone[zone.pickup_date.between(start, end)]
+        selected = zone
+        if selected_dates:
+            start, end = selected_dates[0], selected_dates[-1]
+            selected = selected[selected.pickup_date.between(start, end)]
         if selected_zones:
             selected = selected[selected.zone_name.isin(selected_zones)]
         metrics = filtered_metrics(selected)

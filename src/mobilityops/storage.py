@@ -92,21 +92,27 @@ def ingest_classified(
             SELECT * FROM incoming_a UNION ALL SELECT * FROM incoming_q)
             SELECT count(*), count(DISTINCT trip_record_id), min(source_row_number),
               max(source_row_number), count(*) FILTER (WHERE
-                dataset_id <> ? OR artifact_id <> ? OR source_partition <> ? OR
+                dataset_id IS DISTINCT FROM ? OR artifact_id IS DISTINCT FROM ? OR
+                source_partition IS DISTINCT FROM ? OR raw_payload_json IS NULL OR
                 trip_record_id IS NULL OR source_row_number IS NULL OR
-                trip_record_id <> sha256(artifact_id || ':' || source_row_number::VARCHAR))
+                trip_record_id IS DISTINCT FROM
+                  sha256(artifact_id || ':' || source_row_number::VARCHAR))
             FROM incoming""",
             [report["dataset_id"], report["artifact_id"], report["source_partition"]],
         ).fetchone()
         n = report["source_rows"]
-        if incoming != (n, n, 1, n, 0):
+        expected_coverage = (n, n, 1, n, 0) if n else (0, 0, None, None, 0)
+        if incoming != expected_coverage:
             raise ValueError(f"Incoming identity/coverage failed: {incoming}")
         invalid = connection.execute(
             """SELECT
-            (SELECT count(*) FROM incoming_a WHERE len(reason_codes)<>0 OR
+            (SELECT count(*) FROM incoming_a WHERE reason_codes IS NULL OR
+              warning_codes IS NULL OR len(reason_codes)<>0 OR
               pickup_at IS NULL OR dropoff_at IS NULL OR distance_miles IS NULL OR
-              recorded_charge IS NULL OR duration_seconds < 0 OR distance_miles < 0)
-            + (SELECT count(*) FROM incoming_q WHERE len(reason_codes)=0)
+              recorded_charge IS NULL OR duration_seconds IS NULL OR
+              duration_seconds < 0 OR NOT isfinite(duration_seconds) OR distance_miles < 0)
+            + (SELECT count(*) FROM incoming_q WHERE reason_codes IS NULL OR
+              warning_codes IS NULL OR len(reason_codes)=0)
             + (SELECT abs(count(*) - ?) FROM incoming_a)
             + (SELECT abs(count(*) - ?) FROM incoming_q)""",
             [report["accepted_rows"], report["quarantined_rows"]],
@@ -131,15 +137,23 @@ def ingest_classified(
               USING(dataset_id,trip_record_id))""").fetchone()[0]
         if overlap:
             raise ValueError("Accepted and quarantined key sets would overlap")
-        changed_payload = connection.execute("""SELECT COUNT(*) FROM (
-            SELECT i.trip_record_id FROM incoming_a i JOIN curated.accepted_trips t
-              USING(dataset_id,trip_record_id) WHERE i.raw_payload_json<>t.raw_payload_json
+        changed_payload, changed_classification = connection.execute("""SELECT
+            count(*) FILTER (WHERE incoming_payload IS DISTINCT FROM stored_payload),
+            count(*) FILTER (WHERE incoming_row IS DISTINCT FROM stored_row) FROM (
+            SELECT i.raw_payload_json AS incoming_payload, t.raw_payload_json AS stored_payload,
+              i AS incoming_row, t AS stored_row
+            FROM incoming_a i JOIN curated.accepted_trips t USING(dataset_id,trip_record_id)
             UNION ALL
-            SELECT i.trip_record_id FROM incoming_q i JOIN curated.quarantined_trips t
-              USING(dataset_id,trip_record_id) WHERE i.raw_payload_json<>t.raw_payload_json)
-            """).fetchone()[0]
+            SELECT i.raw_payload_json, t.raw_payload_json, i, t
+            FROM incoming_q i JOIN curated.quarantined_trips t USING(dataset_id,trip_record_id))
+            """).fetchone()
         if changed_payload:
             raise ValueError("Existing stable key has a conflicting original payload")
+        if changed_classification:
+            raise ValueError(
+                "SOURCE_REVISION_REQUIRES_REVIEW: existing stable key has conflicting "
+                "classified values"
+            )
         inserted = {}
         for label, view, table in [
             ("accepted", "incoming_a", "accepted_trips"),

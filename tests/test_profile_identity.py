@@ -1,5 +1,8 @@
 import hashlib
 
+import pyarrow as pa
+import pyarrow.parquet as pq
+
 from mobilityops.fixture import generate_fixture
 from mobilityops.identity import sha256_file, trip_record_id
 from mobilityops.profile import profile_parquet
@@ -80,3 +83,28 @@ def test_identity_rejects_invalid_artifact_hash_and_row_number():
         pass
     else:
         raise AssertionError("row zero was accepted")
+
+
+def test_nested_fields_do_not_shift_following_parquet_leaf_metadata(tmp_path):
+    path = tmp_path / "nested.parquet"
+    table = pa.table(
+        {
+            "extra_struct": pa.array([{"n": 1, "label": "one"}, None]),
+            "actual_boolean": pa.array([True, None]),
+            "extra_map": pa.array([[("key", 1)], None], pa.map_(pa.string(), pa.int64())),
+            "actual_float": pa.array([1.5, 2.5]),
+        }
+    )
+    pq.write_table(table, path)
+    profile = profile_parquet(path, batch_rows=1)
+    fields = {field.name: field for field in profile.fields}
+    assert fields["extra_struct"].parquet_physical_type == "INT64, BYTE_ARRAY"
+    assert fields["actual_boolean"].parquet_physical_type == "BOOLEAN"
+    assert fields["extra_map"].parquet_physical_type == "BYTE_ARRAY, INT64"
+    assert fields["actual_float"].parquet_physical_type == "DOUBLE"
+    assert profile.null_counts == {
+        "extra_struct": 1,
+        "actual_boolean": 1,
+        "extra_map": 1,
+        "actual_float": 0,
+    }

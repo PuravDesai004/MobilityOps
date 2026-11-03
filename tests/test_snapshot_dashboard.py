@@ -132,3 +132,87 @@ def test_snapshot_semantics_fail_even_with_updated_checksum(tmp_path, change):
     manifest_path.write_text(json.dumps(manifest))
     with pytest.raises(ValueError, match="Snapshot"):
         load_snapshot(root)
+
+
+@pytest.mark.parametrize(
+    "change", ["count", "fact_count", "charge", "engine", "difference", "identity", "duplicate"]
+)
+def test_snapshot_rejects_stale_verification_receipts(tmp_path, change):
+    root = tmp_path / "snapshot"
+    shutil.copytree("demo/fixture", root)
+    manifest_path = root / "snapshot_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    receipt = manifest["files"]["run_summary.json"]
+    path = root / receipt["path"]
+    summary = json.loads(path.read_text())
+    report = summary["reconciliation"][0]
+    if change == "count":
+        report["accepted_rows"] -= 1
+    elif change == "fact_count":
+        report["fact_rows"] -= 1
+    elif change == "charge":
+        report["recorded_charge_usd"] = "0.00"
+    elif change == "engine":
+        report["engine"] = "snowflake"
+    elif change == "difference":
+        report["differences"]["source_minus_dispositions"] = 1
+    elif change == "identity":
+        report["invalid_identity_rows"] = 1
+    else:
+        summary["reconciliation"].append(report.copy())
+    path.write_text(json.dumps(summary), encoding="utf-8")
+    receipt.update(sha256=sha256_file(path), bytes=path.stat().st_size)
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="verification"):
+        load_snapshot(root)
+
+
+def test_dashboard_handles_snapshot_with_only_quarantined_records(monkeypatch, tmp_path):
+    root = tmp_path / "snapshot"
+    shutil.copytree("demo/fixture", root)
+    _, daily, summary, manifest = load_snapshot(root)
+    # This regression exercises a base snapshot, without any optional analysis export.
+    manifest["files"].pop("business_insights.json", None)
+    manifest.pop("analysis_generated_at", None)
+    summary.pop("business_insights", None)
+    zone_path = root / manifest["files"]["zone_hour.parquet"]["path"]
+    pq.write_table(pq.read_table(zone_path).slice(0, 0), zone_path)
+    daily["accepted_count"] = 0
+    daily["quarantined_count"] = daily.source_count
+    daily["recorded_charge_sum"] = "0.00"
+    daily.to_csv(root / manifest["files"]["daily_reconciliation.csv"]["path"], index=False)
+    summary.update(
+        accepted_rows=0,
+        quarantined_rows=summary["source_rows"],
+        recorded_charge_usd="0.00",
+        actual_date_coverage=[None, None],
+        accepted_warning_counts={},
+        reason_counts={"MISSING_PICKUP": summary["source_rows"]},
+    )
+    for artifact in summary["artifacts"]:
+        artifact.update(
+            accepted_rows=0, quarantined_rows=artifact["source_rows"], recorded_charge="0.00"
+        )
+    for report in summary["reconciliation"]:
+        report.update(
+            accepted_rows=0,
+            quarantined_rows=report["source_rows"],
+            fact_rows=0,
+            mart_trip_count=0,
+            recorded_charge_usd="0.00",
+            independent_eligible_source_charge_usd="0.00",
+        )
+    summary_path = root / manifest["files"]["run_summary.json"]["path"]
+    summary_path.write_text(json.dumps(summary), encoding="utf-8")
+    for receipt in manifest["files"].values():
+        path = root / receipt["path"]
+        receipt.update(sha256=sha256_file(path), bytes=path.stat().st_size)
+    (root / "snapshot_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    assert load_snapshot(root)[0].empty
+    monkeypatch.setenv("MOBILITYOPS_SNAPSHOT_DIR", str(root))
+    app = AppTest.from_file(str(Path("app/streamlit_app.py").resolve()), default_timeout=30).run()
+    assert not app.exception
+    assert app.metric[0].value == "0"
+    assert any("No accepted trips" in item.value for item in app.info)
+    assert len(app.tabs) == 3
+    assert any(item.label == "Quarantined records" for item in app.metric)

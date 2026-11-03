@@ -41,15 +41,20 @@ def reconcile(database: Path, report: dict[str, Any], output_path: Path) -> dict
         daily, daily_charge = metric(
             "analytics.mart_daily_reconciliation", "sum(source_count)", "sum(recorded_charge_sum)"
         )
-        records = """(SELECT dataset_id, artifact_id, trip_record_id, source_row_number
+        records = """(SELECT dataset_id, artifact_id, source_partition,
+            trip_record_id, source_row_number
             FROM curated.accepted_trips UNION ALL SELECT dataset_id, artifact_id,
-            trip_record_id, source_row_number FROM curated.quarantined_trips)"""
-        total, distinct, missing, low, high = connection.execute(
+            source_partition, trip_record_id, source_row_number
+            FROM curated.quarantined_trips)"""
+        total, distinct, missing, low, high, distinct_rows, invalid = connection.execute(
             f"""SELECT count(*),
             count(DISTINCT trip_record_id), count(*) FILTER(WHERE trip_record_id IS NULL),
-            min(source_row_number), max(source_row_number) FROM {records}
+            min(source_row_number), max(source_row_number),
+            count(DISTINCT source_row_number), count(*) FILTER(WHERE
+              source_partition IS DISTINCT FROM ? OR trip_record_id IS DISTINCT FROM
+              sha256(artifact_id || ':' || source_row_number::VARCHAR)) FROM {records}
             WHERE dataset_id=? AND artifact_id=?""",
-            [dataset, artifact],
+            [report["source_partition"], dataset, artifact],
         ).fetchone()
         overlap = connection.execute(
             """SELECT count(*) FROM curated.accepted_trips a
@@ -57,9 +62,23 @@ def reconcile(database: Path, report: dict[str, Any], output_path: Path) -> dict
             WHERE a.dataset_id=? AND a.artifact_id=?""",
             [dataset, artifact],
         ).fetchone()[0]
+        mismatched_fact_keys = connection.execute(
+            """WITH accepted AS (
+                SELECT trip_record_id FROM curated.accepted_trips
+                WHERE dataset_id=? AND artifact_id=?
+            ), facts AS (
+                SELECT trip_record_id FROM analytics.fct_trip
+                WHERE dataset_id=? AND artifact_id=?
+            ) SELECT count(*) FROM (
+                (SELECT * FROM accepted EXCEPT SELECT * FROM facts)
+                UNION ALL
+                (SELECT * FROM facts EXCEPT SELECT * FROM accepted))""",
+            [dataset, artifact, dataset, artifact],
+        ).fetchone()[0]
     differences = {
         "source_minus_dispositions": report["source_rows"] - accepted - quarantined,
         "accepted_minus_fact": accepted - facts,
+        "accepted_fact_key_mismatches": mismatched_fact_keys,
         "fact_minus_mart": facts - marts,
         "source_minus_daily": report["source_rows"] - daily,
         "independent_eligible_minus_accepted": eligible_count - accepted,
@@ -70,10 +89,9 @@ def reconcile(database: Path, report: dict[str, Any], output_path: Path) -> dict
     }
     passed = (
         all(Decimal(str(value)) == 0 for value in differences.values())
-        and total == distinct == report["source_rows"]
-        and missing == overlap == 0
-        and low == 1
-        and high == report["source_rows"]
+        and total == distinct == distinct_rows == report["source_rows"]
+        and missing == overlap == invalid == 0
+        and (low, high) == ((1, report["source_rows"]) if total else (None, None))
     )
     result = {
         "status": "PASSED" if passed else "FAILED",
@@ -88,6 +106,7 @@ def reconcile(database: Path, report: dict[str, Any], output_path: Path) -> dict
         "mart_trip_count": marts,
         "distinct_keys": distinct,
         "overlap_keys": overlap,
+        "invalid_identity_rows": invalid,
         "recorded_charge_usd": str(accepted_charge),
         "independent_eligible_source_charge_usd": str(eligible_charge),
         "differences": differences,

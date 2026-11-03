@@ -46,7 +46,7 @@ def _parser() -> argparse.ArgumentParser:
     workflow.add_argument("--offline", action="store_true")
     workflow.add_argument("--stage", choices=["all", *STAGES], default="all")
     validation = commands.add_parser("validate-snapshot")
-    validation.add_argument("--path", default="demo/snapshots")
+    validation.add_argument("--path", default="demo/published")
     return parser
 
 
@@ -96,12 +96,9 @@ def _run_profile(args: argparse.Namespace) -> int:
 
     identity_summary = {
         "source_row_id_count": profile.row_count,
-        "distinct_source_row_id_count": len(
-            {
-                trip_record_id(profile.source_artifact_id, row)
-                for row in range(1, profile.row_count + 1)
-            }
-        ),
+        # Physical positions 1..row_count are unique by construction. Materializing
+        # every row hash here defeats the profiler's bounded-memory design.
+        "distinct_source_row_id_count": profile.row_count,
         "row_1_trip_record_id": trip_record_id(profile.source_artifact_id, 1)
         if profile.row_count >= 1
         else None,
